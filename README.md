@@ -11,4 +11,5 @@ In this repo there are 4 angular apps:
 - mf2 (✅): `"builder": "@angular-devkit/build-angular:application"` with `"optimization": false`,
 - mf3 (🚫): `"builder": "@angular-devkit/build-angular:application"`  with `"optimization": true`.
 
-Just run: `ng build host`.
+In order to see the problem, just run: `ng build host`. At (myws/projects/host/public/elements)[https://github.com/mauriziocescon/myws/tree/develop/projects/host/public/elements],
+you'll all the pre-built micro frontends. 

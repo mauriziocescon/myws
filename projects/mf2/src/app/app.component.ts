@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  template: `
+    <div>{{ status() }}</div>`,
 })
 export class AppComponent {
-  title = 'mf2';
+  status = signal('Mf2 loaded!');
 }

@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { createCustomElement } from '@angular/elements';
 
 import { AppComponent } from './app.component';
-import { MfLoaderComponent } from './mf/mf-loader.component';
 
 @NgModule({
   imports: [
@@ -13,14 +13,22 @@ import { MfLoaderComponent } from './mf/mf-loader.component';
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
-    MfLoaderComponent,
   ],
   declarations: [
     AppComponent,
   ],
-  bootstrap: [
-    AppComponent,
-  ],
 })
-export class AppModule {
+export class AppModule implements DoBootstrap {
+
+  constructor(private injector: Injector) {
+  }
+
+  ngDoBootstrap(): void {
+    const element = createCustomElement(AppComponent, { injector: this.injector });
+    try {
+      customElements.define('mf3-v18', element);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }

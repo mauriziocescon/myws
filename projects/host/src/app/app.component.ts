@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 
-type StatusType = 'Loading' | 'Loaded' | 'Failed';
+type Mf = 'mf1' | 'mf2' | 'mf3';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +8,25 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
     @for (mf of mfs(); track mf.elementId) {
       <button (click)="selectMf(mf)">Load {{ mf.elementId }}</button>
     }
-    <app-mf-loader [mf]="selectedMf()"/>
+
+    @if (selectedMf().elementId === 'mf1') {
+      <app-mf-loader [mf]="selectedMf()"/>
+    } @else if (selectedMf().elementId === 'mf2') {
+      <app-mf-loader [mf]="selectedMf()"/>
+    } @else if (selectedMf().elementId === 'mf3') {
+      <app-mf-loader [mf]="selectedMf()"/>
+    }
   `,
 })
 export class AppComponent {
-  mfs = signal<{ elementId: string, tag: string }[]>([
+  mfs = signal<{ elementId: Mf, tag: string }[]>([
     { elementId: 'mf1', tag: 'mf1-v18' },
     { elementId: 'mf2', tag: 'mf2-v18' },
     { elementId: 'mf3', tag: 'mf3-v18' },
   ]);
-  selectedMf = signal<{ elementId: string, tag: string }>(this.mfs()[0]);
+  selectedMf = signal<{ elementId: Mf, tag: string }>({ elementId: 'mf1', tag: 'mf1-v18' });
 
-  selectMf(mf: { elementId: string, tag: string }): void {
+  selectMf(mf: { elementId: Mf, tag: string }): void {
     this.selectedMf.set(mf);
   }
 }

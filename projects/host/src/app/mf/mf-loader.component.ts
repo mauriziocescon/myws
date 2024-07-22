@@ -31,6 +31,8 @@ export class MfLoaderComponent {
   isLoading = computed(() => this.status() === 'Loading');
   failed = computed(() => this.status() === 'Failed');
 
+  private ngElement: NgElement & WithProperties<Record<string, any>> | undefined = undefined;
+
   mfWatcher = effect(() => {
     this.mf();
     untracked(() => this.load());
@@ -46,8 +48,8 @@ export class MfLoaderComponent {
       })
       .then(() => {
         // create element and append it on the DOM
-        const ngElement = document.createElement(this.mf().tag) as NgElement & WithProperties<Record<string, any>>;
-        this.target()!.element.nativeElement.appendChild(ngElement);
+        this.ngElement = document.createElement(this.mf().tag) as NgElement & WithProperties<Record<string, any>>;
+        this.target()!.element.nativeElement.appendChild(this.ngElement);
         this.status.set('Loaded');
       })
       .catch(error => {

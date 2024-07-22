@@ -37205,7 +37205,7 @@ var AppModule = class _AppModule {
   ngDoBootstrap() {
     const element = createCustomElement(AppComponent, { injector: this.injector });
     try {
-      customElements.define("mf1-v18", element);
+      customElements.define("mf2-v18", element);
     } catch (e) {
       console.log(e);
     }

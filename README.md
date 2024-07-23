@@ -11,11 +11,15 @@ In this repo there are 4 angular apps:
 - mf2 (✅): built with `"builder": "@angular-devkit/build-angular:application"`, `"optimization": false`,
 - mf3 (🚫): built with `"builder": "@angular-devkit/build-angular:application"`, `"optimization": true`.
 
-In order to see the problem, just run `start:host`. This command will
+Note that mf1 / mf2 / mf3 have basically the same code.
+
+In order to see the problem, just run `npm run start:host`. This command will
 
 - build mf1 / mf2 / mf3 like reported above,
 - concatenate the output of each mf in a single main.js file,
 - move the concatenated files in the host public folder,
 - start the host app.
 
-Micro frontends will be available at [myws/projects/host/public/elements](https://github.com/mauriziocescon/myws/tree/develop/projects/host/public/elements).
+All the `main.js` files will be available at [myws/projects/host/public/elements](https://github.com/mauriziocescon/myws/tree/develop/projects/host/public/elements).
+
+Note: the repo has a gulp file for the concatenation of files, mostly for convenience. I've anyway manually tested the process as well. 

@@ -35,7 +35,7 @@
     "cross-env": "^7.0.3",
     "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-order": "^1.2.0",
+    "gulp-sort": "^2.0.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

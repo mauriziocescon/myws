@@ -10,7 +10,8 @@
     "export:mf1": "ng build mf1 && cross-env MF_NAME=mf1 gulp",
     "export:mf2": "ng build mf2 && cross-env MF_NAME=mf2 gulp",
     "export:mf3": "ng build mf3 && cross-env MF_NAME=mf3 gulp",
-    "export:all": "npm run export:mf1 && npm run export:mf2 && npm run export:mf3"
+    "export:all": "npm run export:mf1 && npm run export:mf2 && npm run export:mf3",
+    "start:host": "npm run export:all && npm run start host"
   },
   "private": true,
   "dependencies": {

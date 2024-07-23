@@ -7,9 +7,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 In this repo there are 4 angular apps:
 
 - host: loader of mfs,
-- mf1 (✅): built with `"builder": "@angular-devkit/build-angular:browser"` with `"buildOptimizer": true`,
-- mf2 (✅): built with `"builder": "@angular-devkit/build-angular:application"` with `"optimization": false`,
-- mf3 (🚫): built with `"builder": "@angular-devkit/build-angular:application"`  with `"optimization": true`.
+- mf1 (✅): built with `"builder": "@angular-devkit/build-angular:browser"`, `"buildOptimizer": true`,
+- mf2 (✅): built with `"builder": "@angular-devkit/build-angular:application"`, `"optimization": false`,
+- mf3 (🚫): built with `"builder": "@angular-devkit/build-angular:application"`, `"optimization": true`.
 
 In order to see the problem, just run `start:host`. This command will
 

@@ -4,16 +4,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Information
 
-In this repo there are 4 angular apps:
+In this repo there are 4 angular apps (mf1 / mf2 / mf3 have basically the same code):
 
 - host: loader of mfs,
 - mf1 (✅): built with `"builder": "@angular-devkit/build-angular:browser"`, `"buildOptimizer": true`,
 - mf2 (✅): built with `"builder": "@angular-devkit/build-angular:application"`, `"optimization": false`,
 - mf3 (🚫): built with `"builder": "@angular-devkit/build-angular:application"`, `"optimization": true`.
 
-Note that mf1 / mf2 / mf3 have basically the same code.
-
-In order to see the problem, just run `npm run start:host`. This command will
+In order to see the problem, just init and run `npm run start:host`. This command will
 
 - build mf1 / mf2 / mf3 like reported above,
 - concatenate the output of each mf in a single main.js file,

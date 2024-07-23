@@ -110,7 +110,7 @@
           "configurations": {
             "production": {
               "buildOptimizer": true,
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "optimization": false,
@@ -186,7 +186,7 @@
           "configurations": {
             "production": {
               "optimization": false,
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "optimization": false,
@@ -261,7 +261,7 @@
           },
           "configurations": {
             "production": {
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "optimization": false,

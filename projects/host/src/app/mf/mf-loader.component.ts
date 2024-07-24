@@ -48,11 +48,9 @@ export class MfLoaderComponent implements OnDestroy {
   private controller = new AbortController();
 
   tag$ = interval(1000)
-    .pipe(
-      takeUntilDestroyed(),
-      map(v => `${this.mf().tag} - ${v}`),
-    )
+    .pipe(takeUntilDestroyed(), map(v => `${this.mf().tag} - ${v}`))
     .subscribe(v => this.ngElement!.tag = v);
+
   mfWatcher = effect(() => {
     this.mf();
     untracked(() => this.load());

@@ -62,6 +62,11 @@ export class MfLoaderComponent implements OnDestroy {
     this.controller.abort();
   }
 
+  manageEvent(event: Event): void {
+    const customEvent = event as CustomEvent<string>;
+    this.outputValue.set(customEvent.detail);
+  }
+
   load(): void {
     this.status.set('Loading');
 
@@ -74,7 +79,7 @@ export class MfLoaderComponent implements OnDestroy {
         // create element and append it on the DOM
         this.ngElement = document.createElement(this.mf().tag) as NgElement & WithProperties<{ tag: string }>;
         this.ngElement.tag = this.mf().tag;
-        this.ngElement.addEventListener('valueChanged', (e: any) => this.outputValue.set(e.detail), { signal: this.controller.signal });
+        this.ngElement.addEventListener('valueChanged', (e: Event) => this.manageEvent(e), { signal: this.controller.signal });
         this.target()!.element.nativeElement.appendChild(this.ngElement);
         this.status.set('Loaded');
       })

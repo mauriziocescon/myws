@@ -1,25 +1,46 @@
-const {src, dest} = require('gulp');
-const gulpConcat = require('gulp-concat');
-const gulpSort = require('gulp-sort');
+const {series} = require('gulp');
+const fs = require('node:fs/promises');
 
 const mfName = process.env.MF_NAME;
 
-exports.default = () => src(`dist/${mfName}/**/*.js`)
-  .pipe(gulpSort({
-    comparator: (f1, f2) => {
-      // order: runtime - polyfills - main
-      let n1, n2;
+async function hasBrowserFolder() {
+  try {
+    return fs.stat(`dist/${mfName}/browser/`)
+      .then(() => true)
+      .catch(() => false);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-      n1 = `${f1.path.substring(f1.path.lastIndexOf('/') + 1)}`.endsWith('runtime.js') ? 'a' : n1;
-      n1 = `${f1.path.substring(f1.path.lastIndexOf('/') + 1)}`.endsWith('polyfills.js') ? 'b' : n1;
-      n1 = `${f1.path.substring(f1.path.lastIndexOf('/') + 1)}`.endsWith('main.js') ? 'c' : n1;
+async function createEntry() {
+  try {
+    const hasBrowser = await hasBrowserFolder();
+    const dir = hasBrowser ? `dist/${mfName}/browser` : `dist/${mfName}`;
+    const fileList = (await fs.readdir(dir)).filter(f => f.endsWith(`.js`));
 
-      n2 = `${f2.path.substring(f2.path.lastIndexOf('/') + 1)}`.endsWith('runtime.js') ? 'a' : n2;
-      n2 = `${f2.path.substring(f2.path.lastIndexOf('/') + 1)}`.endsWith('polyfills.js') ? 'b' : n2;
-      n2 = `${f2.path.substring(f2.path.lastIndexOf('/') + 1)}`.endsWith('main.js') ? 'c' : n2;
+    const predefinedFiles = ['runtime.js', 'polyfills.js', 'scripts.js', 'main.js'];
+    let content = ``;
 
-      return n1.localeCompare(n2);
-    }
-  }))
-  .pipe(gulpConcat('main.js'))
-  .pipe(dest(`projects/host/public/elements/${mfName}`));
+    predefinedFiles.forEach(pf => {
+      if (fileList.find(f => f === pf)) {
+        content = `${content}\nimport \'./${pf}\';`.trim();
+      }
+    });
+    return fs.writeFile(`${dir}/entry.js`, content);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function copyFiles() {
+  try {
+    const hasBrowser = await hasBrowserFolder();
+    const dir = hasBrowser ? `dist/${mfName}/browser` : `dist/${mfName}/`;
+    return fs.cp(dir, `projects/host/public/elements/${mfName}`, {recursive: true});
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+exports.default = series(createEntry, copyFiles);

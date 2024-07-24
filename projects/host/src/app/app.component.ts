@@ -8,6 +8,7 @@ type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
     @for (mf of mfs(); track mf.elementId) {
       <button (click)="selectMf(mf)">Load {{ mf.elementId }}</button>
     }
+    <hr>
 
     @if (selectedMf().elementId === 'mf1') {
       <app-mf-loader [mf]="selectedMf()"/>

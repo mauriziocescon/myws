@@ -1,15 +1,15 @@
 import { Component, computed, effect, input, signal, untracked, viewChild, ViewContainerRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgElement, WithProperties } from '@angular/elements';
 
-import { firstValueFrom, from } from 'rxjs';
-import { timeout } from 'rxjs/operators';
+import { firstValueFrom, from, interval } from 'rxjs';
+import { map, timeout } from 'rxjs/operators';
 
 type StatusType = 'Loading' | 'Loaded' | 'Failed';
 
 @Component({
   selector: 'app-mf-loader',
   standalone: true,
-  imports: [],
   template: `
     <div #target></div>
 
@@ -31,7 +31,14 @@ export class MfLoaderComponent {
   isLoading = computed(() => this.status() === 'Loading');
   failed = computed(() => this.status() === 'Failed');
 
-  private ngElement: NgElement & WithProperties<Record<string, any>> | undefined = undefined;
+  private ngElement: NgElement & WithProperties<{ tag: string }> | undefined = undefined;
+
+  tag$ = interval(1000)
+    .pipe(
+      takeUntilDestroyed(),
+      map(v => `${this.mf().tag} - ${v}`),
+    )
+    .subscribe(v => this.ngElement!.tag = v);
 
   mfWatcher = effect(() => {
     this.mf();
@@ -48,7 +55,8 @@ export class MfLoaderComponent {
       })
       .then(() => {
         // create element and append it on the DOM
-        this.ngElement = document.createElement(this.mf().tag) as NgElement & WithProperties<Record<string, any>>;
+        this.ngElement = document.createElement(this.mf().tag) as NgElement & WithProperties<{ tag: string }>;
+        this.ngElement.tag = this.mf().tag;
         this.target()!.element.nativeElement.appendChild(this.ngElement);
         this.status.set('Loaded');
       })

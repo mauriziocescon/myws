@@ -1,4 +1,14 @@
-import { Component, computed, effect, input, signal, untracked, viewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  input,
+  OnDestroy,
+  signal,
+  untracked,
+  viewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgElement, WithProperties } from '@angular/elements';
 
@@ -11,6 +21,8 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
   selector: 'app-mf-loader',
   standalone: true,
   template: `
+    <div>Output: {{ outputValue() }}</div>
+
     <div #target></div>
 
     @if (isLoading()) {
@@ -22,16 +34,18 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
     }
   `,
 })
-export class MfLoaderComponent {
+export class MfLoaderComponent implements OnDestroy {
   mf = input.required<{ elementId: string, tag: string }>();
 
   private status = signal<StatusType | undefined>(undefined);
   private target = viewChild('target', { read: ViewContainerRef });
 
+  outputValue = signal('');
   isLoading = computed(() => this.status() === 'Loading');
   failed = computed(() => this.status() === 'Failed');
 
   private ngElement: NgElement & WithProperties<{ tag: string }> | undefined = undefined;
+  private controller = new AbortController();
 
   tag$ = interval(1000)
     .pipe(
@@ -39,11 +53,14 @@ export class MfLoaderComponent {
       map(v => `${this.mf().tag} - ${v}`),
     )
     .subscribe(v => this.ngElement!.tag = v);
-
   mfWatcher = effect(() => {
     this.mf();
     untracked(() => this.load());
   });
+
+  ngOnDestroy(): void {
+    this.controller.abort();
+  }
 
   load(): void {
     this.status.set('Loading');
@@ -57,6 +74,7 @@ export class MfLoaderComponent {
         // create element and append it on the DOM
         this.ngElement = document.createElement(this.mf().tag) as NgElement & WithProperties<{ tag: string }>;
         this.ngElement.tag = this.mf().tag;
+        this.ngElement.addEventListener('valueChanged', (e: any) => this.outputValue.set(e.detail), { signal: this.controller.signal });
         this.target()!.element.nativeElement.appendChild(this.ngElement);
         this.status.set('Loaded');
       })

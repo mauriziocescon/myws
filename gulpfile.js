@@ -27,7 +27,7 @@ async function createEntry() {
         content = `${content}\nimport \'./${pf}\';`.trim();
       }
     });
-    return fs.writeFile(`${dir}/entry.js`, content);
+    return fs.writeFile(`${dir}/index.js`, content);
   } catch (e) {
     console.log(e);
   }

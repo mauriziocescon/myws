@@ -61,13 +61,12 @@ export class MfLoaderComponent {
 
   loadElement(metadata: { elementId: string, tag: string }): Promise<void> {
     if (!customElements.get(metadata.tag)) {
-      const url = `elements/${metadata.elementId}/entry.js`;
+      const url = `elements/${metadata.elementId}/index.js`;
 
       return new Promise<void>((resolve, reject) => {
         // main.js contains all (concatenated) js files from the bundle
         const main: HTMLScriptElement = document.createElement('script');
         main.setAttribute('src', url);
-        main.setAttribute('async', '');
         main.setAttribute('type', 'module');
         const onLoadMain = () => {
           main.removeEventListener('load', onLoadMain);

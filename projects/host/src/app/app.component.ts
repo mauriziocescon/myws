@@ -1,36 +1,31 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+import { MfLoaderComponent } from './mf/mf-loader.component';
 
 type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    MfLoaderComponent,
+  ],
   template: `
-    @for (mf of mfs(); track mf.elementId) {
-      <button (click)="selectMf(mf)">Load {{ mf.elementId }}</button>
+    @for (url of urls(); track url) {
+      <button (click)="goTo(url)">Load {{ url }}</button>
     }
     <hr>
-
-    @if (selectedMf().elementId === 'mf1') {
-      <app-mf-loader [mf]="selectedMf()"/>
-    } @else if (selectedMf().elementId === 'mf2') {
-      <app-mf-loader [mf]="selectedMf()"/>
-    } @else if (selectedMf().elementId === 'mf3') {
-      <app-mf-loader [mf]="selectedMf()"/>
-    } @else if (selectedMf().elementId === 'mf4') {
-      <app-mf-loader [mf]="selectedMf()"/>
-    }
+    <router-outlet></router-outlet>
   `,
 })
 export class AppComponent {
-  mfs = signal<{ elementId: Mf, tag: string }[]>([
-    { elementId: 'mf1', tag: 'mf1-v18' },
-    { elementId: 'mf2', tag: 'mf2-v18' },
-    { elementId: 'mf3', tag: 'mf3-v18' },
-    { elementId: 'mf4', tag: 'mf4-v18' },
-  ]);
-  selectedMf = signal<{ elementId: Mf, tag: string }>({ elementId: 'mf1', tag: 'mf1-v18' });
+  router = inject(Router);
 
-  selectMf(mf: { elementId: Mf, tag: string }): void {
-    this.selectedMf.set(mf);
+  urls = signal<Mf[]>(['mf1', 'mf2', 'mf3', 'mf4']);
+
+  goTo(url: string): void {
+    this.router.navigateByUrl(`/${url}`);
   }
 }

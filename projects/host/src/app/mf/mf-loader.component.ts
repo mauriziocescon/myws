@@ -1,14 +1,4 @@
-import {
-  Component,
-  computed,
-  effect,
-  input,
-  OnDestroy,
-  signal,
-  untracked,
-  viewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, computed, input, OnDestroy, OnInit, signal, viewChild, ViewContainerRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgElement, WithProperties } from '@angular/elements';
 
@@ -34,7 +24,7 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
     }
   `,
 })
-export class MfLoaderComponent implements OnDestroy {
+export class MfLoaderComponent implements OnInit, OnDestroy {
   mf = input.required<{ elementId: string, tag: string }>();
 
   private status = signal<StatusType | undefined>(undefined);
@@ -48,13 +38,16 @@ export class MfLoaderComponent implements OnDestroy {
   private controller = new AbortController();
 
   tag$ = interval(1000)
-    .pipe(takeUntilDestroyed(), map(v => `${this.mf().tag} - ${v}`))
-    .subscribe(v => this.ngElement!.tag = v);
-
-  mfWatcher = effect(() => {
-    this.mf();
-    untracked(() => this.load());
-  });
+    .pipe(takeUntilDestroyed(), map(v => `${this.mf()?.tag} - ${v}`))
+    .subscribe(v => {
+      if (this.ngElement) {
+        this.ngElement!.tag = v;
+      }
+    });
+  
+  ngOnInit(): void {
+    this.load();
+  }
 
   ngOnDestroy(): void {
     this.controller.abort();
@@ -93,26 +86,26 @@ export class MfLoaderComponent implements OnDestroy {
       const url = `elements/${metadata.elementId}/index.js`;
 
       return new Promise<void>((resolve, reject) => {
-        // main.js contains all (concatenated) js files from the bundle
-        const main: HTMLScriptElement = document.createElement('script');
-        main.setAttribute('src', url);
-        main.setAttribute('type', 'module');
-        const onLoadMain = () => {
-          main.removeEventListener('load', onLoadMain);
-          main.removeEventListener('error', onErrorMain);
+        // index.js contains all modules from the bundle
+        const index: HTMLScriptElement = document.createElement('script');
+        index.setAttribute('src', url);
+        index.setAttribute('type', 'module');
+        const onLoadIndex = () => {
+          index.removeEventListener('load', onLoadIndex);
+          index.removeEventListener('error', onErrorIndex);
           resolve();
         };
-        const onErrorMain = (error: any) => {
-          main.removeEventListener('load', onLoadMain);
-          main.removeEventListener('error', onErrorMain);
-          document.head.removeChild(main);
+        const onErrorIndex = (error: any) => {
+          index.removeEventListener('load', onLoadIndex);
+          index.removeEventListener('error', onErrorIndex);
+          document.head.removeChild(index);
           const reason = `url: ${typeof error === 'string' ? error : JSON.stringify(error)}`;
           reject(reason);
         };
 
-        main.addEventListener('load', onLoadMain);
-        main.addEventListener('error', onErrorMain);
-        document.head.appendChild(main);
+        index.addEventListener('load', onLoadIndex);
+        index.addEventListener('error', onErrorIndex);
+        document.head.appendChild(index);
       })
         .catch(error => Promise.reject(error.message || error));
     }

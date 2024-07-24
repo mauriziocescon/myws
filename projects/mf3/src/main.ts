@@ -1,6 +1,11 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import { createApplication } from '@angular/platform-browser';
+import { createCustomElement } from '@angular/elements';
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule, { ngZoneEventCoalescing: true, ngZoneRunCoalescing: true })
-  .catch(err => console.log(err));
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
+
+(async () => {
+  const app = await createApplication(appConfig);
+  const element = createCustomElement(AppComponent, { injector: app.injector });
+  customElements.define('mf3-v18', element);
+})();

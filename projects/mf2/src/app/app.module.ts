@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
 import { AppComponent } from './app.component';
@@ -12,10 +12,12 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
-    HttpClientModule,
   ],
   declarations: [
     AppComponent,
+  ],
+  providers: [
+    provideHttpClient(),
   ],
 })
 export class AppModule implements DoBootstrap {

@@ -4,7 +4,12 @@ import { MfLoaderComponent } from './mf/mf-loader.component';
 
 export const routes: Routes = [
   {
-    path: 'mf1',
+    matcher: url => {
+      if (url.length === 1 && url[0].path.startsWith('mf1')) {
+        return { consumed: url };
+      }
+      return null;
+    },
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf1', tag: 'mf1-v18' },

@@ -37,14 +37,14 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
   private ngElement: NgElement & WithProperties<{ tag: string }> | undefined = undefined;
   private controller = new AbortController();
 
-  tag$ = interval(1000)
+  tag$ = interval(5000)
     .pipe(takeUntilDestroyed(), map(v => `${this.mf()?.tag} - ${v}`))
     .subscribe(v => {
       if (this.ngElement) {
         this.ngElement!.tag = v;
       }
     });
-  
+
   ngOnInit(): void {
     this.load();
   }

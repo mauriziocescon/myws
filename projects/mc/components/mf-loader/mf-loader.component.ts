@@ -8,7 +8,7 @@ import { map, timeout } from 'rxjs/operators';
 type StatusType = 'Loading' | 'Loaded' | 'Failed';
 
 @Component({
-  selector: 'app-mf-loader',
+  selector: 'mc-mf-loader',
   standalone: true,
   template: `
     <div>Output: {{ outputValue() }}</div>

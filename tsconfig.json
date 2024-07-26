@@ -3,6 +3,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@mc/components": [
+        "./projects/mc/components"
+      ],
+      "@mc/components/*": [
+        "./projects/mc/components/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

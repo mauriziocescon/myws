@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
-import { MfLoaderComponent } from './mf/mf-loader.component';
+import { MfLoaderComponent } from '@mc/components/mf-loader';
 
 type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
 

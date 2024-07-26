@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { MfLoaderComponent } from './mf/mf-loader.component';
+import { MfLoaderComponent } from '@mc/components/mf-loader';
 
 export const routes: Routes = [
   {

@@ -1,15 +1,28 @@
-import { Component, computed, input, OnDestroy, OnInit, signal, viewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  signal,
+  viewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgElement, WithProperties } from '@angular/elements';
 
 import { firstValueFrom, from, interval } from 'rxjs';
 import { map, timeout } from 'rxjs/operators';
 
+import { MfLoaderService } from './mf-loader.service';
+
 type StatusType = 'Loading' | 'Loaded' | 'Failed';
 
 @Component({
   selector: 'mc-mf-loader',
   standalone: true,
+  providers: [MfLoaderService],
   template: `
     <div>Output: {{ outputValue() }}</div>
 
@@ -25,6 +38,8 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
   `,
 })
 export class MfLoaderComponent implements OnInit, OnDestroy {
+  private mfLoader = inject(MfLoaderService);
+
   mf = input.required<{ elementId: string, tag: string }>();
 
   private status = signal<StatusType | undefined>(undefined);
@@ -61,7 +76,8 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
   load(): void {
     this.status.set('Loading');
 
-    this.loadElement(this.mf())
+    this.mfLoader
+      .loadElement(this.mf())
       .then(() => {
         const source$ = from(customElements.whenDefined(this.mf().tag)).pipe(timeout(3500));
         return firstValueFrom(source$);
@@ -79,37 +95,5 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
         console.error(error);
         this.status.set('Failed');
       });
-  }
-
-  loadElement(metadata: { elementId: string, tag: string }): Promise<void> {
-    if (!customElements.get(metadata.tag)) {
-      const url = `elements/${metadata.elementId}/index.js`;
-
-      return new Promise<void>((resolve, reject) => {
-        // index.js contains all modules from the bundle
-        const index: HTMLScriptElement = document.createElement('script');
-        index.setAttribute('src', url);
-        index.setAttribute('type', 'module');
-        const onLoadIndex = () => {
-          index.removeEventListener('load', onLoadIndex);
-          index.removeEventListener('error', onErrorIndex);
-          resolve();
-        };
-        const onErrorIndex = (error: any) => {
-          index.removeEventListener('load', onLoadIndex);
-          index.removeEventListener('error', onErrorIndex);
-          document.head.removeChild(index);
-          const reason = `url: ${typeof error === 'string' ? error : JSON.stringify(error)}`;
-          reject(reason);
-        };
-
-        index.addEventListener('load', onLoadIndex);
-        index.addEventListener('error', onErrorIndex);
-        document.head.appendChild(index);
-      })
-        .catch(error => Promise.reject(error.message || error));
-    }
-
-    return Promise.resolve();
   }
 }

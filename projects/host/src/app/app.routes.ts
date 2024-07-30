@@ -13,6 +13,8 @@ export const routes: Routes = [
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf1', tag: 'mf1-v18' },
+      inputs: { desc: 'mf1 desc from route' },
+      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
   },
   {
@@ -20,6 +22,8 @@ export const routes: Routes = [
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf2', tag: 'mf2-v18' },
+      inputs: { desc: 'mf2 desc from route' },
+      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
   },
   {
@@ -27,6 +31,8 @@ export const routes: Routes = [
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf3', tag: 'mf3-v18' },
+      inputs: { desc: 'mf3 desc from route' },
+      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
   },
   {
@@ -34,6 +40,8 @@ export const routes: Routes = [
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf4', tag: 'mf4-v18' },
+      inputs: { desc: 'mf4 desc from route' },
+      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
   },
   { path: '**', redirectTo: '/mf1' },

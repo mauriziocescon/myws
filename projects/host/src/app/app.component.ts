@@ -17,8 +17,7 @@ type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
       <button (click)="goTo(url)">Load {{ url }}</button>
     }
     <hr>
-    <router-outlet></router-outlet>
-  `,
+    <router-outlet></router-outlet>`,
 })
 export class AppComponent {
   router = inject(Router);

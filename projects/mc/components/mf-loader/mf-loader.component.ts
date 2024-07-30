@@ -1,19 +1,20 @@
 import {
   Component,
   computed,
+  effect,
   inject,
   input,
   OnDestroy,
   OnInit,
   signal,
+  untracked,
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgElement, WithProperties } from '@angular/elements';
 
-import { firstValueFrom, from, interval } from 'rxjs';
-import { map, timeout } from 'rxjs/operators';
+import { firstValueFrom, from } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 
 import { MfLoaderService } from './mf-loader.service';
 
@@ -24,8 +25,6 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
   standalone: true,
   providers: [MfLoaderService],
   template: `
-    <div>Output: {{ outputValue() }}</div>
-
     <div #target></div>
 
     @if (isLoading()) {
@@ -41,24 +40,27 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
   private mfLoader = inject(MfLoaderService);
 
   mf = input.required<{ elementId: string, tag: string }>();
+  inputs = input<Record<string, unknown>>();
+  outputs = input<Record<string, (data: any) => void>>();
 
   private status = signal<StatusType | undefined>(undefined);
   private target = viewChild('target', { read: ViewContainerRef });
 
-  outputValue = signal('');
   isLoading = computed(() => this.status() === 'Loading');
   failed = computed(() => this.status() === 'Failed');
 
-  private ngElement: NgElement & WithProperties<{ tag: string }> | undefined = undefined;
+  private ngElement: NgElement & WithProperties<Record<string, any>> | undefined = undefined;
   private controller = new AbortController();
 
-  tag$ = interval(5000)
-    .pipe(takeUntilDestroyed(), map(v => `${this.mf()?.tag} - ${v}`))
-    .subscribe(v => {
-      if (this.ngElement) {
-        this.ngElement!.tag = v;
-      }
-    });
+  inputsWatcher = effect(() => {
+    this.inputs();
+    untracked(() => this.updateInputs());
+  });
+
+  outputsWatcher = effect(() => {
+    this.outputs();
+    untracked(() => this.updateOutputs());
+  });
 
   ngOnInit(): void {
     this.load();
@@ -66,11 +68,6 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.controller.abort();
-  }
-
-  manageEvent(event: Event): void {
-    const customEvent = event as CustomEvent<string>;
-    this.outputValue.set(customEvent.detail);
   }
 
   load(): void {
@@ -85,8 +82,8 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
       .then(() => {
         // create element and append it on the DOM
         this.ngElement = document.createElement(this.mf().tag) as NgElement & WithProperties<{ tag: string }>;
-        this.ngElement.tag = this.mf().tag;
-        this.ngElement.addEventListener('valueChanged', (e: Event) => this.manageEvent(e), { signal: this.controller.signal });
+        this.updateInputs();
+        this.updateOutputs();
         this.target()!.element.nativeElement.appendChild(this.ngElement);
         this.status.set('Loaded');
       })
@@ -95,5 +92,29 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
         console.error(error);
         this.status.set('Failed');
       });
+  }
+
+  private updateInputs(): void {
+    if (this.ngElement && this.inputs()) {
+      const ngElement = this.ngElement as NgElement & WithProperties<Record<string, any>>;
+      const inputs = this.inputs() as Record<string, unknown>;
+      Object.keys(inputs).forEach(key => ngElement[key] = inputs[key]);
+    }
+  }
+
+  private updateOutputs(): void {
+    if (this.ngElement && this.outputs()) {
+      this.controller.abort();
+      const ngElement = this.ngElement as NgElement & WithProperties<Record<string, any>>;
+      const outputs = this.outputs() as Record<string, (data: unknown) => void>;
+
+      this.controller = new AbortController();
+      Object.keys(outputs).forEach(key => {
+        ngElement.addEventListener(key, (event: Event) => {
+          const customEvent = event as CustomEvent<string>;
+          outputs[key](customEvent.detail);
+        }, { signal: this.controller.signal });
+      });
+    }
   }
 }

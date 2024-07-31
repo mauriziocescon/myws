@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div>Just a wildcard for mis-matches</div>`,
+    <div>Path not matching any predefined route</div>`,
 })
 export class FallbackComponent {
 }

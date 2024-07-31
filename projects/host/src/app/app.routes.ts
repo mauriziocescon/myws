@@ -5,7 +5,7 @@ import { startsWith } from '@mc/integration/utils';
 
 export const routes: Routes = [
   {
-    path: 'mf1',
+    matcher: startsWith('mf1'),
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf1', tag: 'mf1-v18' },
@@ -14,7 +14,7 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'mf2',
+    matcher: startsWith('mf2'),
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf2', tag: 'mf2-v18' },
@@ -32,7 +32,7 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'mf4',
+    matcher: startsWith('mf4'),
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf4', tag: 'mf4-v18' },

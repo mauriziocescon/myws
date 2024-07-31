@@ -24,7 +24,9 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
 @Component({
   selector: 'mc-mf-loader',
   standalone: true,
-  providers: [MfLoaderService],
+  providers: [
+    MfLoaderService,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div #target></div>

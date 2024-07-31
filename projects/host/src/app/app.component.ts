@@ -4,8 +4,6 @@ import { Router, RouterOutlet } from '@angular/router';
 import { MfLoaderComponent } from '@mc/integration/mf-loader';
 import { HostRouterService } from '@mc/integration/host-router';
 
-type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,12 +17,12 @@ type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
       <button (click)="goTo(url)">Load {{ url }}</button>
     }
     <hr>
-    <router-outlet></router-outlet>`,
+    <router-outlet/>`,
 })
 export class AppComponent {
   router = inject(Router);
 
-  urls = signal<Mf[]>(['mf1', 'mf2', 'mf3', 'mf4']);
+  urls = signal<string[]>(['mf1', 'mf2', 'mf3', 'mf3/a', 'mf4']);
 
   constructor() {
     // exposing HostRouterService using the global scope

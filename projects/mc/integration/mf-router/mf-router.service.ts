@@ -20,6 +20,7 @@ interface IHostRouter {
 export class MfRouterService {
   private elementRouter = inject(Router);
   private elementZone = inject(NgZone);
+  // setting HostRouterService from the global scope
   private hostRouter: IHostRouter = (globalThis as any).HostRouterService;
 
   private elId: string | undefined = undefined;

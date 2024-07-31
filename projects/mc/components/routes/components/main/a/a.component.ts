@@ -2,22 +2,22 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-b',
+  selector: 'app-a',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h5>BComponent</h5>
-    <button (click)="goToB()">Go to a</button>
-    <button (click)="goToMf1()">Go to mf1</button>`,
+    <h5>AComponent</h5>
+    <button (click)="goToB()">Go to b</button>
+    <button (click)="goToMf1()">Go to mf2</button>`,
 })
-export class BComponent {
+export class AComponent {
   private router = inject(Router);
 
   goToB(): void {
-    this.router.navigateByUrl('/mf3/a');
+    this.router.navigateByUrl('/mf3/b');
   }
 
   goToMf1(): void {
-    this.router.navigateByUrl('/mf1');
+    this.router.navigateByUrl('/mf2');
   }
 }

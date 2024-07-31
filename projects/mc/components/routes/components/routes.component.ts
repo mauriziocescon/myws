@@ -15,16 +15,11 @@ import { RouterOutlet } from '@angular/router';
 
 import { MfRouterService } from '@mc/integration/mf-router';
 
-import { AComponent } from './a/a.component';
-import { BComponent } from './b/b.component';
-
 @Component({
   selector: 'app-routes',
   standalone: true,
   imports: [
     RouterOutlet,
-    AComponent,
-    BComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

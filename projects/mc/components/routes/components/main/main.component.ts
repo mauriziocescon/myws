@@ -15,14 +15,14 @@ import { BComponent } from './b/b.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>Main</div>
-    <button (click)="goToMf1()">Go to mf1</button>
+    <button (click)="goToMf()">Go to mf2</button>
     <hr>
     <router-outlet/>`,
 })
 export class MainComponent {
   private router = inject(Router);
 
-  goToMf1(): void {
-    this.router.navigateByUrl('/mf1');
+  goToMf(): void {
+    this.router.navigateByUrl('/mf2');
   }
 }

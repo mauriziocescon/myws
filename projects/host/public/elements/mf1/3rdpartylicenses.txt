@@ -13,7 +13,12 @@ MIT
 @angular/platform-browser
 MIT
 
+@angular/router
+MIT
+
 @mc/components
+
+@mc/integration
 
 rxjs
 Apache-2.0

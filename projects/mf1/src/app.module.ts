@@ -1,34 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DoBootstrap, Injector, NgModule } from '@angular/core';
+import { DoBootstrap, inject, Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { GenericComponent } from '@mc/components/generic';
+import { routes, RoutesComponent } from '@mc/components/routes';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
-    GenericComponent,
+    RouterModule.forRoot(routes('mf1')),
+    RoutesComponent,
   ],
   providers: [
     provideHttpClient(),
   ],
 })
 export class AppModule implements DoBootstrap {
-
-  constructor(private injector: Injector) {
-  }
+  private injector = inject(Injector);
 
   ngDoBootstrap(): void {
-    const element = createCustomElement(GenericComponent, { injector: this.injector });
-    try {
-      customElements.define('mf2-v18', element);
-    } catch (e) {
-      console.log(e);
-    }
+    const element = createCustomElement(RoutesComponent, { injector: this.injector });
+    customElements.define('mf1-v18', element);
   }
 }

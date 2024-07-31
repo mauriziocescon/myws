@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   template: `
     <h5>AComponent</h5>
     <button (click)="goToB()">Go to b</button>
-    <button (click)="goToMf1()">Go to mf2</button>`,
+    <button (click)="goToMf()">Go to mf2</button>`,
 })
 export class AComponent {
   private router = inject(Router);
@@ -17,7 +17,7 @@ export class AComponent {
     this.router.navigateByUrl('/mf3/b');
   }
 
-  goToMf1(): void {
+  goToMf(): void {
     this.router.navigateByUrl('/mf2');
   }
 }

@@ -2,4 +2,4 @@
  * Public API Surface of components
  */
 
-export * from '@mc/components/generic';
+export * from './host-router.service';

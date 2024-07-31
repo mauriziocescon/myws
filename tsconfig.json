@@ -9,6 +9,12 @@
       ],
       "@mc/components/*": [
         "./projects/mc/components/*"
+      ],
+      "@mc/integration": [
+        "./projects/mc/integration"
+      ],
+      "@mc/integration/*": [
+        "./projects/mc/integration/*"
       ]
     },
     "outDir": "./dist/out-tsc",

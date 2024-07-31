@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
-import { MfLoaderComponent } from '@mc/components/mf-loader';
+import { MfLoaderComponent } from '@mc/integration/mf-loader';
+import { HostRouterService } from '@mc/integration/host-router';
 
 type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
 
@@ -23,6 +24,11 @@ export class AppComponent {
   router = inject(Router);
 
   urls = signal<Mf[]>(['mf1', 'mf2', 'mf3', 'mf4']);
+
+  constructor() {
+    // exposing HostRouterService using the global scope
+    (globalThis as any).HostRouterService = inject(HostRouterService);
+  }
 
   goTo(url: string): void {
     this.router.navigateByUrl(`/${url}`);

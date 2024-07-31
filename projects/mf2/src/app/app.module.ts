@@ -5,16 +5,14 @@ import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { AppComponent } from './app.component';
+import { GenericComponent } from '@mc/components/generic';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
-  ],
-  declarations: [
-    AppComponent,
+    GenericComponent,
   ],
   providers: [
     provideHttpClient(),
@@ -26,7 +24,7 @@ export class AppModule implements DoBootstrap {
   }
 
   ngDoBootstrap(): void {
-    const element = createCustomElement(AppComponent, { injector: this.injector });
+    const element = createCustomElement(GenericComponent, { injector: this.injector });
     try {
       customElements.define('mf2-v18', element);
     } catch (e) {

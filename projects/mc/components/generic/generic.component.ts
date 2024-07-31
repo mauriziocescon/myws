@@ -1,17 +1,19 @@
-import { Component, EventEmitter, Input, OnChanges, Output, signal, SimpleChanges } from '@angular/core';
+import { Component, computed, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   template: `
     <div>Input: {{ desc }}</div>
     <div>Signal: {{ status() }}</div>
     <button (click)="onClick()">Output</button>`,
 })
-export class AppComponent implements OnChanges {
+export class GenericComponent implements OnChanges {
+  @Input({ required: true }) mf: { elementId: string, tag: string } = { elementId: '', tag: '' };
   @Input({ required: true }) desc: string = '';
   @Output() valueChanged = new EventEmitter<string>();
 
-  status = signal('Mf1 loaded!');
+  status = computed(() => `${this.mf.tag} loaded!`);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['desc'] && !changes['desc'].isFirstChange()) {

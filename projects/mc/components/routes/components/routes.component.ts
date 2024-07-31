@@ -1,5 +1,7 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  computed,
   EventEmitter,
   inject,
   Input,
@@ -7,7 +9,6 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  signal,
   SimpleChanges,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
@@ -18,28 +19,29 @@ import { AComponent } from './a/a.component';
 import { BComponent } from './b/b.component';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-routes',
   standalone: true,
   imports: [
     RouterOutlet,
     AComponent,
     BComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>Input: {{ desc }}</div>
     <div>Signal: {{ status() }}</div>
     <button (click)="onClick()">Output</button>
     <hr>
-    <router-outlet></router-outlet>`,
+    <router-outlet/>`,
 })
-export class AppComponent implements OnInit, OnChanges, OnDestroy {
+export class RoutesComponent implements OnInit, OnChanges, OnDestroy {
   private mfRouter = inject(MfRouterService);
 
   @Input({ required: true }) mf: { elementId: string, tag: string } = { elementId: '', tag: '' };
   @Input({ required: true }) desc: string = '';
   @Output() valueChanged = new EventEmitter<string>();
 
-  status = signal('Mf3 loaded!');
+  status = computed(() => `${this.mf.tag} loaded!`);
 
   ngOnInit(): void {
     this.mfRouter.setup({ elId: this.mf.elementId });

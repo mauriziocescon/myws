@@ -5,3 +5,4 @@
 export * from '@mc/integration/host-router';
 export * from '@mc/integration/mf-loader';
 export * from '@mc/integration/mf-loader';
+export * from '@mc/integration/utils';

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   computed,
   effect,
@@ -24,6 +25,7 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
   selector: 'mc-mf-loader',
   standalone: true,
   providers: [MfLoaderService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div #target></div>
 

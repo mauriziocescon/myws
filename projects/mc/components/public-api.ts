@@ -3,3 +3,4 @@
  */
 
 export * from '@mc/components/generic';
+export * from '@mc/components/routes';

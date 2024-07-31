@@ -1,8 +1,18 @@
-import { Component, computed, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-generic',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>Input: {{ desc }}</div>
     <div>Signal: {{ status() }}</div>

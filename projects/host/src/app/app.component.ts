@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
 import { MfLoaderComponent } from '@mc/integration/mf-loader';
@@ -13,6 +13,7 @@ type Mf = 'mf1' | 'mf2' | 'mf3' | 'mf4';
     RouterOutlet,
     MfLoaderComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @for (url of urls(); track url) {
       <button (click)="goTo(url)">Load {{ url }}</button>

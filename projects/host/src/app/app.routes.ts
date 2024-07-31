@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { MfLoaderComponent } from '@mc/integration/mf-loader';
+import { startsWith } from '@mc/integration/utils';
 
 export const routes: Routes = [
   {
@@ -22,7 +23,7 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'mf3',
+    matcher: startsWith('mf3'),
     component: MfLoaderComponent,
     data: {
       mf: { elementId: 'mf3', tag: 'mf3-v18' },

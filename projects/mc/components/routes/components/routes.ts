@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { FallbackComponent } from '@mc/components/routes';
+
 import { AComponent } from './a/a.component';
 import { BComponent } from './b/b.component';
 
@@ -17,5 +19,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: '/mf3/a' },
+  { path: '**', component: FallbackComponent },
 ];

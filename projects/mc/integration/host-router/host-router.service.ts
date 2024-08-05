@@ -58,14 +58,12 @@ export class HostRouterService {
   }
 
   private manageRouterEvent(event: RouterEvent): void {
-    const url: string = event['url'];
-
     Object
       .keys(this.routerCallbacks)
       .forEach(id => {
         const callback = this.routerCallbacks[id];
         if (callback) {
-          callback(url);
+          callback(event['url']);
         }
       });
   }

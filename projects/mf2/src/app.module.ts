@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { DoBootstrap, inject, Injector, NgModule } from '@angular/core';
+import { DoBootstrap, inject, Injector, NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
@@ -12,6 +12,7 @@ import { GenericComponent } from '@mc/components/generic';
   ],
   providers: [
     provideHttpClient(),
+    provideExperimentalZonelessChangeDetection(),
   ],
 })
 export class AppModule implements DoBootstrap {

@@ -29,7 +29,7 @@ import { MfRouterService } from '@mc/integration/mf-router';
     <hr>
     <router-outlet/>`,
 })
-export class RoutesComponent implements OnInit, OnChanges, OnDestroy {
+export class RouteComponent implements OnInit, OnChanges, OnDestroy {
   private mfRouter = inject(MfRouterService);
 
   @Input({ required: true }) mf: { elementId: string, tag: string } = { elementId: '', tag: '' };

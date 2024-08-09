@@ -3,7 +3,9 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { routes, RoutesComponent } from '@mc/components/routes';
+import { RouteComponent } from '@mc/integration/mf-route';
+
+import { routes } from '@mc/components/mf3';
 
 (async () => {
   const app = await createApplication({
@@ -12,6 +14,6 @@ import { routes, RoutesComponent } from '@mc/components/routes';
       provideRouter(routes('mf3')),
     ],
   });
-  const element = createCustomElement(RoutesComponent, { injector: app.injector });
+  const element = createCustomElement(RouteComponent, { injector: app.injector });
   customElements.define('mf3-v18', element);
 })();

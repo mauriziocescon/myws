@@ -3,7 +3,7 @@ import { DoBootstrap, inject, Injector, NgModule, provideExperimentalZonelessCha
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { GenericComponent } from '@mc/components/generic';
+import { GenericComponent } from '@mc/integration/mf-generic';
 
 @NgModule({
   imports: [

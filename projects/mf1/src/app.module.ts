@@ -4,13 +4,15 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { routes, RoutesComponent } from '@mc/components/routes';
+import { RouteComponent } from '@mc/integration/mf-route';
+
+import { routes } from '@mc/components/mf1';
 
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes('mf1')),
-    RoutesComponent,
+    RouteComponent,
   ],
   providers: [
     provideHttpClient(withFetch()),
@@ -20,7 +22,7 @@ export class AppModule implements DoBootstrap {
   private injector = inject(Injector);
 
   ngDoBootstrap(): void {
-    const element = createCustomElement(RoutesComponent, { injector: this.injector });
+    const element = createCustomElement(RouteComponent, { injector: this.injector });
     customElements.define('mf1-v18', element);
   }
 }

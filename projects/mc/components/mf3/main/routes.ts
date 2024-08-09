@@ -1,8 +1,8 @@
-import { FallbackComponent } from '@mc/integration/route-fallback';
+import { FallbackComponent } from '@mc/integration/mf-route';
 
-import { MainComponent } from './main/main.component';
-import { AComponent } from './main/a/a.component';
-import { BComponent } from './main/b/b.component';
+import { MainComponent } from './main.component';
+import { AComponent } from './a/a.component';
+import { BComponent } from './b/b.component';
 
 export const routes = (path: string) => {
   return [

@@ -1,23 +1,23 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-a',
   standalone: true,
+  imports: [
+    RouterLink,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h5>AComponent</h5>
-    <button (click)="goToB()">Go to b</button>
-    <button (click)="goToMf()">Go to mf2</button>`,
+    <a class="link" [routerLink]="bLink()">Go to b</a>
+    <a class="link" [routerLink]="link()">Go to mf2</a>`,
+  styles: `
+    .link {
+      padding: 0.3rem;
+    }`,
 })
 export class AComponent {
-  private router = inject(Router);
-
-  goToB(): void {
-    this.router.navigateByUrl('/mf3/b');
-  }
-
-  goToMf(): void {
-    this.router.navigateByUrl('/mf2');
-  }
+  bLink = signal('/mf3/b');
+  link = signal('/mf2');
 }

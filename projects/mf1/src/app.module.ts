@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { DoBootstrap, inject, Injector, NgModule } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
@@ -13,7 +13,7 @@ import { routes, RoutesComponent } from '@mc/components/routes';
     RoutesComponent,
   ],
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
   ],
 })
 export class AppModule implements DoBootstrap {

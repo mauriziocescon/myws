@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { DoBootstrap, inject, Injector, NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
 import { GenericComponent } from '@mc/components/generic';
@@ -11,7 +11,7 @@ import { GenericComponent } from '@mc/components/generic';
     GenericComponent,
   ],
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideExperimentalZonelessChangeDetection(),
   ],
 })

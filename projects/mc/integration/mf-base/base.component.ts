@@ -18,7 +18,7 @@ import {
     <div>Signal: {{ status() }}</div>
     <button (click)="onClick()">Output</button>`,
 })
-export class GenericComponent implements OnChanges {
+export class BaseComponent implements OnChanges {
   @Input({ required: true }) mf: { elementId: string, tag: string } = { elementId: '', tag: '' };
   @Input({ required: true }) desc: string = '';
   @Output() valueChanged = new EventEmitter<string>();

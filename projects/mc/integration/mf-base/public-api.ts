@@ -2,4 +2,4 @@
  * Public API Surface of components
  */
 
-export * from './generic.component';
+export * from './base.component';

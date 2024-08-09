@@ -1,4 +1,4 @@
-import { FallbackComponent } from './fallback.component';
+import { FallbackComponent } from '@mc/integration/route-fallback';
 
 import { MainComponent } from './main/main.component';
 import { AComponent } from './main/a/a.component';

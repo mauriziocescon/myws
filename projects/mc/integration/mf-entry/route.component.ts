@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-routes',
+  selector: 'app-route',
   standalone: true,
+  imports: [
+    RouterOutlet,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div>Path not matching any predefined route</div>`,
+    <router-outlet/>`,
 })
-export class FallbackComponent {
+export class RouteComponent {
 }

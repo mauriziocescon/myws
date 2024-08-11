@@ -16,30 +16,37 @@ import { RouterOutlet } from '@angular/router';
 import { MfRouterService } from '@mc/integration/mf-router';
 
 @Component({
-  selector: 'app-routes',
+  selector: 'app-entry',
   standalone: true,
   imports: [
     RouterOutlet,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
+    <div>Entry component</div>
     <div>Input: {{ desc }}</div>
     <div>Signal: {{ status() }}</div>
     <button (click)="onClick()">Output</button>
     <hr>
     <router-outlet/>`,
 })
-export class RouteComponent implements OnInit, OnChanges, OnDestroy {
+export class EntryComponent implements OnInit, OnChanges, OnDestroy {
   private mfRouter = inject(MfRouterService);
 
-  @Input({ required: true }) mf: { elementId: string, tag: string } = { elementId: '', tag: '' };
+  @Input({ required: true }) mf: { elementId: string, tag: string, routes?: boolean } = {
+    elementId: '',
+    tag: '',
+    routes: false,
+  };
   @Input({ required: true }) desc: string = '';
   @Output() valueChanged = new EventEmitter<string>();
 
   status = computed(() => `${this.mf.tag} loaded!`);
 
   ngOnInit(): void {
-    this.mfRouter.setup({ elId: this.mf.elementId });
+    if (this.mf.routes === true) {
+      this.mfRouter.setup({ elId: this.mf.elementId });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -49,7 +56,9 @@ export class RouteComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mfRouter.cleanup();
+    if (this.mf.routes === true) {
+      this.mfRouter.cleanup();
+    }
   }
 
   onClick(): void {

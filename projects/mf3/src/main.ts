@@ -3,17 +3,17 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { RouteComponent } from '@mc/integration/mf-route';
+import { defineRoutes, EntryComponent } from '@mc/integration/mf-entry';
 
-import { routes } from '@mc/components/mf3';
+import { mf2Routes } from '@mc/components/mf3';
 
 (async () => {
   const app = await createApplication({
     providers: [
       provideHttpClient(withFetch()),
-      provideRouter(routes('mf3')),
+      provideRouter(defineRoutes('mf3', mf2Routes)),
     ],
   });
-  const element = createCustomElement(RouteComponent, { injector: app.injector });
+  const element = createCustomElement(EntryComponent, { injector: app.injector });
   customElements.define('mf3-v18', element);
 })();

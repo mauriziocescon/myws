@@ -3,7 +3,7 @@ import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { BaseComponent } from '@mc/integration/mf-base';
+import { EntryComponent } from '@mc/integration/mf-entry';
 
 (async () => {
   const app = await createApplication({
@@ -12,6 +12,6 @@ import { BaseComponent } from '@mc/integration/mf-base';
       provideHttpClient(withFetch()),
     ],
   });
-  const element = createCustomElement(BaseComponent, { injector: app.injector });
+  const element = createCustomElement(EntryComponent, { injector: app.injector });
   customElements.define('mf4-v18', element);
 })();

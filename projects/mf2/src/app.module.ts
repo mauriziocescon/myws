@@ -3,12 +3,12 @@ import { DoBootstrap, inject, Injector, NgModule, provideExperimentalZonelessCha
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { BaseComponent } from '@mc/integration/mf-base';
+import { EntryComponent } from '@mc/integration/mf-entry';
 
 @NgModule({
   imports: [
     BrowserModule,
-    BaseComponent,
+    EntryComponent,
   ],
   providers: [
     provideHttpClient(withFetch()),
@@ -19,7 +19,7 @@ export class AppModule implements DoBootstrap {
   private injector = inject(Injector);
 
   ngDoBootstrap(): void {
-    const element = createCustomElement(BaseComponent, { injector: this.injector });
+    const element = createCustomElement(EntryComponent, { injector: this.injector });
     customElements.define('mf2-v18', element);
   }
 }

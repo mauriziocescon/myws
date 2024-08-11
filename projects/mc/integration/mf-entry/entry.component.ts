@@ -24,7 +24,6 @@ import { MfRouterService } from '@mc/integration/mf-router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>Entry component</div>
-    <div>Input: {{ desc }}</div>
     <button (click)="onClick()">Output</button>
     @if (hasRouting()) {
       <hr>
@@ -39,7 +38,6 @@ export class EntryComponent implements OnInit, OnChanges, OnDestroy {
     tag: '',
     routing: false,
   };
-  @Input({ required: true }) desc: string = '';
   @Output() valueChanged = new EventEmitter<string>();
 
   hasRouting = signal(false);
@@ -52,8 +50,8 @@ export class EntryComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['desc'] && !changes['desc'].isFirstChange()) {
-      console.log(`ngOnChanges: desc = ${this.desc}`);
+    if (changes['mf']) {
+      console.log(`ngOnChanges: mf = ${JSON.stringify(this.mf)}`);
     }
   }
 

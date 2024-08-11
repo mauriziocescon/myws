@@ -5,13 +5,13 @@ import { createCustomElement } from '@angular/elements';
 
 import { defineRoutes, EntryComponent } from '@mc/integration/mf-entry';
 
-import { mf2Routes } from '@mc/components/mf3';
+import { mf3Routes } from '@mc/components/mf3';
 
 (async () => {
   const app = await createApplication({
     providers: [
       provideHttpClient(withFetch()),
-      provideRouter(defineRoutes('mf3', mf2Routes)),
+      provideRouter(defineRoutes('mf3', mf3Routes)),
     ],
   });
   const element = createCustomElement(EntryComponent, { injector: app.injector });

@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   EventEmitter,
   inject,
   Input,
@@ -9,6 +8,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  signal,
   SimpleChanges,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
@@ -25,26 +25,28 @@ import { MfRouterService } from '@mc/integration/mf-router';
   template: `
     <div>Entry component</div>
     <div>Input: {{ desc }}</div>
-    <div>Signal: {{ status() }}</div>
     <button (click)="onClick()">Output</button>
-    <hr>
-    <router-outlet/>`,
+    @if (hasRouting()) {
+      <hr>
+      <router-outlet/>
+    }`,
 })
 export class EntryComponent implements OnInit, OnChanges, OnDestroy {
   private mfRouter = inject(MfRouterService);
 
-  @Input({ required: true }) mf: { elementId: string, tag: string, routes?: boolean } = {
+  @Input({ required: true }) mf: { elementId: string, tag: string, routing?: boolean } = {
     elementId: '',
     tag: '',
-    routes: false,
+    routing: false,
   };
   @Input({ required: true }) desc: string = '';
   @Output() valueChanged = new EventEmitter<string>();
 
-  status = computed(() => `${this.mf.tag} loaded!`);
+  hasRouting = signal(false);
 
   ngOnInit(): void {
-    if (this.mf.routes === true) {
+    if (this.mf.routing === true) {
+      this.hasRouting.set(true);
       this.mfRouter.setup({ elId: this.mf.elementId });
     }
   }
@@ -56,7 +58,7 @@ export class EntryComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.mf.routes === true) {
+    if (this.mf.routing === true) {
       this.mfRouter.cleanup();
     }
   }

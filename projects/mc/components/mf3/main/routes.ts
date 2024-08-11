@@ -4,7 +4,7 @@ import { MainComponent } from './main.component';
 import { AComponent } from './a/a.component';
 import { BComponent } from './b/b.component';
 
-export const mf2Routes = [{
+export const mf3Routes = [{
   path: '',
   component: MainComponent,
   children: [

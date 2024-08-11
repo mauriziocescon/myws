@@ -13,6 +13,8 @@ MIT
 @angular/router
 MIT
 
+@mc/components
+
 @mc/integration
 
 rxjs

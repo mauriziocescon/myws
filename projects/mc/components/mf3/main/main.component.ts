@@ -15,9 +15,8 @@ import { BComponent } from './b/b.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div>Main</div>
+    <div>Mf3</div>
     <a class="link" [routerLink]="link()">Go to mf2</a>
-    <hr>
     <router-outlet/>`,
   styles: `
     .link {

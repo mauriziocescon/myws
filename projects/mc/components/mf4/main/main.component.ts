@@ -9,13 +9,13 @@ import { RouterLink } from '@angular/router';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div>Mf1</div>
-    <a class="link" [routerLink]="link()">Go to mf4</a>`,
+    <div>Mf4</div>
+    <a class="link" [routerLink]="link()">Go to mf1</a>`,
   styles: `
     .link {
       padding: 0.3rem;
     }`,
 })
 export class MainComponent {
-  link = signal('/mf4');
+  link = signal('/mf1');
 }

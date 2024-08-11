@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div>Mf1</div>
+    <div>Mf2</div>
     <a class="link" [routerLink]="link()">Go to mf4</a>`,
   styles: `
     .link {

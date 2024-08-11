@@ -23,13 +23,9 @@ import { MfRouterService } from '@mc/integration/mf-router';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="title" (click)="onClick()">Mf Entry component (click me)</div>
+    <div (click)="onClick()">Mf entry component (click me)</div>
     @if (hasRouting()) {
       <router-outlet/>
-    }`,
-  styles: `
-    .title {
-      padding: 0.3rem;
     }`,
 })
 export class EntryComponent implements OnInit, OnChanges, OnDestroy {

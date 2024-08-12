@@ -3,11 +3,6 @@ import { Routes } from '@angular/router';
 import { MfLoaderComponent } from '@mc/integration/mf-loader';
 import { startsWith } from '@mc/integration/utils';
 
-import { mf1Routes } from '@mc/components/mf1';
-import { mf2Routes } from '@mc/components/mf2';
-import { mf3Routes } from '@mc/components/mf3';
-import { mf4Routes } from '@mc/components/mf4';
-
 export const mfRoutes: Routes = [
   {
     matcher: startsWith('mf1'),
@@ -51,19 +46,19 @@ export const mfRoutes: Routes = [
 export const lzRoutes: Routes = [
   {
     path: 'mf1',
-    children: mf1Routes,
+    loadChildren: () => import('@mc/components/mf1').then(m => m.mf1Routes),
   },
   {
     path: 'mf2',
-    children: mf2Routes,
+    loadChildren: () => import('@mc/components/mf2').then(m => m.mf2Routes),
   },
   {
     path: 'mf3',
-    children: mf3Routes,
+    loadChildren: () => import('@mc/components/mf3').then(m => m.mf3Routes),
   },
   {
     path: 'mf4',
-    children: mf4Routes,
+    loadChildren: () => import('@mc/components/mf4').then(m => m.mf4Routes),
   },
   { path: '**', redirectTo: '/mf1' },
 ];

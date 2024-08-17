@@ -1,68 +1,58 @@
 import { inject, Injectable, NgZone } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 
 interface IHostRouter {
-  getUrl(): string;
+  hostUrl$: Observable<string>;
 
-  registerRouterCallback(data: { id: string }, callback: (url: string) => void): void;
-
-  unregisterRouterCallback(data: { id: string }): void;
-
-  routerEvent(data: { id: string }, event: NavigationStart): void;
+  mfRouterEvent(data: { id: string }, event: NavigationStart): void;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class MfRouterService {
-  private elementRouter = inject(Router);
-  private elementZone = inject(NgZone);
+  private mfRouter = inject(Router);
+  private mfZone = inject(NgZone);
+
   // setting HostRouterService from the global scope
   private hostRouter: IHostRouter = (globalThis as any).HostRouterService;
 
   private elId: string | undefined = undefined;
-  private navigationStartSubscription: Subscription | undefined = undefined;
+  private hostNavigationStartSubscription: Subscription | undefined = undefined;
+  private mfNavigationStartSubscription: Subscription | undefined = undefined;
 
   setup(data: { elId: string }): void {
     this.elId = data.elId;
 
-    this.registerRouterCallback();
-    this.listenForNavigationEvent();
-
-    this.elementRouter.navigateByUrl(this.hostRouter.getUrl());
+    this.listenForHostNavigationEvent();
+    this.listenForMfNavigationEvent();
   }
 
   cleanup(): void {
-    this.navigationStartSubscription?.unsubscribe();
-    this.unregisterRouterCallback();
+    this.hostNavigationStartSubscription?.unsubscribe();
+    this.mfNavigationStartSubscription?.unsubscribe();
   }
 
-  private registerRouterCallback(): void {
-    this.hostRouter.registerRouterCallback({ id: this.elId as string }, (url: string) => {
-      this.elementZone.run(() => {
-        if (this.elementRouter.url !== url) {
-          this.elementRouter.navigateByUrl(url);
-        }
-      });
-    });
+  private listenForHostNavigationEvent(): void {
+    this.hostNavigationStartSubscription?.unsubscribe();
+
+    this.hostNavigationStartSubscription = this.hostRouter
+      .hostUrl$
+      .subscribe(url => this.mfZone.run(() => this.mfRouter.navigateByUrl(url)));
   }
 
-  private unregisterRouterCallback(): void {
-    this.hostRouter.unregisterRouterCallback({ id: this.elId as string });
-  }
+  private listenForMfNavigationEvent(): void {
+    this.mfNavigationStartSubscription?.unsubscribe();
 
-  private listenForNavigationEvent(): void {
-    this.navigationStartSubscription?.unsubscribe();
-
-    this.navigationStartSubscription = this.elementRouter
+    this.mfNavigationStartSubscription = this.mfRouter
       .events
       .pipe(
         filter(event => event instanceof NavigationStart),
         distinctUntilChanged((prev, curr) => prev['url'] === curr['url']),
       )
-      .subscribe(event => this.hostRouter.routerEvent({ id: this.elId as string }, event));
+      .subscribe(event => this.hostRouter.mfRouterEvent({ id: this.elId as string }, event));
   }
 }

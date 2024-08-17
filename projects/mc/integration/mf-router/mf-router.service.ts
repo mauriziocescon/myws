@@ -27,6 +27,7 @@ export class MfRouterService {
   setup(data: { mfId: string }): void {
     this.mfId = data.mfId;
 
+    // router init
     this.mfRouter.initialNavigation();
     this.listenForHostNavigationEvent();
     this.listenForMfNavigationEvent();
@@ -40,6 +41,7 @@ export class MfRouterService {
   private listenForHostNavigationEvent(): void {
     this.hostNavigationStartSubscription?.unsubscribe();
 
+    // changes triggered at host level: different zone
     this.hostNavigationStartSubscription = this.hostRouter
       .hostUrl$
       .pipe(filter(url => this.mfRouter.url !== url))

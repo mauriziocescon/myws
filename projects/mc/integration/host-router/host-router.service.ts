@@ -13,14 +13,14 @@ export class HostRouterService {
   private hostZone = inject(NgZone);
 
   /**
-   * Url at host level used by mf to sync.
+   * Url at host level used by mf to sync the router.
    */
   private hostUrlSubject$ = new BehaviorSubject(this.hostRouter.url);
   hostUrl$ = this.hostUrlSubject$.asObservable();
 
   /**
-   * Anytime there is a router event (either coming from the host
-   * or any element on screen), we notify all mfs
+   * Anytime there is a router event (either coming from
+   * the host or any mf on screen), we notify all mfs
    * about the url change.
    */
   private hostRouterSubscription = this.hostRouter
@@ -32,14 +32,14 @@ export class HostRouterService {
     .subscribe((event: RouterEvent) => this.hostUrlSubject$.next(event['url']));
 
   /**
-   * Called by mf any time a NavigationStart event
+   * Called by mfs any time a NavigationStart event
    * is triggered at mf level.
    * @param data
    * @param event
    */
   mfRouterEvent(data: { id: string }, event: NavigationStart): void {
-    // method called by mf: different zone
     if (this.hostRouter.url !== event['url']) {
+      // method called by mf: different zone
       this.hostZone.run(() => this.hostRouter.navigateByUrl(event['url']));
     }
   }

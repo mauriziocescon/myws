@@ -43,7 +43,7 @@ export class EntryComponent implements OnChanges, OnDestroy {
   domAvailable = afterNextRender(() => {
     if (this.mf.routing === true) {
       this.hasRouting.set(true);
-      this.mfRouter.setup({ mfId: this.mf.elementId });
+      this.mfRouter.setup();
     }
   });
 

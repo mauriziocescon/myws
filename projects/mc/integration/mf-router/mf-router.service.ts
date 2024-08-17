@@ -18,7 +18,7 @@ export class MfRouterService {
   private mfZone = inject(NgZone);
 
   // setting HostRouterService from the global scope
-  private hostRouter: IHostRouter = (globalThis as any).HostRouterService;
+  private hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
 
   private mfId: string | undefined = undefined;
   private hostNavigationStartSubscription: Subscription | undefined = undefined;

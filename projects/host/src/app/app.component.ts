@@ -29,6 +29,8 @@ export class AppComponent {
 
   constructor() {
     // exposing HostRouterService using the global scope
-    (globalThis as any).HostRouterService = inject(HostRouterService);
+    const global = (globalThis as any);
+    global.__myws__ = {};
+    global.__myws__.HostRouterService = inject(HostRouterService);
   }
 }

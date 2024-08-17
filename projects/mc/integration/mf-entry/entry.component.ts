@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -6,7 +7,6 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   Output,
   signal,
   SimpleChanges,
@@ -28,7 +28,7 @@ import { MfRouterService } from '@mc/integration/mf-router';
       <router-outlet/>
     }`,
 })
-export class EntryComponent implements OnInit, OnChanges, OnDestroy {
+export class EntryComponent implements OnChanges, OnDestroy {
   private mfRouter = inject(MfRouterService);
 
   @Input({ required: true }) mf: { elementId: string, tag: string, routing?: boolean } = {
@@ -40,12 +40,12 @@ export class EntryComponent implements OnInit, OnChanges, OnDestroy {
 
   hasRouting = signal(false);
 
-  ngOnInit(): void {
+  domAvailable = afterNextRender(() => {
     if (this.mf.routing === true) {
       this.hasRouting.set(true);
       this.mfRouter.setup({ mfId: this.mf.elementId });
     }
-  }
+  });
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['mf']) {

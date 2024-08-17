@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -6,7 +7,6 @@ import {
   inject,
   input,
   OnDestroy,
-  OnInit,
   signal,
   untracked,
   viewChild,
@@ -40,7 +40,7 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
     }
   `,
 })
-export class MfLoaderComponent implements OnInit, OnDestroy {
+export class MfLoaderComponent implements OnDestroy {
   private mfLoader = inject(MfLoaderService);
 
   mf = input.required<{ elementId: string, tag: string, routing?: boolean }>();
@@ -66,9 +66,7 @@ export class MfLoaderComponent implements OnInit, OnDestroy {
     untracked(() => this.updateOutputs());
   });
 
-  ngOnInit(): void {
-    this.load();
-  }
+  domAvailable = afterNextRender(() => this.load());
 
   ngOnDestroy(): void {
     this.controller.abort();

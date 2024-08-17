@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 import { MfLoaderComponent } from '@mc/integration/mf-loader';
-import { HostRouterService } from '@mc/integration/host-router';
 
 @Component({
   selector: 'app-root',
@@ -26,11 +25,4 @@ import { HostRouterService } from '@mc/integration/host-router';
 })
 export class AppComponent {
   urls = signal<string[]>(['/mf1', '/mf2', '/mf3', '/mf3/a', '/mf4']);
-
-  constructor() {
-    // exposing HostRouterService using the global scope
-    const global = (globalThis as any);
-    global.__myws__ = {};
-    global.__myws__.HostRouterService = inject(HostRouterService);
-  }
 }

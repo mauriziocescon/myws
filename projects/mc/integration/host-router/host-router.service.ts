@@ -40,6 +40,7 @@ export class HostRouterService {
   mfRouterEvent(data: { id: string }, event: NavigationStart): void {
     if (this.hostRouter.url !== event['url']) {
       // method called by mf: needs zone.run for mf zone.js based
+      // Note: no need of zone.run in case everything is zoneless
       this.hostZone.run(() => this.hostRouter.navigateByUrl(event['url']));
     }
   }

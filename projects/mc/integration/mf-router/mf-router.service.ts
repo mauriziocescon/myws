@@ -42,6 +42,7 @@ export class MfRouterService {
     this.hostNavigationStartSubscription?.unsubscribe();
 
     // changes triggered at host level: since host is zone.js based, we need zone.run
+    // Note: no need of zone.run in case everything is zoneless
     this.hostNavigationStartSubscription = this.hostRouter
       .hostUrl$
       .pipe(filter(url => this.mfRouter.url !== url))

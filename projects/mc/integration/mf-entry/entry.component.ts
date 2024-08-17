@@ -43,7 +43,7 @@ export class EntryComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     if (this.mf.routing === true) {
       this.hasRouting.set(true);
-      this.mfRouter.setup({ elId: this.mf.elementId });
+      this.mfRouter.setup({ mfId: this.mf.elementId });
     }
   }
 

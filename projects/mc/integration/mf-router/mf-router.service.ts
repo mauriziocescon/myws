@@ -18,21 +18,21 @@ interface IHostRouter {
   providedIn: 'root',
 })
 export class MfRouterService {
-  private elementRouter = inject(Router);
-  private elementZone = inject(NgZone);
+  private mfRouter = inject(Router);
+  private mfZone = inject(NgZone);
   // setting HostRouterService from the global scope
   private hostRouter: IHostRouter = (globalThis as any).HostRouterService;
 
-  private elId: string | undefined = undefined;
+  private mfId: string | undefined = undefined;
   private navigationStartSubscription: Subscription | undefined = undefined;
 
-  setup(data: { elId: string }): void {
-    this.elId = data.elId;
+  setup(data: { mfId: string }): void {
+    this.mfId = data.mfId;
 
     this.registerRouterCallback();
     this.listenForNavigationEvent();
 
-    this.elementRouter.navigateByUrl(this.hostRouter.getUrl());
+    this.mfRouter.navigateByUrl(this.hostRouter.getUrl());
   }
 
   cleanup(): void {
@@ -41,28 +41,28 @@ export class MfRouterService {
   }
 
   private registerRouterCallback(): void {
-    this.hostRouter.registerRouterCallback({ id: this.elId as string }, (url: string) => {
-      this.elementZone.run(() => {
-        if (this.elementRouter.url !== url) {
-          this.elementRouter.navigateByUrl(url);
+    this.hostRouter.registerRouterCallback({ id: this.mfId as string }, (url: string) => {
+      this.mfZone.run(() => {
+        if (this.mfRouter.url !== url) {
+          this.mfRouter.navigateByUrl(url);
         }
       });
     });
   }
 
   private unregisterRouterCallback(): void {
-    this.hostRouter.unregisterRouterCallback({ id: this.elId as string });
+    this.hostRouter.unregisterRouterCallback({ id: this.mfId as string });
   }
 
   private listenForNavigationEvent(): void {
     this.navigationStartSubscription?.unsubscribe();
 
-    this.navigationStartSubscription = this.elementRouter
+    this.navigationStartSubscription = this.mfRouter
       .events
       .pipe(
         filter(event => event instanceof NavigationStart),
         distinctUntilChanged((prev, curr) => prev['url'] === curr['url']),
       )
-      .subscribe(event => this.hostRouter.routerEvent({ id: this.elId as string }, event));
+      .subscribe(event => this.hostRouter.routerEvent({ id: this.mfId as string }, event));
   }
 }

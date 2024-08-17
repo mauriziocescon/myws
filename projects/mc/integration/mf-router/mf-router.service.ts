@@ -7,7 +7,7 @@ import { filter } from 'rxjs/operators';
 interface IHostRouter {
   hostUrl$: Observable<string>;
 
-  mfRouterEvent(data: { id: string }, event: NavigationStart): void;
+  mfRouterEvent(url: string): void;
 }
 
 @Injectable({
@@ -20,24 +20,33 @@ export class MfRouterService {
   // setting HostRouterService from the global scope
   private hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
 
-  private mfId: string | undefined = undefined;
   private hostNavigationStartSubscription: Subscription | undefined = undefined;
   private mfNavigationStartSubscription: Subscription | undefined = undefined;
 
-  setup(data: { mfId: string }): void {
-    this.mfId = data.mfId;
-
+  /**
+   * Init mf router sync
+   */
+  setup(): void {
     // router init
     this.mfRouter.initialNavigation();
+
     this.listenForHostNavigationEvent();
     this.listenForMfNavigationEvent();
   }
 
+  /**
+   * Paused the sync.
+   */
   cleanup(): void {
     this.hostNavigationStartSubscription?.unsubscribe();
     this.mfNavigationStartSubscription?.unsubscribe();
   }
 
+  /**
+   * Listen for host url changes and call navigateByUrl
+   * with the host url.
+   * @private
+   */
   private listenForHostNavigationEvent(): void {
     this.hostNavigationStartSubscription?.unsubscribe();
 
@@ -49,12 +58,18 @@ export class MfRouterService {
       .subscribe(url => this.mfZone.run(() => this.mfRouter.navigateByUrl(url)));
   }
 
+  /**
+   * Listen for the start of mf router events and
+   * ask the host router to navigateByUrl using the
+   * new url.
+   * @private
+   */
   private listenForMfNavigationEvent(): void {
     this.mfNavigationStartSubscription?.unsubscribe();
 
     this.mfNavigationStartSubscription = this.mfRouter
       .events
       .pipe(filter(event => event instanceof NavigationStart))
-      .subscribe(event => this.hostRouter.mfRouterEvent({ id: this.mfId as string }, event));
+      .subscribe(event => this.hostRouter.mfRouterEvent(event['url']));
   }
 }

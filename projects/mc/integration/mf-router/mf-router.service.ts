@@ -20,12 +20,12 @@ export class MfRouterService {
   // setting HostRouterService from the global scope
   private hostRouter: IHostRouter = (globalThis as any).HostRouterService;
 
-  private elId: string | undefined = undefined;
+  private mfId: string | undefined = undefined;
   private hostNavigationStartSubscription: Subscription | undefined = undefined;
   private mfNavigationStartSubscription: Subscription | undefined = undefined;
 
-  setup(data: { elId: string }): void {
-    this.elId = data.elId;
+  setup(data: { mfId: string }): void {
+    this.mfId = data.mfId;
 
     this.mfRouter.initialNavigation();
     this.listenForHostNavigationEvent();
@@ -52,6 +52,6 @@ export class MfRouterService {
     this.mfNavigationStartSubscription = this.mfRouter
       .events
       .pipe(filter(event => event instanceof NavigationStart))
-      .subscribe(event => this.hostRouter.mfRouterEvent({ id: this.elId as string }, event));
+      .subscribe(event => this.hostRouter.mfRouterEvent({ id: this.mfId as string }, event));
   }
 }

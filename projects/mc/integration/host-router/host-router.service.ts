@@ -39,6 +39,8 @@ export class HostRouterService {
    */
   mfRouterEvent(data: { id: string }, event: NavigationStart): void {
     // method called by mf: different zone
-    this.hostZone.run(() => this.hostUrlSubject$.next(event['url']));
+    if (this.hostRouter.url !== event['url']) {
+      this.hostZone.run(() => this.hostRouter.navigateByUrl(event['url']));
+    }
   }
 }

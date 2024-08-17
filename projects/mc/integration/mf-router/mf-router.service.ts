@@ -2,7 +2,7 @@ import { inject, Injectable, NgZone } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 interface IHostRouter {
   hostUrl$: Observable<string>;
@@ -27,6 +27,7 @@ export class MfRouterService {
   setup(data: { elId: string }): void {
     this.elId = data.elId;
 
+    this.mfRouter.initialNavigation();
     this.listenForHostNavigationEvent();
     this.listenForMfNavigationEvent();
   }
@@ -41,6 +42,7 @@ export class MfRouterService {
 
     this.hostNavigationStartSubscription = this.hostRouter
       .hostUrl$
+      .pipe(filter(url => this.mfRouter.url !== url))
       .subscribe(url => this.mfZone.run(() => this.mfRouter.navigateByUrl(url)));
   }
 
@@ -49,10 +51,7 @@ export class MfRouterService {
 
     this.mfNavigationStartSubscription = this.mfRouter
       .events
-      .pipe(
-        filter(event => event instanceof NavigationStart),
-        distinctUntilChanged((prev, curr) => prev['url'] === curr['url']),
-      )
+      .pipe(filter(event => event instanceof NavigationStart))
       .subscribe(event => this.hostRouter.mfRouterEvent({ id: this.elId as string }, event));
   }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { DoBootstrap, inject, Injector, NgModule } from '@angular/core';
+import { DoBootstrap, inject, Injector, NgModule, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
@@ -15,6 +15,7 @@ import { mf1Routes } from '@mc/components/mf1';
     EntryComponent,
   ],
   providers: [
+    provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
     provideHttpClient(withFetch()),
   ],
 })

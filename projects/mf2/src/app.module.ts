@@ -15,8 +15,8 @@ import { mf2Routes } from '@mc/components/mf2';
     EntryComponent,
   ],
   providers: [
-    provideHttpClient(withFetch()),
     provideExperimentalZonelessChangeDetection(),
+    provideHttpClient(withFetch()),
   ],
 })
 export class AppModule implements DoBootstrap {

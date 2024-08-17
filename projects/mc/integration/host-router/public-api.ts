@@ -3,3 +3,4 @@
  */
 
 export * from './host-router.service';
+export * from './provide-host-router';

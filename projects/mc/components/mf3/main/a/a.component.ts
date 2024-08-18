@@ -9,15 +9,15 @@ import { RouterLink } from '@angular/router';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h5>AComponent</h5>
-    <a class="link" [routerLink]="bLink()">Go to b</a>
-    <a class="link" [routerLink]="link()">Go to mf2</a>`,
+    <h5>Component_A</h5>
+    <a class="link" [routerLink]="link()">Go to mf2</a>
+    <a class="link" [routerLink]="link2()">Go to b</a>`,
   styles: `
     .link {
       padding: 0.3rem;
     }`,
 })
 export class AComponent {
-  bLink = signal('/mf3/b');
   link = signal('/mf2');
+  link2 = signal('/mf3/b');
 }

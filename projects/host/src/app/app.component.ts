@@ -14,7 +14,7 @@ import { MfLoaderComponent } from '@mc/integration/mf-loader';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @for (url of urls(); track url) {
-      <a class="link" [routerLink]="url">Load {{ url }}</a>
+      <a class="link" [routerLink]="url">{{ url }}</a>
     }
     <hr>
     <router-outlet/>`,
@@ -24,5 +24,5 @@ import { MfLoaderComponent } from '@mc/integration/mf-loader';
     }`,
 })
 export class AppComponent {
-  urls = signal<string[]>(['/mf1', '/mf2', '/mf3', '/mf3/a', '/mf4']);
+  urls = signal<string[]>(['/mf1', '/mf1/tab/tabId', '/mf2', '/mf3', '/mf3/a', '/mf4']);
 }

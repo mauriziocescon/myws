@@ -11,7 +11,7 @@ import { mf1Routes } from '@mc/components/mf1';
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(defineRoutes('mf1', mf1Routes)),
+    RouterModule.forRoot(defineRoutes('mf1', mf1Routes), { bindToComponentInputs: true }),
     EntryComponent,
   ],
   providers: [

@@ -4,7 +4,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { defineRoutes, EntryComponent } from '@mc/integration/mf-entry';
+import { defineRoutes, EntryComponent } from '@mc/integration/mf-route-entry';
 
 import { mf2Routes } from '@mc/components/mf2';
 

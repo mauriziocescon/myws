@@ -6,9 +6,11 @@ export const mf1Routes = [
   {
     path: '',
     component: MainComponent,
+    title: 'Mf1',
   },
   {
     path: 'tab/:id',
     component: MainComponent,
+    title: 'Mf3 tab',
   },
 ] as Route[];

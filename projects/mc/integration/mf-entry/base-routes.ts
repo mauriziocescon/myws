@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { FallbackComponent } from './fallback.component';
+import { PageNotFoundComponent } from './fallback.component';
 import { RouteComponent } from './route.component';
 
 export const defineRoutes = (path: string, children: Route[]) => {
@@ -10,6 +10,6 @@ export const defineRoutes = (path: string, children: Route[]) => {
       component: RouteComponent,
       children: children,
     },
-    { path: '**', component: FallbackComponent },
+    { path: '**', component: PageNotFoundComponent },
   ] as Route[];
 };

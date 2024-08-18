@@ -1,22 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { DoBootstrap, inject, Injector, NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { withComponentInputBinding } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { defineRoutes, EntryComponent } from '@mc/integration/mf-route-entry';
+import { EntryComponent, provideRoutesMf } from '@mc/integration/mf-route-entry';
 
 import { mf2Routes } from '@mc/components/mf2';
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(defineRoutes('mf2', mf2Routes)),
     EntryComponent,
   ],
   providers: [
     provideExperimentalZonelessChangeDetection(),
     provideHttpClient(withFetch()),
+    provideRoutesMf('mf2', mf2Routes, withComponentInputBinding()),
   ],
 })
 export class AppModule implements DoBootstrap {

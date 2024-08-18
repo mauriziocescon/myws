@@ -43,7 +43,7 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
 export class MfLoaderComponent implements OnDestroy {
   private mfLoader = inject(MfLoaderService);
 
-  mf = input.required<{ elementId: string, tag: string, routing?: boolean }>();
+  mf = input.required<{ elementId: string, tag: string }>();
   inputs = input<Record<string, unknown>>();
   outputs = input<Record<string, (data: any) => void>>();
 

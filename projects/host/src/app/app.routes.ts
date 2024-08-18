@@ -1,44 +1,21 @@
 import { Routes } from '@angular/router';
 
-import { MfLoaderComponent } from '@mc/integration/mf-loader';
-import { startsWith } from '@mc/integration/utils';
-
 export const routes: Routes = [
   {
-    matcher: startsWith('mf1'),
-    component: MfLoaderComponent,
-    data: {
-      mf: { elementId: 'mf1', tag: 'mf1-v18', routing: true },
-      inputs: { mf: { elementId: 'mf1', tag: 'mf1-v18', routing: true } },
-      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
-    },
+    path: 'mf1',
+    loadChildren: () => import('@mc/components/mf1').then(m => m.mf1Routes),
   },
   {
-    matcher: startsWith('mf2'),
-    component: MfLoaderComponent,
-    data: {
-      mf: { elementId: 'mf2', tag: 'mf2-v18', routing: true },
-      inputs: { mf: { elementId: 'mf2', tag: 'mf2-v18', routing: true } },
-      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
-    },
+    path: 'mf2',
+    loadChildren: () => import('@mc/components/mf2').then(m => m.mf2Routes),
   },
   {
-    matcher: startsWith('mf3'),
-    component: MfLoaderComponent,
-    data: {
-      mf: { elementId: 'mf3', tag: 'mf3-v18', routing: true },
-      inputs: { mf: { elementId: 'mf3', tag: 'mf3-v18', routing: true } },
-      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
-    },
+    path: 'mf3',
+    loadChildren: () => import('@mc/components/mf3').then(m => m.mf3Routes),
   },
   {
-    matcher: startsWith('mf4'),
-    component: MfLoaderComponent,
-    data: {
-      mf: { elementId: 'mf4', tag: 'mf4-v18', routing: true },
-      inputs: { mf: { elementId: 'mf4', tag: 'mf4-v18', routing: true } },
-      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
-    },
+    path: 'mf4',
+    loadChildren: () => import('@mc/components/mf4').then(m => m.mf4Routes),
   },
   { path: '**', redirectTo: '/mf1' },
 ];

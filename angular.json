@@ -46,6 +46,12 @@
                   "maximumError": "4kB"
                 }
               ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/host/src/app/app.routes.ts",
+                  "with": "projects/host/src/app/app.routes.mf.ts"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
@@ -56,10 +62,6 @@
                 {
                   "replace": "projects/host/src/environments/environment.ts",
                   "with": "projects/host/src/environments/environment.development.ts"
-                },
-                {
-                  "replace": "projects/host/src/app/app.routes.ts",
-                  "with": "projects/host/src/app/app.routes-lazy.ts"
                 }
               ]
             },
@@ -71,6 +73,10 @@
                 {
                   "replace": "projects/host/src/environments/environment.ts",
                   "with": "projects/host/src/environments/environment.development.ts"
+                },
+                {
+                  "replace": "projects/host/src/app/app.routes.ts",
+                  "with": "projects/host/src/app/app.routes.mf.ts"
                 }
               ]
             }

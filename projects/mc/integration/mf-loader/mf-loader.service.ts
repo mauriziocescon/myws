@@ -34,4 +34,11 @@ export class MfLoaderService {
 
     return Promise.resolve();
   }
+
+  loadElements(metadata: { elementId: string, tag: string }[]): Promise<void> {
+    return Promise.all(metadata.map(m => this.loadElement(m)))
+      .then(() => Promise.resolve())
+      .catch(error => Promise.reject(error.message || error));
+
+  }
 }

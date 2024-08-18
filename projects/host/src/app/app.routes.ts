@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { MfLoaderComponent } from '@mc/integration/mf-loader';
 import { startsWith } from '@mc/integration/utils';
 
-export const mfRoutes: Routes = [
+export const routes: Routes = [
   {
     matcher: startsWith('mf1'),
     component: MfLoaderComponent,
@@ -39,26 +39,6 @@ export const mfRoutes: Routes = [
       inputs: { mf: { elementId: 'mf4', tag: 'mf4-v18', routing: true } },
       outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
-  },
-  { path: '**', redirectTo: '/mf1' },
-];
-
-export const lzRoutes: Routes = [
-  {
-    path: 'mf1',
-    loadChildren: () => import('@mc/components/mf1').then(m => m.mf1Routes),
-  },
-  {
-    path: 'mf2',
-    loadChildren: () => import('@mc/components/mf2').then(m => m.mf2Routes),
-  },
-  {
-    path: 'mf3',
-    loadChildren: () => import('@mc/components/mf3').then(m => m.mf3Routes),
-  },
-  {
-    path: 'mf4',
-    loadChildren: () => import('@mc/components/mf4').then(m => m.mf4Routes),
   },
   { path: '**', redirectTo: '/mf1' },
 ];

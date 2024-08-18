@@ -4,13 +4,13 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { provideHostRouter } from '@mc/integration/host-router';
 
-import { mfRoutes } from './app.routes';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
     provideHttpClient(withFetch()),
-    provideRouter(mfRoutes, withComponentInputBinding()),
+    provideRouter(routes, withComponentInputBinding()),
     provideHostRouter(),
   ],
 };

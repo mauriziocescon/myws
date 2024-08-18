@@ -1,15 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
-import { MfLoaderComponent } from '@mc/integration/mf-loader';
-
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterLink,
     RouterOutlet,
-    MfLoaderComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

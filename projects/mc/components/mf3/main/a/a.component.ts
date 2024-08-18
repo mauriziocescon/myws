@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <h5>Component_A</h5>
     <a class="link" [routerLink]="link()">Go to mf2</a>
-    <a class="link" [routerLink]="link2()">Go to b</a>`,
+    <a class="link" [routerLink]="link2()">Go to mf3/b</a>`,
   styles: `
     .link {
       padding: 0.3rem;

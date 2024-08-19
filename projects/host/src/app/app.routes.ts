@@ -13,9 +13,5 @@ export const routes: Routes = [
     path: 'mf3',
     loadChildren: () => import('@mc/components/mf3').then(m => m.mf3Routes),
   },
-  {
-    path: 'mf4',
-    loadChildren: () => import('@mc/components/mf4').then(m => m.mf4Routes),
-  },
   { path: '**', redirectTo: '/mf1' },
 ];

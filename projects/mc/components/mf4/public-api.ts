@@ -2,4 +2,4 @@
  * Public API Surface of components
  */
 
-export * from './main/routes';
+export * from './main/main.component';

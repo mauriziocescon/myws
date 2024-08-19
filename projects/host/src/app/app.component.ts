@@ -21,5 +21,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     }`,
 })
 export class AppComponent {
-  urls = signal<string[]>(['/mf1', '/mf1/tab/tabId', '/mf2', '/mf2/a', '/mf3', '/mf4']);
+  urls = signal<string[]>(['/mf1', '/mf1/tab/tabId', '/mf2', '/mf2/a', '/mf3']);
 }

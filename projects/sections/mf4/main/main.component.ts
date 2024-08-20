@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -11,8 +11,10 @@ import { RouterLink } from '@angular/router';
   template: `
     <h4>Mf4</h4>
     <a class="link" [routerLink]="link()">Go to mf1</a>
-    @if (value()) {
-      <div>Input: {{ value() }}</div>
+    @if (showValue()) {
+      <div class="link">Input: {{ value() }}</div>
+    } @else {
+      <div class="link">No inputs!</div>
     }`,
   styles: `
     .link {
@@ -20,7 +22,8 @@ import { RouterLink } from '@angular/router';
     }`,
 })
 export class MainComponent {
-  value = input<number>(-1);
+  value = input<number>();
+  showValue = computed(() => this.value() != undefined);
 
   link = signal('/mf1');
 }

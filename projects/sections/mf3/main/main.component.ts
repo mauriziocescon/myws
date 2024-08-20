@@ -15,6 +15,8 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
     <h3>Mf3</h3>
     <a class="link" [routerLink]="link()">Go to mf2</a>
     <hr>
+    <div [mfLoader]="mf()"></div>
+    <hr>
     <div [mfLoader]="mf()" [mfInputs]="inputs()"></div>`,
   styles: `
     .link {
@@ -26,11 +28,11 @@ export class MainComponent implements OnDestroy {
   mf = signal({ elementId: 'mf4', tag: 'mf4-v18' });
 
   private value = signal(0);
-  // private intervalId = setInterval(() => this.value.update(v => v + 1), 1000);
+  private intervalId = setInterval(() => this.value.update(v => v + 1), 1000);
 
   inputs = computed(() => ({ value: this.value() }));
 
   ngOnDestroy(): void {
-    // clearInterval(this.intervalId);
+    clearInterval(this.intervalId);
   }
 }

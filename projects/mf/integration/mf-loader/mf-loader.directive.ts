@@ -77,7 +77,7 @@ export class MfLoaderDirective implements OnDestroy {
   private updateInputs(): void {
     if (this.ngElement && this.inputs()) {
       const ngElement = this.ngElement as NgElement & WithProperties<Record<string, any>>;
-      ngElement['mfInputs'] = this.inputs();
+      ngElement['mfInputs'] = { ...this.inputs() };
     }
   }
 

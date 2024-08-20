@@ -1,7 +1,6 @@
 import {
   afterNextRender,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
   Input,
@@ -27,7 +26,6 @@ import { MF_CONFIG } from './mf-config';
     <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="inputs()"/>`,
 })
 export class EntryComponent implements OnChanges, OnDestroy {
-  private cdr = inject(ChangeDetectorRef);
   private mfRouter = inject(MfRouterService);
   private mfConfig = inject(MF_CONFIG);
 
@@ -39,9 +37,9 @@ export class EntryComponent implements OnChanges, OnDestroy {
   domAvailable = afterNextRender(() => this.mfRouter.setup());
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    this.inputs.set(this.mfInputs);
-    this.cdr.markForCheck();
+    if (changes['mfInputs']) {
+      this.inputs.set({ ...this.mfInputs });
+    }
   }
 
   ngOnDestroy(): void {

@@ -198,11 +198,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/mf/mf1-entry",
             "index": "projects/mf/mf1-entry/src/index.html",
-            "browser": "projects/mf/mf1-entry/src/main.ts",
+            "main": "projects/mf/mf1-entry/src/main.ts",
             "tsConfig": "projects/mf/mf1-entry/tsconfig.app.json",
             "assets": [
               {
@@ -360,11 +360,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/mf/mf3-entry",
             "index": "projects/mf/mf3-entry/src/index.html",
-            "browser": "projects/mf/mf3-entry/src/main.ts",
+            "main": "projects/mf/mf3-entry/src/main.ts",
             "tsConfig": "projects/mf/mf3-entry/tsconfig.app.json",
             "assets": [
               {

@@ -1,8 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-import { interval } from 'rxjs';
 
 import { MfLoaderDirective } from '@mf/integration/mf-loader';
 
@@ -24,11 +21,16 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
       padding: 0.3rem;
     }`,
 })
-export class MainComponent {
+export class MainComponent implements OnDestroy {
   link = signal('/mf2');
   mf = signal({ elementId: 'mf4', tag: 'mf4-v18' });
 
-  private value$ = interval(1000);
-  private value = toSignal(this.value$, { initialValue: 0 });
+  private value = signal(0);
+  // private intervalId = setInterval(() => this.value.update(v => v + 1), 1000);
+
   inputs = computed(() => ({ value: this.value() }));
+
+  ngOnDestroy(): void {
+    // clearInterval(this.intervalId);
+  }
 }

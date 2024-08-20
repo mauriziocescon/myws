@@ -20,7 +20,7 @@ import { RouterLink } from '@angular/router';
     }`,
 })
 export class MainComponent {
-  value = input<string>();
+  value = input<number>(-1);
 
   link = signal('/mf1');
 }

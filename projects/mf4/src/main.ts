@@ -5,7 +5,7 @@ import { createCustomElement } from '@angular/elements';
 
 import { EntryComponent, provideRoutesMf } from '@mc/integration/mf-standalone-entry';
 
-import { MainComponent } from '@mc/components/mf4';
+import { MainComponent } from '@mc/modules/mf4';
 
 (async () => {
   const app = await createApplication({

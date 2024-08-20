@@ -1,5 +1,5 @@
 {
-  "name": "@mc/components",
+  "name": "@mc/modules",
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^18.1.0",

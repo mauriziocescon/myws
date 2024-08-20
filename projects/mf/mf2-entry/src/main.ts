@@ -4,16 +4,16 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { withComponentInputBinding } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRoutesMf } from '@mf/integration/mf-route-entry';
+import { EntryComponent, provideRouteMf } from '@mf/integration/mf-section-entry';
 
-import { mf2Routes } from 'sections/mf2';
+import { mf2Routes } from 'section/mf2';
 
 (async () => {
   const app = await createApplication({
     providers: [
       provideExperimentalZonelessChangeDetection(),
       provideHttpClient(withFetch()),
-      provideRoutesMf({ path: 'mf2', children: mf2Routes }, withComponentInputBinding()),
+      provideRouteMf({ path: 'mf2', children: mf2Routes }, withComponentInputBinding()),
     ],
   });
   const element = createCustomElement(EntryComponent, { injector: app.injector });

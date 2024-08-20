@@ -4,16 +4,16 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { withComponentInputBinding } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRoutesMf } from '@mf/integration/mf-route-entry';
+import { EntryComponent, provideRouteMf } from '@mf/integration/mf-section-entry';
 
-import { mf1Routes } from 'sections/mf1';
+import { mf1Routes } from 'section/mf1';
 
 (async () => {
   const app = await createApplication({
     providers: [
       provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
       provideHttpClient(withFetch()),
-      provideRoutesMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
+      provideRouteMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
     ],
   });
   const element = createCustomElement(EntryComponent, { injector: app.injector });

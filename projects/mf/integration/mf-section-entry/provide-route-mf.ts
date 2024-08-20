@@ -14,6 +14,6 @@ const defineRoutes = (path: string, children: Route[]) => {
   ] as Route[];
 };
 
-export const provideRoutesMf = (config: { path: string, children: Route[] }, ...features: RouterFeatures[]) => {
+export const provideRouteMf = (config: { path: string, children: Route[] }, ...features: RouterFeatures[]) => {
   return provideRouter(defineRoutes(config.path, config.children), ...features);
 };

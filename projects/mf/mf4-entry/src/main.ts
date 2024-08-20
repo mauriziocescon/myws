@@ -3,16 +3,16 @@ import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRoutesMf } from '@mf/integration/mf-standalone-entry';
+import { EntryComponent, provideRouteMf } from '@mf/integration/mf-standalone-entry';
 
-import { MainComponent } from 'sections/mf4';
+import { MainComponent } from 'standalone/mf4';
 
 (async () => {
   const app = await createApplication({
     providers: [
       provideExperimentalZonelessChangeDetection(),
       provideHttpClient(withFetch()),
-      provideRoutesMf({ component: MainComponent }),
+      provideRouteMf({ component: MainComponent }),
     ],
   });
   const element = createCustomElement(EntryComponent, { injector: app.injector });

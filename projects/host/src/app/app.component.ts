@@ -11,7 +11,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ul>
-      <li>Host</li>
+      <li><strong>Host</strong></li>
       @for (url of urls(); track url) {
         <li><a class="link" [routerLink]="url">{{ url }}</a></li>
       }
@@ -20,7 +20,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     <router-outlet/>`,
   styles: `
     ul {
-      font-size: 1.5rem;
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -28,6 +27,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     }
 
     li {
+      font-size: 1.7rem;
       display: inline;
       padding: 0.3rem;
     }

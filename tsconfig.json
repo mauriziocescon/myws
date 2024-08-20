@@ -4,11 +4,17 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "sections": [
-        "./projects/sections"
+      "section": [
+        "./projects/section"
       ],
-      "sections/*": [
-        "./projects/sections/*"
+      "section/*": [
+        "./projects/section/*"
+      ],
+      "standalone": [
+        "./projects/standalone"
+      ],
+      "standalone/*": [
+        "./projects/standalone/*"
       ],
       "@mf/integration": [
         "./projects/mf/integration"

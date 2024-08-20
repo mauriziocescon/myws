@@ -3,4 +3,4 @@
  */
 
 export * from './entry.component';
-export * from './provide-routes-mf';
+export * from './provide-route-mf';

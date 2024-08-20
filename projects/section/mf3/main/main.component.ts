@@ -12,7 +12,7 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h3>Mf3 section</h3>
+    <h4>Mf3 section</h4>
     <a class="link" [routerLink]="link()">Go to mf2</a>
     <hr>
     <div class="container">

@@ -1,5 +1,5 @@
 {
-  "name": "sections",
+  "name": "standalone",
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^18.2.0",

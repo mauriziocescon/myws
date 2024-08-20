@@ -3,16 +3,16 @@ import { provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRoutesMf } from '@mf/integration/mf-route-entry';
+import { EntryComponent, provideRouteMf } from '@mf/integration/mf-section-entry';
 
-import { mf3Routes } from 'sections/mf3';
+import { mf3Routes } from 'section/mf3';
 
 (async () => {
   const app = await createApplication({
     providers: [
       provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
       provideHttpClient(withFetch()),
-      provideRoutesMf({ path: 'mf3', children: mf3Routes }),
+      provideRouteMf({ path: 'mf3', children: mf3Routes }),
     ],
   });
   const element = createCustomElement(EntryComponent, { injector: app.injector });

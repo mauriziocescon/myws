@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
 
-import { MfLoaderDirective } from '@mc/integration/mf-loader/mf-loader.directive';
+import { MfLoaderDirective } from './mf-loader.directive';
 
 @Component({
   selector: 'mc-mf-loader',

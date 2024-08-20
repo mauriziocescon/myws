@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { startsWith } from '@mc/integration/host-router';
-import { MfLoaderComponent } from '@mc/integration/mf-loader';
+import { startsWith } from '@mf/integration/host-router';
+import { MfLoaderComponent } from '@mf/integration/mf-loader';
 
 export const routes: Routes = [
   {

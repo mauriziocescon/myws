@@ -10,11 +10,11 @@
       "sections/*": [
         "./projects/sections/*"
       ],
-      "@mc/integration": [
-        "./projects/mc/integration"
+      "@mf/integration": [
+        "./projects/mf/integration"
       ],
-      "@mc/integration/*": [
-        "./projects/mc/integration/*"
+      "@mf/integration/*": [
+        "./projects/mf/integration/*"
       ]
     },
     "outDir": "./dist/out-tsc",

@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 
 import { interval } from 'rxjs';
 
-import { MfLoaderDirective } from '@mc/integration/mf-loader';
+import { MfLoaderDirective } from '@mf/integration/mf-loader';
 
 @Component({
   selector: 'app-main',

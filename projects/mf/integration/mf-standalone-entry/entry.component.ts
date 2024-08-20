@@ -1,7 +1,7 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, inject, Input, OnDestroy } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 
-import { MfRouterService } from '@mc/integration/mf-router';
+import { MfRouterService } from '@mf/integration/mf-router';
 
 import { MF_CONFIG } from './mf-config';
 

@@ -3,7 +3,7 @@ import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRoutesMf } from '@mc/integration/mf-standalone-entry';
+import { EntryComponent, provideRoutesMf } from '@mf/integration/mf-standalone-entry';
 
 import { MainComponent } from 'sections/mf4';
 

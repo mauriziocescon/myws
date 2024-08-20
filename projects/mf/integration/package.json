@@ -1,5 +1,5 @@
 {
-  "name": "@mc/integration",
+  "name": "@mf/integration",
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^18.2.0",

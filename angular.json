@@ -153,6 +153,39 @@
         }
       }
     },
+    "@mf/integration": {
+      "projectType": "library",
+      "root": "projects/mf/integration",
+      "sourceRoot": "projects/mf/integration",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/mf/integration/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mf/integration/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/mf/integration/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/mf/integration/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
     "mf1": {
       "projectType": "application",
       "schematics": {
@@ -476,39 +509,6 @@
                 "glob": "**/*",
                 "input": "projects/mf4/public"
               }
-            ]
-          }
-        }
-      }
-    },
-    "@mc/integration": {
-      "projectType": "library",
-      "root": "projects/mc/integration",
-      "sourceRoot": "projects/mc/integration",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/mc/integration/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/mc/integration/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/mc/integration/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/mc/integration/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
             ]
           }
         }

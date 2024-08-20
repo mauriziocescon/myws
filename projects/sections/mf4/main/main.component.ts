@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h4>Mf4</h4>
+    <h4>Mf4 reusable component</h4>
     <a class="link" [routerLink]="link()">Go to mf1</a>
     @if (showValue()) {
       <div class="link">Input: {{ value() }}</div>

@@ -12,13 +12,22 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h3>Mf3</h3>
+    <h3>Mf3 section</h3>
     <a class="link" [routerLink]="link()">Go to mf2</a>
     <hr>
-    <div [mfLoader]="mf()"></div>
-    <hr>
-    <div [mfLoader]="mf()" [mfInputs]="inputs()"></div>`,
+    <div class="container">
+      <div class="block" [mfLoader]="mf()"></div>
+      <div class="block" [mfLoader]="mf()" [mfInputs]="inputs()"></div>
+    </div>`,
   styles: `
+    .container {
+      display: flex;
+    }
+
+    .block {
+      width: 50%;
+    }
+
     .link {
       padding: 0.3rem;
     }`,

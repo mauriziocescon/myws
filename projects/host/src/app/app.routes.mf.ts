@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { startsWith } from '@mc/integration/host-router';
 import { MfLoaderComponent } from '@mc/integration/mf-loader';
-import { startsWith } from '@mc/integration/utils';
 
 export const routes: Routes = [
   {
@@ -10,7 +10,6 @@ export const routes: Routes = [
     data: {
       mf: { elementId: 'mf1', tag: 'mf1-v18' },
       inputs: { mf: { elementId: 'mf1', tag: 'mf1-v18' } },
-      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
   },
   {
@@ -19,7 +18,6 @@ export const routes: Routes = [
     data: {
       mf: { elementId: 'mf2', tag: 'mf2-v18' },
       inputs: { mf: { elementId: 'mf2', tag: 'mf2-v18' } },
-      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
   },
   {
@@ -28,7 +26,6 @@ export const routes: Routes = [
     data: {
       mf: { elementId: 'mf3', tag: 'mf3-v18' },
       inputs: { mf: { elementId: 'mf3', tag: 'mf3-v18' } },
-      outputs: { valueChanged: (v: string) => console.log(`valueChanged called with ${v}`) },
     },
   },
   { path: '**', redirectTo: '/mf1' },

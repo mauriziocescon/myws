@@ -12,7 +12,7 @@ import { MainComponent } from '@mc/components/mf4';
     providers: [
       provideExperimentalZonelessChangeDetection(),
       provideHttpClient(withFetch()),
-      provideRoutesMf(MainComponent),
+      provideRoutesMf({ component: MainComponent }),
     ],
   });
   const element = createCustomElement(EntryComponent, { injector: app.injector });

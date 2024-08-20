@@ -12,7 +12,7 @@ import { mf3Routes } from '@mc/components/mf3';
     providers: [
       provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
       provideHttpClient(withFetch()),
-      provideRoutesMf('mf3', mf3Routes),
+      provideRoutesMf({ path: 'mf3', children: mf3Routes }),
     ],
   });
   const element = createCustomElement(EntryComponent, { injector: app.injector });

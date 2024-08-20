@@ -12,12 +12,12 @@ const defineRoutes = (component: any) => {
   ] as Route[];
 };
 
-export const provideRoutesMf = (component: any) => [
-  provideRouter(defineRoutes(component)),
+export const provideRoutesMf = (config: { component: any }) => [
+  provideRouter(defineRoutes(config.component)),
   makeEnvironmentProviders([
     {
       provide: MF_CONFIG,
-      useFactory: () => ({ component }),
+      useFactory: () => ({ component: config.component }),
     },
   ]),
 ];

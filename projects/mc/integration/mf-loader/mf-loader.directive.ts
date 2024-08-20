@@ -1,6 +1,5 @@
 import {
   afterNextRender,
-  computed,
   Directive,
   effect,
   inject,
@@ -22,6 +21,7 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
 @Directive({
   selector: '[mfLoader]',
   standalone: true,
+  exportAs: 'mfLoader',
   providers: [
     MfLoaderService,
   ],
@@ -33,21 +33,17 @@ export class MfLoaderDirective {
 
   mf = input.required<{ elementId: string, tag: string }>({ alias: 'mfLoader' });
   inputs = input<Record<string, unknown> | undefined>(undefined, { alias: 'mfInputs' });
-  outputs = input<Record<string, (data: any) => void> | undefined>(undefined, { alias: 'mfOutputs' });
 
-  private status = signal<StatusType | undefined>(undefined);
-
-  isLoading = computed(() => this.status() === 'Loading');
-  failed = computed(() => this.status() === 'Failed');
+  status = signal<StatusType | undefined>(undefined);
 
   private ngElement: NgElement & WithProperties<Record<string, any>> | undefined = undefined;
 
-  inputsWatcher = effect(() => {
+  private inputsWatcher = effect(() => {
     this.inputs();
     untracked(() => this.updateInputs());
   });
 
-  domAvailable = afterNextRender(() => this.load());
+  private domAvailable = afterNextRender(() => this.load());
 
   load(): void {
     this.status.set('Loading');
@@ -79,4 +75,21 @@ export class MfLoaderDirective {
       ngElement['mfInputs'] = this.inputs();
     }
   }
+
+  // todo: check outputs availability
+  // private updateOutputs(): void {
+  //   if (this.ngElement && this.outputs()) {
+  //     this.controller.abort();
+  //     const ngElement = this.ngElement as NgElement & WithProperties<Record<string, any>>;
+  //     const outputs = this.outputs() as Record<string, (data: unknown) => void>;
+  //
+  //     this.controller = new AbortController();
+  //     Object.keys(outputs).forEach(key => {
+  //       ngElement.addEventListener(key, (event: Event) => {
+  //         const customEvent = event as CustomEvent<string>;
+  //         outputs[key](customEvent.detail);
+  //       }, { signal: this.controller.signal });
+  //     });
+  //   }
+  // }
 }

@@ -4,3 +4,4 @@
 
 export * from './host-router.service';
 export * from './provide-host-router';
+export * from './route-utils';

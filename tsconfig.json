@@ -4,11 +4,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@mc/modules": [
-        "./projects/mc/modules"
+      "sections": [
+        "./projects/sections"
       ],
-      "@mc/modules/*": [
-        "./projects/mc/modules/*"
+      "sections/*": [
+        "./projects/sections/*"
       ],
       "@mc/integration": [
         "./projects/mc/integration"

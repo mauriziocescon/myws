@@ -29,6 +29,6 @@ export class MainComponent {
   mf = signal({ elementId: 'mf4', tag: 'mf4-v18' });
 
   private value$ = interval(1000);
-  private value = toSignal(this.value$);
+  private value = toSignal(this.value$, { initialValue: 0 });
   inputs = computed(() => ({ value: this.value() }));
 }

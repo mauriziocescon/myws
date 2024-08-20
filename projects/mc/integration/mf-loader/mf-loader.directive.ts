@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   input,
+  OnDestroy,
   Renderer2,
   signal,
   untracked,
@@ -26,7 +27,7 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
     MfLoaderService,
   ],
 })
-export class MfLoaderDirective {
+export class MfLoaderDirective implements OnDestroy {
   private vcr = inject(ViewContainerRef);
   private renderer = inject(Renderer2);
   private mfLoader = inject(MfLoaderService);
@@ -44,6 +45,10 @@ export class MfLoaderDirective {
   });
 
   private domAvailable = afterNextRender(() => this.load());
+
+  ngOnDestroy(): void {
+    this.vcr.clear();
+  }
 
   load(): void {
     this.status.set('Loading');

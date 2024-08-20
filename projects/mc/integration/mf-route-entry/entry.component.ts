@@ -15,7 +15,7 @@ import { RouterOutlet } from '@angular/router';
 import { MfRouterService } from '@mc/integration/mf-router';
 
 @Component({
-  selector: 'app-entry',
+  selector: 'mf-route-entry',
   standalone: true,
   imports: [
     RouterOutlet,

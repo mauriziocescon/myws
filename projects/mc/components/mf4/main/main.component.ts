@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,13 +9,18 @@ import { RouterLink } from '@angular/router';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h3>Mf4</h3>
-    <a class="link" [routerLink]="link()">Go to mf1</a>`,
+    <h4>Mf4</h4>
+    <a class="link" [routerLink]="link()">Go to mf1</a>
+    @if (value()) {
+      <div>Input: {{ value() }}</div>
+    }`,
   styles: `
     .link {
       padding: 0.3rem;
     }`,
 })
 export class MainComponent {
+  value = input<string>();
+
   link = signal('/mf1');
 }

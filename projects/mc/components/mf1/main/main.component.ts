@@ -10,12 +10,12 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h3>Mf1</h3>
-    @if (id()) {
-      <div class="params">TabId: {{ id() }}</div>
-    }
     <a class="link" [routerLink]="link()">Go to mf2</a>
     <a class="link" [routerLink]="link2()">Go to mf2/b</a>
-    <a class="link" [routerLink]="link3()">Go to /mf1/tab/tabId</a>`,
+    <a class="link" [routerLink]="link3()">Go to /mf1/tab/tabId</a>
+    @if (id()) {
+      <div class="params">TabId: {{ id() }}</div>
+    }`,
   styles: `
     .params {
       padding: 0.3rem;

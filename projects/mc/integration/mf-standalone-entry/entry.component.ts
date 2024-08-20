@@ -1,49 +1,34 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, inject, Input, OnDestroy } from '@angular/core';
+import { NgComponentOutlet } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 import { MfRouterService } from '@mc/integration/mf-router';
 
+import { MF_CONFIG } from './mf-config';
+
 @Component({
-  selector: 'app-entry',
+  selector: 'mf-standalone-entry',
   standalone: true,
   imports: [
+    NgComponentOutlet,
     RouterOutlet,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div (click)="onClick()">Mf entry component (click me)</div>
-    <router-outlet/>`,
+    <ng-container [ngComponentOutlet]="component" [ngComponentOutletInputs]="mfInputs"/>`,
 })
-export class EntryComponent implements OnChanges, OnDestroy {
+export class EntryComponent implements OnDestroy {
   private mfRouter = inject(MfRouterService);
+  private mfConfig = inject(MF_CONFIG);
 
-  @Input({ required: true }) mf: { elementId: string, tag: string } = { elementId: '', tag: '' };
-  @Output() valueChanged = new EventEmitter<string>();
+  @Input() mfInputs: Record<string, unknown> = {};
+  @Input() mfOutputs: Record<string, (data: any) => void> = {};
+
+  component = this.mfConfig['component'];
 
   domAvailable = afterNextRender(() => this.mfRouter.setup());
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['mf']) {
-      console.log(`ngOnChanges: mf = ${JSON.stringify(this.mf)}`);
-    }
-  }
-
   ngOnDestroy(): void {
     this.mfRouter.cleanup();
-  }
-
-  onClick(): void {
-    this.valueChanged.emit(`value: ${Date.now()}`);
   }
 }

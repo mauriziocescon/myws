@@ -13,5 +13,5 @@ export const routes: Routes = [
     path: 'mf3',
     loadChildren: () => import('sections/mf3').then(m => m.mf3Routes),
   },
-  { path: '**', redirectTo: '/mf1' },
+  { path: '**', redirectTo: '/mf2' },
 ];

@@ -5,7 +5,7 @@ const mfName = process.env.MF_NAME;
 
 async function hasBrowserFolder() {
   try {
-    return fs.stat(`dist/${mfName}/browser/`)
+    return fs.stat(`dist/mf/${mfName}-entry/browser/`)
       .then(() => true)
       .catch(() => false);
   } catch (e) {
@@ -13,10 +13,18 @@ async function hasBrowserFolder() {
   }
 }
 
-async function createEntry() {
+async function getDir() {
   try {
     const hasBrowser = await hasBrowserFolder();
-    const dir = hasBrowser ? `dist/${mfName}/browser` : `dist/${mfName}`;
+    return hasBrowser ? `dist/mf/${mfName}-entry/browser` : `dist/mf/${mfName}-entry`;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function createEntry() {
+  try {
+    const dir = await getDir();
     const fileList = (await fs.readdir(dir)).filter(f => f.endsWith(`.js`));
 
     const predefinedFiles = ['runtime.js', 'polyfills.js', 'scripts.js', 'main.js'];
@@ -35,8 +43,7 @@ async function createEntry() {
 
 async function copyFiles() {
   try {
-    const hasBrowser = await hasBrowserFolder();
-    const dir = hasBrowser ? `dist/${mfName}/browser` : `dist/${mfName}/`;
+    const dir = await getDir();
     return fs.cp(dir, `projects/host/public/elements/${mfName}`, {recursive: true});
   } catch (e) {
     console.log(e);

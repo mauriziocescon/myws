@@ -186,29 +186,28 @@
         }
       }
     },
-    "mf1": {
+    "@mf/mf1-entry": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/mf1",
-      "sourceRoot": "projects/mf1/src",
+      "root": "projects/mf/mf1-entry",
+      "sourceRoot": "projects/mf/mf1-entry/src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mf1",
-            "index": "projects/mf1/src/index.html",
-            "main": "projects/mf1/src/main.ts",
-            "tsConfig": "projects/mf1/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "outputPath": "dist/mf/mf1-entry",
+            "index": "projects/mf/mf1-entry/src/index.html",
+            "browser": "projects/mf/mf1-entry/src/main.ts",
+            "tsConfig": "projects/mf/mf1-entry/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf1/public"
+                "input": "projects/mf/mf1-entry/public"
               }
             ]
           },
@@ -240,10 +239,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mf1:build:production"
+              "buildTarget": "@mf/mf1-entry:build:production"
             },
             "development": {
-              "buildTarget": "mf1:build:development"
+              "buildTarget": "@mf/mf1-entry:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -258,41 +257,40 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/mf1/tsconfig.spec.json",
+            "tsConfig": "projects/mf/mf1-entry/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf1/public"
+                "input": "projects/mf/mf1-entry/public"
               }
             ]
           }
         }
       }
     },
-    "mf2": {
+    "@mf/mf2-entry": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/mf2",
-      "sourceRoot": "projects/mf2/src",
+      "root": "projects/mf/mf2-entry",
+      "sourceRoot": "projects/mf/mf2-entry/src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mf2",
-            "index": "projects/mf2/src/index.html",
-            "main": "projects/mf2/src/main.ts",
-            "tsConfig": "projects/mf2/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "outputPath": "dist/mf/mf2-entry",
+            "index": "projects/mf/mf2-entry/src/index.html",
+            "browser": "projects/mf/mf2-entry/src/main.ts",
+            "tsConfig": "projects/mf/mf2-entry/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf2/public"
+                "input": "projects/mf/mf2-entry/public"
               }
             ]
           },
@@ -324,10 +322,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mf2:build:production"
+              "buildTarget": "@mf/mf2-entry:build:production"
             },
             "development": {
-              "buildTarget": "mf2:build:development"
+              "buildTarget": "@mf/mf2-entry:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -338,41 +336,40 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/mf2/tsconfig.spec.json",
+            "tsConfig": "projects/mf/mf2-entry/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf2/public"
+                "input": "projects/mf/mf2-entry/public"
               }
             ]
           }
         }
       }
     },
-    "mf3": {
+    "@mf/mf3-entry": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/mf3",
-      "sourceRoot": "projects/mf3/src",
+      "root": "projects/mf/mf3-entry",
+      "sourceRoot": "projects/mf/mf3-entry/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mf3",
-            "index": "projects/mf3/src/index.html",
-            "browser": "projects/mf3/src/main.ts",
-            "tsConfig": "projects/mf3/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "outputPath": "dist/mf/mf3-entry",
+            "index": "projects/mf/mf3-entry/src/index.html",
+            "browser": "projects/mf/mf3-entry/src/main.ts",
+            "tsConfig": "projects/mf/mf3-entry/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf3/public"
+                "input": "projects/mf/mf3-entry/public"
               }
             ]
           },
@@ -404,10 +401,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mf3:build:production"
+              "buildTarget": "@mf/mf3-entry:build:production"
             },
             "development": {
-              "buildTarget": "mf3:build:development"
+              "buildTarget": "@mf/mf3-entry:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -422,41 +419,40 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/mf3/tsconfig.spec.json",
+            "tsConfig": "projects/mf/mf3-entry/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf3/public"
+                "input": "projects/mf/mf3-entry/public"
               }
             ]
           }
         }
       }
     },
-    "mf4": {
+    "@mf/mf4-entry": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/mf4",
-      "sourceRoot": "projects/mf4/src",
+      "root": "projects/mf/mf4-entry",
+      "sourceRoot": "projects/mf/mf4-entry/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mf4",
-            "index": "projects/mf4/src/index.html",
-            "browser": "projects/mf4/src/main.ts",
-            "tsConfig": "projects/mf4/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "outputPath": "dist/mf/mf4-entry",
+            "index": "projects/mf/mf4-entry/src/index.html",
+            "browser": "projects/mf/mf4-entry/src/main.ts",
+            "tsConfig": "projects/mf/mf4-entry/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf4/public"
+                "input": "projects/mf/mf4-entry/public"
               }
             ]
           },
@@ -488,10 +484,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mf4:build:production"
+              "buildTarget": "@mf/mf4-entry:build:production"
             },
             "development": {
-              "buildTarget": "mf4:build:development"
+              "buildTarget": "@mf/mf4-entry:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -502,12 +498,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/mf4/tsconfig.spec.json",
+            "tsConfig": "projects/mf/mf4-entry/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/mf4/public"
+                "input": "projects/mf/mf4-entry/public"
               }
             ]
           }

@@ -13,7 +13,7 @@ import { MfRouterService } from '@mf/integration/mf-router';
   template: `
     <router-outlet/>`,
 })
-export class EntryComponent implements OnDestroy {
+export class SectionEntryComponent implements OnDestroy {
   private mfRouter = inject(MfRouterService);
 
   domAvailable = afterNextRender(() => this.mfRouter.setup());

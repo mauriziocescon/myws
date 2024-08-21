@@ -4,7 +4,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { withComponentInputBinding } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRouteMf } from '@mf/integration/mf-section-entry';
+import { provideSectionMf, SectionEntryComponent } from '@mf/integration/mf-section-entry';
 
 import { mf1Routes } from 'section/mf1';
 
@@ -13,9 +13,9 @@ import { mf1Routes } from 'section/mf1';
     providers: [
       provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
       provideHttpClient(withFetch()),
-      provideRouteMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
+      provideSectionMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
     ],
   });
-  const element = createCustomElement(EntryComponent, { injector: app.injector });
+  const element = createCustomElement(SectionEntryComponent, { injector: app.injector });
   customElements.define('mf1-v18', element);
 })();

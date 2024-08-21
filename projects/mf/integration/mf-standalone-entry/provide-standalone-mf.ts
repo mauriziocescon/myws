@@ -12,7 +12,7 @@ const defineRoutes = (component: any) => {
   ] as Route[];
 };
 
-export const provideRouteMf = (config: { component: any }) => [
+export const provideStandaloneMf = (config: { component: any }) => [
   provideRouter(defineRoutes(config.component), withComponentInputBinding()),
   makeEnvironmentProviders([
     {

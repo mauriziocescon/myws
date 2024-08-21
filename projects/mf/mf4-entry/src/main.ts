@@ -3,7 +3,7 @@ import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRouteMf } from '@mf/integration/mf-standalone-entry';
+import { provideStandaloneMf, StandaloneEntryComponent } from '@mf/integration/mf-standalone-entry';
 
 import { MainComponent } from 'standalone/mf4';
 
@@ -12,9 +12,9 @@ import { MainComponent } from 'standalone/mf4';
     providers: [
       provideExperimentalZonelessChangeDetection(),
       provideHttpClient(withFetch()),
-      provideRouteMf({ component: MainComponent }),
+      provideStandaloneMf({ component: MainComponent }),
     ],
   });
-  const element = createCustomElement(EntryComponent, { injector: app.injector });
+  const element = createCustomElement(StandaloneEntryComponent, { injector: app.injector });
   customElements.define('mf4-v18', element);
 })();

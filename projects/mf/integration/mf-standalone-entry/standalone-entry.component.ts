@@ -25,7 +25,7 @@ import { MF_CONFIG } from './mf-config';
   template: `
     <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="inputs()"/>`,
 })
-export class EntryComponent implements OnChanges, OnDestroy {
+export class StandaloneEntryComponent implements OnChanges, OnDestroy {
   private mfRouter = inject(MfRouterService);
   private mfConfig = inject(MF_CONFIG);
 

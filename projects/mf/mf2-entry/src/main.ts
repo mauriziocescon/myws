@@ -4,7 +4,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { withComponentInputBinding } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { EntryComponent, provideRouteMf } from '@mf/integration/mf-section-entry';
+import { provideSectionMf, SectionEntryComponent } from '@mf/integration/mf-section-entry';
 
 import { mf2Routes } from 'section/mf2';
 
@@ -13,9 +13,9 @@ import { mf2Routes } from 'section/mf2';
     providers: [
       provideExperimentalZonelessChangeDetection(),
       provideHttpClient(withFetch()),
-      provideRouteMf({ path: 'mf2', children: mf2Routes }, withComponentInputBinding()),
+      provideSectionMf({ path: 'mf2', children: mf2Routes }, withComponentInputBinding()),
     ],
   });
-  const element = createCustomElement(EntryComponent, { injector: app.injector });
+  const element = createCustomElement(SectionEntryComponent, { injector: app.injector });
   customElements.define('mf2-v18', element);
 })();

@@ -2,5 +2,5 @@
  * Public API Surface of components
  */
 
-export * from './entry.component';
-export * from './provide-route-mf';
+export * from './section-entry.component';
+export * from './provide-section-mf';

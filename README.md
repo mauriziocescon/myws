@@ -1,9 +1,5 @@
 # Myws
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
-
-## Information
-
 This repo contains an ng-workspace having 5 angular apps:
 
 - **host**: shell and loader of mfs,
@@ -22,3 +18,7 @@ To launch the host application, just `npm run start:host`. This command will
 - start the host app.
 
 For development, you can run `npm run start host` and lazy load all the parts.
+
+## Information
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.

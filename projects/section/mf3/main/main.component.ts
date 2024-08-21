@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, OnDestroy, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 import { MfLoaderDirective } from '@mf/integration/mf-loader';
 
@@ -8,6 +8,7 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
   standalone: true,
   imports: [
     RouterLink,
+    RouterOutlet,
     MfLoaderDirective,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,19 +16,10 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
     <h4>Mf3 section</h4>
     <a class="link" [routerLink]="link()">Go to mf2</a>
     <hr>
-    <div class="container">
-      <div class="block" [mfLoader]="mf()"></div>
-      <div class="block" [mfLoader]="mf()" [mfInputs]="inputs()"></div>
-    </div>`,
+    <div [mfLoader]="mf()" [mfInputs]="inputs()"></div>
+    <hr>
+    <router-outlet/>`,
   styles: `
-    .container {
-      display: flex;
-    }
-
-    .block {
-      width: 50%;
-    }
-
     .link {
       padding: 0.3rem;
     }`,

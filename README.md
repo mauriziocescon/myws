@@ -6,11 +6,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This repo contains an ng-workspace having 5 angular apps:
 
-- host: shell and loader of mfs,
-- mf1: zone.js based section having a couple of routes,
-- mf2: zoneless section having a couple of child routes,
-- mf3: zone.js based section having a couple of routes one of those loading another mf,
-- mf4: a zoneless standalone reusable component.
+- **host**: shell and loader of mfs,
+- **mf1**: zone.js based section having a couple of routes,
+- **mf2**: zoneless section having a couple of child routes,
+- **mf3**: zone.js based section having a couple of routes one of those loading another mf,
+- **mf4**: a zoneless standalone reusable component.
 
 Each mf has (more or less) regular routing capabilities.
 

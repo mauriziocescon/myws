@@ -1,6 +1,6 @@
 import { inject, Injectable, NgZone } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -28,9 +28,9 @@ export class HostRouterService {
     .events
     .pipe(
       takeUntilDestroyed(),
-      filter((event: Event | RouterEvent): event is RouterEvent => event instanceof NavigationEnd),
+      filter(event => event instanceof NavigationEnd),
     )
-    .subscribe((event: RouterEvent) => this.hostUrlSubject$.next(event['url']));
+    .subscribe(event => this.hostUrlSubject$.next(event['url']));
 
   /**
    * Called by mfs any time a NavigationStart event

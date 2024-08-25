@@ -1,4 +1,4 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { MfRouterService } from '@mf/integration/mf-router';
@@ -9,16 +9,13 @@ import { MfRouterService } from '@mf/integration/mf-router';
   imports: [
     RouterOutlet,
   ],
+  providers: [MfRouterService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <router-outlet/>`,
 })
-export class SectionEntryComponent implements OnDestroy {
+export class SectionEntryComponent {
   private mfRouter = inject(MfRouterService);
 
   domAvailable = afterNextRender(() => this.mfRouter.setup());
-
-  ngOnDestroy(): void {
-    this.mfRouter.cleanup();
-  }
 }

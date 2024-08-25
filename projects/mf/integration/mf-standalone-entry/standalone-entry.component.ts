@@ -5,7 +5,6 @@ import {
   inject,
   Input,
   OnChanges,
-  OnDestroy,
   signal,
   SimpleChanges,
 } from '@angular/core';
@@ -21,13 +20,14 @@ import { MF_CONFIG } from './mf-config';
   imports: [
     NgComponentOutlet,
   ],
+  providers: [MfRouterService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="inputs()"/>`,
 })
-export class StandaloneEntryComponent implements OnChanges, OnDestroy {
-  private mfRouter = inject(MfRouterService);
+export class StandaloneEntryComponent implements OnChanges {
   private mfConfig = inject(MF_CONFIG);
+  private mfRouter = inject(MfRouterService);
 
   @Input() mfInputs: Record<string, unknown> | undefined = undefined;
 
@@ -40,9 +40,5 @@ export class StandaloneEntryComponent implements OnChanges, OnDestroy {
     if (changes['mfInputs']) {
       this.inputs.set({ ...this.mfInputs });
     }
-  }
-
-  ngOnDestroy(): void {
-    this.mfRouter.cleanup();
   }
 }

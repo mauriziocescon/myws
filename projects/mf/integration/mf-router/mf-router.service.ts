@@ -1,4 +1,4 @@
-import { inject, Injectable, NgZone } from '@angular/core';
+import { inject, Injectable, NgZone, OnDestroy } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
@@ -10,10 +10,8 @@ interface IHostRouter {
   mfRouterEvent(url: string): void;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
-export class MfRouterService {
+@Injectable()
+export class MfRouterService implements OnDestroy {
   private mfRouter = inject(Router);
   private mfZone = inject(NgZone);
 
@@ -40,6 +38,10 @@ export class MfRouterService {
   cleanup(): void {
     this.hostNavigationStartSubscription?.unsubscribe();
     this.mfNavigationStartSubscription?.unsubscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.cleanup();
   }
 
   /**

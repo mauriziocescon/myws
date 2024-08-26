@@ -15,7 +15,6 @@ import { MfRouterService } from '@mf/integration/mf-router';
 import { MF_CONFIG } from './mf-config';
 
 @Component({
-  selector: 'mf-standalone-entry',
   standalone: true,
   imports: [
     NgComponentOutlet,

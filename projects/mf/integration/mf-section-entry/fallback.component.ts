@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'mf-fallback',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

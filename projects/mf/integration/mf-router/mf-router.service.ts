@@ -22,7 +22,7 @@ export class MfRouterService implements OnDestroy {
   private mfNavigationStartSubscription: Subscription | undefined = undefined;
 
   /**
-   * Init mf router sync
+   * Start sync
    */
   setup(): void {
     // router init
@@ -33,7 +33,7 @@ export class MfRouterService implements OnDestroy {
   }
 
   /**
-   * Paused the sync.
+   * Stop sync
    */
   cleanup(): void {
     this.hostNavigationStartSubscription?.unsubscribe();

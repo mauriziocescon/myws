@@ -8,7 +8,7 @@ const defineRoutes = (path: string, children: Route[]) => {
       // base path = mf1
       path: path,
 
-      // business routes defined for the mf1 section
+      // business routes defined for mf1 section
       children: children,
     },
 

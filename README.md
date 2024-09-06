@@ -171,7 +171,7 @@ const defineRoutes = (path: string, children: Route[]) => {
       // base path = mf1
       path: path,
 
-      // business routes defined for the mf1 section 
+      // business routes defined for mf1 section
       children: children,
     },
 
@@ -226,7 +226,7 @@ export class MfRouterService implements OnDestroy {
   private mfNavigationStartSubscription: Subscription | undefined = undefined;
 
   /**
-   * Init mf router sync
+   * Start sync
    */
   setup(): void {
     // router init
@@ -237,7 +237,7 @@ export class MfRouterService implements OnDestroy {
   }
 
   /**
-   * Paused the sync.
+   * Stop sync
    */
   cleanup(): void {
     this.hostNavigationStartSubscription?.unsubscribe();

@@ -1,24 +1,13 @@
 # Sections
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+A lib having 3 sub-entries representing 3 business sections available at the urls:
 
-## Code scaffolding
+- mf1 => /mf1,
+- mf2 => /mf2,
+- mf3 => /mf3.
 
-Run `ng generate component component-name --project sections` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project sections`.
-> Note: Don't forget to add `--project sections` or else it will be added to the default project in your `angular.json` file. 
+All sections have routing capabilities.
 
-## Build
+## Information
 
-Run `ng build sections` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build sections`, go to the dist folder `cd dist/sections` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test sections` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.

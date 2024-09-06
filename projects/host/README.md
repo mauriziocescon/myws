@@ -1,6 +1,6 @@
-# Integration
+# Host
 
-All the reusable code required by Host / Mf_x.
+Application having in the main content area one of the sections.
 
 ## Information
 

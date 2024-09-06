@@ -1,24 +1,7 @@
 # Standalone
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+A lib having 1 sub-entry representing 1 business component with routing capabilities that is loadable anywhere.
 
-## Code scaffolding
+## Information
 
-Run `ng generate component component-name --project standalone` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project standalone`.
-> Note: Don't forget to add `--project standalone` or else it will be added to the default project in your `angular.json` file. 
-
-## Build
-
-Run `ng build standalone` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build standalone`, go to the dist folder `cd dist/standalone` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test standalone` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.

@@ -1,6 +1,6 @@
-# Integration
+# Mf3-entry
 
-All the reusable code required by Host / Mf_x.
+Application built as an angular element.
 
 ## Information
 

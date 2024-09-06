@@ -1,7 +1,7 @@
 # Myws
 
-This repo showcases a possible way of achieving standard angular routing capabilities
-in a micro frontend architecture with angular. The setup is the following:
+This repo showcases a possible way of achieving (more or less) standard angular
+routing capabilities in a micro frontend architecture. The setup is the following:
 
 - a `host` (shell) loading the various parts of the application,
 - 3 "sections" (`mf1`, `mf2`, `mf3`) available at the urls:

@@ -32,7 +32,7 @@ export const routes: Routes = [
     component: MfLoaderComponent,
     data: {
       // mf is used by MfLoaderComponent to load the
-      // mf bundle and create a WC <mf1-v18></mf1-v18>
+      // bundle and create a WC <mf1-v18></mf1-v18>
       mf: { elementId: 'mf1', tag: 'mf1-v18' },
 
       // inputs is an object of `ng-inputs` passed to
@@ -136,7 +136,7 @@ export function provideHostRouter(): EnvironmentProviders {
 }
 ```
 
-### Section mf
+### Mf section
 
 A WC defined like this
 

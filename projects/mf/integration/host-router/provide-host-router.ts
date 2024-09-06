@@ -8,9 +8,10 @@ export function provideHostRouter(): EnvironmentProviders {
       provide: APP_INITIALIZER,
       useFactory: () => {
         const hostRouter = inject(HostRouterService);
-        
+
         return () => new Promise<void>(resolve => {
           // attaching HostRouterService to the global scope
+          // so it can be used by Mf
           const global = (globalThis as any);
           global.__myws__ = {};
           global.__myws__.HostRouterService = hostRouter;

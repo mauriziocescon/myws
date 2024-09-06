@@ -175,7 +175,7 @@ const defineRoutes = (path: string, children: Route[]) => {
       children: children,
     },
 
-    // wildcard to avoid exceptions while routing from mf1 to mf_x
+    // wildcard to avoid exceptions while routing from /mf1 to /mf_x
     { path: '**', component: PageNotFoundComponent },
   ] as Route[];
 };

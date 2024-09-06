@@ -3,12 +3,12 @@
 This repo showcases a possible way of achieving standard angular routing capabilities
 in a micro frontend architecture with angular. The setup is the following:
 
-- a host (shell) loading the various parts of the application,
-- 3 "sections" (mf1, mf2, mf3) available at the urls:
-  - mf1 => /mf1,
-  - mf2 => /mf2,
-  - mf3 => /mf3,
-- 1 "standalone" (mf4) not attached to any url.
+- a `host` (shell) loading the various parts of the application,
+- 3 "sections" (`mf1`, `mf2`, `mf3`) available at the urls:
+  - `mf1` => /mf1,
+  - `mf2` => /mf2,
+  - `mf3` => /mf3,
+- 1 "standalone" (`mf4`) not attached to any url.
 
 All 5 applications are built independently and have (more or less) standard routing capabilities.
 In particular, each `mf` app has its own router which is kept in sync with the host one (url level).

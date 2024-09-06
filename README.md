@@ -289,7 +289,7 @@ export class MfRouterService implements OnDestroy {
 To launch the host application, just run `npm run start:host`. This command will
 
 - build `mf1` / `mf2` / `mf3` / `mf4`,
-- repackage the mf apps to be loaded by the `host` as js modules,
+- repackage the mf apps to be loaded as js modules,
 - move the bundles to the `host/public/elements` folder,
 - start the `host` app.
 

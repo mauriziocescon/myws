@@ -251,6 +251,7 @@ export class MfRouterService implements OnDestroy {
   /**
    * Listen for host url changes and call navigateByUrl
    * with the host url.
+   *
    * @private
    */
   private listenForHostNavigationEvent(): void {
@@ -269,6 +270,7 @@ export class MfRouterService implements OnDestroy {
    * Listen for mf-router NavigationStart events and
    * ask the host router to navigateByUrl using the
    * new url.
+   *
    * @private
    */
   private listenForMfNavigationEvent(): void {

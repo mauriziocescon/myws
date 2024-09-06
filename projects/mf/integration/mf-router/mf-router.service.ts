@@ -15,7 +15,7 @@ export class MfRouterService implements OnDestroy {
   private mfRouter = inject(Router);
   private mfZone = inject(NgZone);
 
-  // setting HostRouterService from the global scope
+  // getting HostRouterService from the global scope
   private hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
 
   private hostNavigationStartSubscription: Subscription | undefined = undefined;
@@ -52,7 +52,8 @@ export class MfRouterService implements OnDestroy {
   private listenForHostNavigationEvent(): void {
     this.hostNavigationStartSubscription?.unsubscribe();
 
-    // changes triggered at host level: since host is zone.js based, we need zone.run
+    // changes triggered at host level: since host is zone based,
+    // we need zone.run
     // Note: no need of zone.run in case everything is zoneless
     this.hostNavigationStartSubscription = this.hostRouter
       .hostUrl$
@@ -61,7 +62,7 @@ export class MfRouterService implements OnDestroy {
   }
 
   /**
-   * Listen for the start of mf router events and
+   * Listen for mf-router NavigationStart events and
    * ask the host router to navigateByUrl using the
    * new url.
    * @private

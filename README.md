@@ -17,8 +17,6 @@ Once such operation is done, it notifies every mf on screen about the change.
 
 ## Enable routing
 
-In order to achieve ng routing capabilities, the code does 3 things.
-
 ### Host
 
 Routes at host level are defined like this:
@@ -138,7 +136,7 @@ export function provideHostRouter(): EnvironmentProviders {
 }
 ```
 
-### Mf
+### Section mf
 
 A WC defined like this
 
@@ -150,6 +148,10 @@ import { mf1Routes } from 'section/mf1';
     providers: [
       provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
       provideHttpClient(withFetch()),
+
+      // this is simply calling provideRouter behind the scene
+      // and set the mf "base path" to mf1: mf1 must match
+      // what has been defined at host level!
       provideSectionMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
     ],
   });
@@ -160,12 +162,132 @@ import { mf1Routes } from 'section/mf1';
 })();
 ```
 
+where
+
+```ts
+const defineRoutes = (path: string, children: Route[]) => {
+  return [
+    {
+      // base path = mf1
+      path: path,
+
+      // business routes defined for the mf1 section 
+      children: children,
+    },
+
+    // wildcard to avoid redirection while routing from mf1 to mf_x
+    { path: '**', component: PageNotFoundComponent },
+  ] as Route[];
+};
+
+export const provideSectionMf = (config: { path: string, children: Route[] }, ...features: RouterFeatures[]) => {
+  return provideRouter(defineRoutes(config.path, config.children), withComponentInputBinding(), ...features);
+};
+```
+
+and
+
+```ts
+@Component({
+  standalone: true,
+  imports: [
+    RouterOutlet,
+  ],
+  providers: [MfRouterService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <router-outlet/>`,
+})
+export class SectionEntryComponent {
+  private mfRouter = inject(MfRouterService);
+
+  domAvailable = afterNextRender(() => this.mfRouter.setup());
+}
+```
+
+Each Mf has a dedicated `MfRouterService` which is communicating with the Host like this:
+
+```ts
+interface IHostRouter {
+  hostUrl$: Observable<string>;
+
+  mfRouterEvent(url: string): void;
+}
+
+@Injectable()
+export class MfRouterService implements OnDestroy {
+  private mfRouter = inject(Router);
+  private mfZone = inject(NgZone);
+
+  // getting HostRouterService from the global scope
+  private hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
+
+  private hostNavigationStartSubscription: Subscription | undefined = undefined;
+  private mfNavigationStartSubscription: Subscription | undefined = undefined;
+
+  /**
+   * Init mf router sync
+   */
+  setup(): void {
+    // router init
+    this.mfRouter.initialNavigation();
+
+    this.listenForHostNavigationEvent();
+    this.listenForMfNavigationEvent();
+  }
+
+  /**
+   * Paused the sync.
+   */
+  cleanup(): void {
+    this.hostNavigationStartSubscription?.unsubscribe();
+    this.mfNavigationStartSubscription?.unsubscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.cleanup();
+  }
+
+  /**
+   * Listen for host url changes and call navigateByUrl
+   * with the host url.
+   * @private
+   */
+  private listenForHostNavigationEvent(): void {
+    this.hostNavigationStartSubscription?.unsubscribe();
+
+    // changes triggered at host level: since host is zone based, 
+    // we need zone.run
+    // Note: no need of zone.run in case everything is zoneless
+    this.hostNavigationStartSubscription = this.hostRouter
+      .hostUrl$
+      .pipe(filter(url => this.mfRouter.url !== url))
+      .subscribe(url => this.mfZone.run(() => this.mfRouter.navigateByUrl(url)));
+  }
+
+  /**
+   * Listen for mf-router NavigationStart events and
+   * ask the host router to navigateByUrl using the
+   * new url.
+   * @private
+   */
+  private listenForMfNavigationEvent(): void {
+    this.mfNavigationStartSubscription?.unsubscribe();
+
+    this.mfNavigationStartSubscription = this.mfRouter
+      .events
+      .pipe(filter(event => event instanceof NavigationStart))
+      .subscribe(event => this.hostRouter.mfRouterEvent(event['url']));
+  }
+}
+```
+
 ## Commands
 
 To launch the host application, just run `npm run start:host`. This command will
 
 - build mf1 / mf2 / mf3 / mf4,
-- repackage the mf apps to be loaded by the host,
+- repackage the mf apps to be loaded by the host (bundles in `host/public/elements`),
 - move the bundles to the host/public/elements folder,
 - start the host app.
 

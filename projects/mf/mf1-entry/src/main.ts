@@ -13,9 +13,15 @@ import { mf1Routes } from 'section/mf1';
     providers: [
       provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
       provideHttpClient(withFetch()),
+
+      // this is simply calling provideRouter behind the scene
+      // and set the mf "base path" to mf1: mf1 must match
+      // what has been defined at host level!
       provideSectionMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
     ],
   });
   const element = createCustomElement(SectionEntryComponent, { injector: app.injector });
+
+  // definition of mf1-v18
   customElements.define('mf1-v18', element);
 })();

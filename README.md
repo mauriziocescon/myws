@@ -3,8 +3,8 @@
 This repo showcases a possible way of achieving (more or less) standard angular
 routing capabilities in a micro frontend architecture. The setup is the following:
 
-- a `host` (shell) loading the various parts,
-- 3 "sections" (`mf1`, `mf2`, `mf3`) available at the urls:
+- a `host` (shell) with a main "content area",
+- 3 "sections" (`mf1`, `mf2`, `mf3`) for the "main content area" available at the urls:
   - `mf1` => /mf1,
   - `mf2` => /mf2,
   - `mf3` => /mf3,

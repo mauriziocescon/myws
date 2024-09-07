@@ -16,7 +16,7 @@ its own router which is kept in sync with the host one (url level).
 
 The host dynamically loads each `mf_x` bundle based on the navigation (or other conditions for `mf4`).
 In particular: it loads the bundle, defines a WC, creates an instance of such component
-and append it.
+and appends it.
 
 The host also receives notifications from any `mf` and performs `navigateByUrl`.
 Once such operation is done, it notifies every `mf` on screen about the url change and each

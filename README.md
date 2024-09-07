@@ -18,8 +18,8 @@ The bundle of each `mf_x` is dynamically loaded based on the navigation (or othe
 conditions for `mf4`). In particular: the bundle is loaded, a WC is defined and
 an instance of such component is created and appended to the DOM.
 
-When any routing operation in any `mf` starts (new url), the host receives
-notifications and performs `navigateByUrl`. Once such operation is done, it notifies
+When any routing navigation in any `mf` starts (new url), the host receives
+notifications and performs `navigateByUrl`. Once such operation ends, it notifies
 every `mf` on screen about the url change and each `mf` triggers
 an "internal" `navigateByUrl` with the new host url.
 

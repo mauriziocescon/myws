@@ -23,8 +23,8 @@ notifications and performs `navigateByUrl`. Once such operation is done, it noti
 every `mf` on screen about the url change and each `mf` triggers
 an "internal" `navigateByUrl` with the new host url.
 
-Each `mf_x` bundles the necessary v18 angular code. Considering the build output of each `mf_x`
-is a WC, each `mf_x` could potentially have a different ng version.
+Each `mf_x` bundles the necessary v18 angular code. Considering each `mf_x` in the end
+is a WC, they could potentially be built with different ng versions.
 
 **Note**: there might be some ng-routing features not covered!
 

@@ -10,10 +10,18 @@ routing capabilities in a micro frontend architecture. The setup is the followin
   - `mf3` => /mf3,
 - 1 "standalone" (`mf4`) not attached to any url.
 
-All 5 ng-applications are built independently and have (more or less) standard ng-routing capabilities.
-In particular, each `mf` app has its own router which is kept in sync with the host one (url level).
-The host one receives notifications from any mf and performs the real routing operation.
-Once such operation is done, it notifies every mf on screen about the change.
+All 5 ng-applications are built independently and have (more or less) standard ng-routing
+capabilities. The four `mf_x` applications are built as angular elements and each one has
+its own router which is kept in sync with the host one (url level).
+
+The host one receives notifications from any `mf` and performs the "real" `navigateByUrl`.
+Once such operation is done, it notifies every `mf` on screen about the url change and each
+`mf` triggers an "internal" `navigateByUrl` with the new host url.
+
+Each `mf_x` bundles the necessary v18 angular code. Considering the build output of each `mf_x`
+is a WC, each `mf_x` could potentially have a different ng version.
+
+**Note**: there might be some ng-routing features not covered!
 
 ## Setup Host / Mf
 

@@ -26,7 +26,9 @@ an "internal" `navigateByUrl` with the new host url.
 Each `mf_x` bundles the necessary v18 angular code. Considering each `mf_x` in the end
 is a WC, they could potentially be built with different ng versions.
 
-**Note**: there might be some ng-routing features not covered!
+**PS**: there might be some ng-routing features not covered!
+
+**PPS**: since WCs are created programmatically, there's no need to add `CUSTOM_ELEMENTS_SCHEMA`.
 
 ## Setup Host / Mf
 

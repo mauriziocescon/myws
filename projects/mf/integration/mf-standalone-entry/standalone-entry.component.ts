@@ -3,10 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
-  OnChanges,
+  input,
+  linkedSignal,
   signal,
-  SimpleChanges,
 } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 
@@ -23,20 +22,14 @@ import { MF_CONFIG } from './mf-config';
   template: `
     <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="inputs()"/>`,
 })
-export class StandaloneEntryComponent implements OnChanges {
+export class StandaloneEntryComponent {
   private mfConfig = inject(MF_CONFIG);
   private mfRouter = inject(MfRouterService);
 
-  @Input() mfInputs: Record<string, unknown> | undefined = undefined;
+  mfInputs = input<Record<string, unknown> | undefined>(undefined);
 
   component = signal(this.mfConfig['component']);
-  inputs = signal<Record<string, unknown> | undefined>({});
+  inputs = linkedSignal<Record<string, unknown> | undefined>(() => ({ ...this.mfInputs() }));
 
   domAvailable = afterNextRender(() => this.mfRouter.setup());
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['mfInputs']) {
-      this.inputs.set({ ...this.mfInputs });
-    }
-  }
 }

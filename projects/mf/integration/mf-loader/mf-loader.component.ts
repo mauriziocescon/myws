@@ -10,10 +10,7 @@ import { MfLoaderDirective } from './mf-loader.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (mf()) {
-      <div [mfLoader]="mf()"
-           [mfInputs]="inputs()"
-           #mfLoader="mfLoader">
-      </div>
+      <div #mfLoader="mfLoader" [mfLoader]="mf()" [mfInputs]="inputs()"></div>
     }
     @if (isLoading()) {
       <div>Loading...</div>

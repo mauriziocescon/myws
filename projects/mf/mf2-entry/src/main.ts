@@ -17,5 +17,5 @@ import { mf2Routes } from 'section/mf2';
     ],
   });
   const element = createCustomElement(SectionEntryComponent, { injector: app.injector });
-  customElements.define('mf2-v18', element);
+  customElements.define('mf2-v19', element);
 })();

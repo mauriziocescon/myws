@@ -4,7 +4,6 @@ import { MfLoaderDirective } from './mf-loader.directive';
 
 @Component({
   selector: 'mc-mf-loader',
-  standalone: true,
   imports: [
     MfLoaderDirective,
   ],

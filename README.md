@@ -23,7 +23,7 @@ notifications and performs `navigateByUrl`. Once such operation ends, it notifie
 every `mf` on screen about the url change and each `mf` triggers
 an "internal" `navigateByUrl` with the new host url.
 
-Each `mf_x` bundles the necessary v18 angular code. Considering each `mf_x` in the end
+Each `mf_x` bundles the necessary v19 angular code. Considering each `mf_x` in the end
 is a WC, they could potentially be built with different ng versions.
 
 **PS**: there might be some ng-routing features not covered!
@@ -43,32 +43,32 @@ export const routes: Routes = [
     matcher: startsWith('mf1'),
 
     // loader of the mf bundle: loads the bundle 
-    // and appends <mf1-v18></mf1-v18>. 
+    // and appends <mf1-v19></mf1-v19>. 
     component: MfLoaderComponent,
     data: {
       // mf is used by MfLoaderComponent to load the
-      // bundle and create a WC <mf1-v18></mf1-v18>
-      mf: { elementId: 'mf1', tag: 'mf1-v18' },
+      // bundle and create a WC <mf1-v1></mf1-v19>
+      mf: { elementId: 'mf1', tag: 'mf1-v19' },
 
       // inputs is an object of `ng-inputs` passed to
       // the business component behind mf1.
-      inputs: { mf: { elementId: 'mf1', tag: 'mf1-v18' } },
+      inputs: { mf: { elementId: 'mf1', tag: 'mf1-v19' } },
     },
   },
   {
     matcher: startsWith('mf2'),
     component: MfLoaderComponent,
     data: {
-      mf: { elementId: 'mf2', tag: 'mf2-v18' },
-      inputs: { mf: { elementId: 'mf2', tag: 'mf2-v18' } },
+      mf: { elementId: 'mf2', tag: 'mf2-v19' },
+      inputs: { mf: { elementId: 'mf2', tag: 'mf2-v19' } },
     },
   },
   {
     matcher: startsWith('mf3'),
     component: MfLoaderComponent,
     data: {
-      mf: { elementId: 'mf3', tag: 'mf3-v18' },
-      inputs: { mf: { elementId: 'mf3', tag: 'mf3-v18' } },
+      mf: { elementId: 'mf3', tag: 'mf3-v19' },
+      inputs: { mf: { elementId: 'mf3', tag: 'mf3-v19' } },
     },
   },
   { path: '**', redirectTo: '/mf1' },
@@ -78,6 +78,7 @@ export const routes: Routes = [
 Host has a `HostRouterService` managing the url / route events
 
 ```ts
+
 @Injectable({
   providedIn: 'root',
 })
@@ -172,8 +173,8 @@ import { mf1Routes } from 'section/mf1';
   });
   const element = createCustomElement(SectionEntryComponent, { injector: app.injector });
 
-  // definition of mf1-v18
-  customElements.define('mf1-v18', element);
+  // definition of mf1-v19
+  customElements.define('mf1-v19', element);
 })();
 ```
 
@@ -203,6 +204,7 @@ export const provideSectionMf = (config: { path: string, children: Route[] }, ..
 and
 
 ```ts
+
 @Component({
   standalone: true,
   imports: [
@@ -313,4 +315,4 @@ The command `npm run serve:ssr:host` runs the host using ssr.
 
 ## Information
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.

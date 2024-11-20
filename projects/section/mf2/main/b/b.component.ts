@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-b',
-  standalone: true,
   imports: [
     RouterLink,
   ],

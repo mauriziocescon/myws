@@ -16,5 +16,5 @@ import { MainComponent } from 'standalone/mf4';
     ],
   });
   const element = createCustomElement(StandaloneEntryComponent, { injector: app.injector });
-  customElements.define('mf4-v18', element);
+  customElements.define('mf4-v19', element);
 })();

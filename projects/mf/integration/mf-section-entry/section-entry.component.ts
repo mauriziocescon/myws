@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { MfRouterService } from '@mf/integration/mf-router';
 
 @Component({
-  standalone: true,
   imports: [
     RouterOutlet,
   ],

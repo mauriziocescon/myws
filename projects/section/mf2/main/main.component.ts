@@ -1,17 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
-import { AComponent } from './a/a.component';
-import { BComponent } from './b/b.component';
-
 @Component({
   selector: 'app-main',
-  standalone: true,
   imports: [
     RouterLink,
     RouterOutlet,
-    AComponent,
-    BComponent,
+
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

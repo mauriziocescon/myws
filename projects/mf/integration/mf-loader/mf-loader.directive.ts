@@ -21,7 +21,6 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
 
 @Directive({
   selector: '[mfLoader]',
-  standalone: true,
   exportAs: 'mfLoader',
   providers: [
     MfLoaderService,

@@ -5,7 +5,6 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
 
 @Component({
   selector: 'app-main',
-  standalone: true,
   imports: [
     RouterLink,
     RouterOutlet,
@@ -26,7 +25,7 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
 })
 export class MainComponent implements OnDestroy {
   link = signal('/mf2');
-  mf = signal({ elementId: 'mf4', tag: 'mf4-v18' });
+  mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });
 
   private value = signal(0);
   private intervalId = setInterval(() => this.value.update(v => v + 1), 1000);

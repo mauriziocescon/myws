@@ -1,12 +1,4 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  linkedSignal,
-  signal,
-} from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 
 import { MfRouterService } from '@mf/integration/mf-router';
@@ -20,7 +12,7 @@ import { MF_CONFIG } from './mf-config';
   providers: [MfRouterService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="inputs()"/>`,
+    <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="mfInputs()"/>`,
 })
 export class StandaloneEntryComponent {
   private mfConfig = inject(MF_CONFIG);
@@ -29,7 +21,6 @@ export class StandaloneEntryComponent {
   mfInputs = input<Record<string, unknown> | undefined>(undefined);
 
   component = signal(this.mfConfig['component']);
-  inputs = linkedSignal<Record<string, unknown> | undefined>(() => ({ ...this.mfInputs() }));
 
   domAvailable = afterNextRender(() => this.mfRouter.setup());
 }

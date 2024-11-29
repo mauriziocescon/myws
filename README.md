@@ -206,7 +206,6 @@ and
 ```ts
 
 @Component({
-  standalone: true,
   imports: [
     RouterOutlet,
   ],

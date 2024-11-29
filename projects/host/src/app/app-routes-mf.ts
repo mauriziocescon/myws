@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { startsWith } from '@mf/integration/host-router';
-import { MfLoaderComponent } from '@mf/integration/mf-loader';
+import { MfWrapper } from '@mf/integration/mf-loader';
 
 export const routes: Routes = [
   {
@@ -10,9 +10,9 @@ export const routes: Routes = [
 
     // loader of the mf bundle: loads the bundle
     // and appends <mf1-v19></mf1-v19>.
-    component: MfLoaderComponent,
+    component: MfWrapper,
     data: {
-      // mf is used by MfLoaderComponent to load the
+      // mf is used by MfWrapper to load the
       // bundle and create a WC <mf1-v19></mf1-v19>
       mf: { elementId: 'mf1', tag: 'mf1-v19' },
 
@@ -23,7 +23,7 @@ export const routes: Routes = [
   },
   {
     matcher: startsWith('mf2'),
-    component: MfLoaderComponent,
+    component: MfWrapper,
     data: {
       mf: { elementId: 'mf2', tag: 'mf2-v19' },
       inputs: { mf: { elementId: 'mf2', tag: 'mf2-v19' } },
@@ -31,7 +31,7 @@ export const routes: Routes = [
   },
   {
     matcher: startsWith('mf3'),
-    component: MfLoaderComponent,
+    component: MfWrapper,
     data: {
       mf: { elementId: 'mf3', tag: 'mf3-v19' },
       inputs: { mf: { elementId: 'mf3', tag: 'mf3-v19' } },

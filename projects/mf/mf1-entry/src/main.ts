@@ -4,7 +4,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { withComponentInputBinding } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
 
-import { provideSectionMf, SectionEntryComponent } from '@mf/integration/mf-section-entry';
+import { provideSectionMf, SectionEntry } from '@mf/integration/mf-section-entry';
 
 import { mf1Routes } from 'section/mf1';
 
@@ -20,7 +20,7 @@ import { mf1Routes } from 'section/mf1';
       provideSectionMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
     ],
   });
-  const element = createCustomElement(SectionEntryComponent, { injector: app.injector });
+  const element = createCustomElement(SectionEntry, { injector: app.injector });
 
   // definition of mf1-v19
   customElements.define('mf1-v19', element);

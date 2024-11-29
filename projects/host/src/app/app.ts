@@ -35,6 +35,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       padding: 0.3rem;
     }`,
 })
-export class AppComponent {
-  urls = signal<string[]>(['/mf1', '/mf1/tab/tabId', '/mf2', '/mf2/a', '/mf3', '/mf3/a', '/mf3/b']);
+export class App {
+  protected readonly urls = signal(['/mf1', '/mf1/tab/tabId', '/mf2', '/mf2/a', '/mf3', '/mf3/a', '/mf3/b']);
 }

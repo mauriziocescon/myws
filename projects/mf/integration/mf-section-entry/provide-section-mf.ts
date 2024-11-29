@@ -1,6 +1,6 @@
 import { provideRouter, Route, RouterFeatures, withComponentInputBinding } from '@angular/router';
 
-import { PageNotFoundComponent } from './fallback.component';
+import { PageNotFoundComponent } from './fallback';
 
 const defineRoutes = (path: string, children: Route[]) => {
   return [

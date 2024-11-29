@@ -44,9 +44,9 @@ export const routes: Routes = [
 
     // loader of the mf bundle: loads the bundle 
     // and appends <mf1-v19></mf1-v19>. 
-    component: MfLoaderComponent,
+    component: MfWrapper,
     data: {
-      // mf is used by MfLoaderComponent to load the
+      // mf is used by MfWrapper to load the
       // bundle and create a WC <mf1-v1></mf1-v19>
       mf: { elementId: 'mf1', tag: 'mf1-v19' },
 
@@ -57,7 +57,7 @@ export const routes: Routes = [
   },
   {
     matcher: startsWith('mf2'),
-    component: MfLoaderComponent,
+    component: MfWrapper,
     data: {
       mf: { elementId: 'mf2', tag: 'mf2-v19' },
       inputs: { mf: { elementId: 'mf2', tag: 'mf2-v19' } },
@@ -65,7 +65,7 @@ export const routes: Routes = [
   },
   {
     matcher: startsWith('mf3'),
-    component: MfLoaderComponent,
+    component: MfWrapper,
     data: {
       mf: { elementId: 'mf3', tag: 'mf3-v19' },
       inputs: { mf: { elementId: 'mf3', tag: 'mf3-v19' } },
@@ -75,23 +75,23 @@ export const routes: Routes = [
 ];
 ```
 
-Host has a `HostRouterService` managing the url / route events
+Host has a `HostRouter` managing the url / route events
 
 ```ts
 
 @Injectable({
   providedIn: 'root',
 })
-export class HostRouterService {
-  private hostRouter = inject(Router);
-  private hostZone = inject(NgZone);
+export class HostRouter {
+  private readonly hostRouter = inject(Router);
+  private readonly hostZone = inject(NgZone);
 
   /**
    * Url at host level used by mf to sync its router.
    * Note: cannot expose a signal cause cross-app signals don't work.
    */
-  private hostUrlSubject$ = new BehaviorSubject(this.hostRouter.url);
-  hostUrl$ = this.hostUrlSubject$.asObservable();
+  private readonly hostUrlSubject$ = new BehaviorSubject(this.hostRouter.url);
+  private hostUrl$ = this.hostUrlSubject$.asObservable();
 
   /**
    * Anytime the host router has successfully
@@ -101,7 +101,7 @@ export class HostRouterService {
    *
    * Host event: NavigationEnd
    */
-  private hostRouterSubscription = this.hostRouter
+  private readonly hostRouterSubscription = this.hostRouter
     .events
     .pipe(
       takeUntilDestroyed(),
@@ -117,7 +117,7 @@ export class HostRouterService {
    *
    * @param url
    */
-  mfRouterEvent(url: string): void {
+  mfRouterEvent(url: string) {
     if (this.hostRouter.url !== url) {
       // method called by mf: needs zone.run for mf zone based
       // Note: no need of zone.run in case everything is zoneless
@@ -135,14 +135,14 @@ export function provideHostRouter(): EnvironmentProviders {
     {
       provide: APP_INITIALIZER,
       useFactory: () => {
-        const hostRouter = inject(HostRouterService);
+        const hostRouter = inject(HostRouter);
 
         return () => new Promise<void>(resolve => {
-          // attaching HostRouterService to the global scope
+          // attaching HostRouter to the global scope
           // so it can be used by Mf
           const global = (globalThis as any);
           global.__myws__ = {};
-          global.__myws__.HostRouterService = hostRouter;
+          global.__myws__.HostRouter = hostRouter;
           resolve();
         });
       },
@@ -171,7 +171,7 @@ import { mf1Routes } from 'section/mf1';
       provideSectionMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
     ],
   });
-  const element = createCustomElement(SectionEntryComponent, { injector: app.injector });
+  const element = createCustomElement(SectionEntry, { injector: app.injector });
 
   // definition of mf1-v19
   customElements.define('mf1-v19', element);
@@ -210,19 +210,19 @@ and
   imports: [
     RouterOutlet,
   ],
-  providers: [MfRouterService],
+  providers: [MfRouter],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <router-outlet/>`,
 })
-export class SectionEntryComponent {
-  private mfRouter = inject(MfRouterService);
+export class SectionEntry {
+  private readonly mfRouter = inject(MfRouter);
 
-  domAvailable = afterNextRender(() => this.mfRouter.setup());
+  private readonly domAvailable = afterNextRender(() => this.mfRouter.setup());
 }
 ```
 
-Each Mf has a dedicated `MfRouterService` which is communicating with the Host like this:
+Each Mf has a dedicated `MfRouter` which is communicating with the Host like this:
 
 ```ts
 interface IHostRouter {
@@ -232,12 +232,12 @@ interface IHostRouter {
 }
 
 @Injectable()
-export class MfRouterService implements OnDestroy {
-  private mfRouter = inject(Router);
-  private mfZone = inject(NgZone);
+export class MfRouter implements OnDestroy {
+  private readonly mfRouter = inject(Router);
+  private readonly mfZone = inject(NgZone);
 
-  // getting HostRouterService from the global scope
-  private hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
+  // getting HostRouter from the global scope
+  private readonly hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouter;
 
   private hostNavigationStartSubscription: Subscription | undefined = undefined;
   private mfNavigationStartSubscription: Subscription | undefined = undefined;
@@ -245,7 +245,7 @@ export class MfRouterService implements OnDestroy {
   /**
    * Start sync
    */
-  setup(): void {
+  setup() {
     // router init
     this.mfRouter.initialNavigation();
 
@@ -256,12 +256,12 @@ export class MfRouterService implements OnDestroy {
   /**
    * Stop sync
    */
-  cleanup(): void {
+  cleanup() {
     this.hostNavigationStartSubscription?.unsubscribe();
     this.mfNavigationStartSubscription?.unsubscribe();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.cleanup();
   }
 
@@ -271,7 +271,7 @@ export class MfRouterService implements OnDestroy {
    *
    * @private
    */
-  private listenForHostNavigationEvent(): void {
+  private listenForHostNavigationEvent() {
     this.hostNavigationStartSubscription?.unsubscribe();
 
     // changes triggered at host level: since host is zone based, 
@@ -290,7 +290,7 @@ export class MfRouterService implements OnDestroy {
    *
    * @private
    */
-  private listenForMfNavigationEvent(): void {
+  private listenForMfNavigationEvent() {
     this.mfNavigationStartSubscription?.unsubscribe();
 
     this.mfNavigationStartSubscription = this.mfRouter

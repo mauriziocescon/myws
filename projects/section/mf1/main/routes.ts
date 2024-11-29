@@ -1,16 +1,16 @@
 import { Route } from '@angular/router';
 
-import { MainComponent } from './main.component';
+import { Page } from './page';
 
 export const mf1Routes = [
   {
     path: '',
-    component: MainComponent,
+    component: Page,
     title: 'Mf1',
   },
   {
     path: 'tab/:id',
-    component: MainComponent,
+    component: Page,
     title: 'Mf3 tab',
   },
 ] as Route[];

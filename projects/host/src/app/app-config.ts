@@ -5,7 +5,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { provideHostRouter } from '@mf/integration/host-router';
 
-import { routes } from './app.routes';
+import { routes } from './app-routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [

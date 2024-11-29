@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class MfLoaderService {
+export class MfBundleLoader {
 
-  loadElement(metadata: { elementId: string, tag: string }): Promise<void> {
+  loadElement(metadata: { elementId: string, tag: string }) {
     if (!customElements.get(metadata.tag)) {
       const url = `elements/${metadata.elementId}/index.js`;
 
@@ -35,7 +35,7 @@ export class MfLoaderService {
     return Promise.resolve();
   }
 
-  loadElements(metadata: { elementId: string, tag: string }[]): Promise<void> {
+  loadElements(metadata: { elementId: string, tag: string }[]) {
     return Promise.all(metadata.map(m => this.loadElement(m)))
       .then(() => Promise.resolve())
       .catch(error => Promise.reject(error.message || error));

@@ -8,16 +8,16 @@ import { filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class HostRouterService {
-  private hostRouter = inject(Router);
-  private hostZone = inject(NgZone);
+export class HostRouter {
+  private readonly hostRouter = inject(Router);
+  private readonly hostZone = inject(NgZone);
 
   /**
    * Url at host level used by mf to sync its router.
    * Note: cannot expose a signal cause cross-app signals don't work.
    */
-  private hostUrlSubject$ = new BehaviorSubject(this.hostRouter.url);
-  hostUrl$ = this.hostUrlSubject$.asObservable();
+  private readonly hostUrlSubject$ = new BehaviorSubject(this.hostRouter.url);
+  readonly hostUrl$ = this.hostUrlSubject$.asObservable();
 
   /**
    * Anytime the host router has successfully
@@ -43,7 +43,7 @@ export class HostRouterService {
    *
    * @param url
    */
-  mfRouterEvent(url: string): void {
+  mfRouterEvent(url: string) {
     if (this.hostRouter.url !== url) {
       // method called by mf: needs zone.run for mf zone based
       // Note: no need of zone.run in case everything is zoneless

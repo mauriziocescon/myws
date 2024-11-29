@@ -1,19 +1,19 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { MfRouterService } from '@mf/integration/mf-router';
+import { MfRouter } from '@mf/integration/mf-router';
 
 @Component({
   imports: [
     RouterOutlet,
   ],
-  providers: [MfRouterService],
+  providers: [MfRouter],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <router-outlet/>`,
 })
-export class SectionEntryComponent {
-  private mfRouter = inject(MfRouterService);
+export class SectionEntry {
+  private readonly mfRouter = inject(MfRouter);
 
-  domAvailable = afterNextRender(() => this.mfRouter.setup());
+  private readonly domAvailable = afterNextRender(() => this.mfRouter.setup());
 }

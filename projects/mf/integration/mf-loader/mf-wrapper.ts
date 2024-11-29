@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
 
-import { MfLoaderDirective } from './mf-loader.directive';
+import { MfLoader } from './mf-loader';
 
 @Component({
   selector: 'mc-mf-loader',
   imports: [
-    MfLoaderDirective,
+    MfLoader,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -20,17 +20,17 @@ import { MfLoaderDirective } from './mf-loader.directive';
       <button (click)="reload()">Reload</button>
     }`,
 })
-export class MfLoaderComponent {
-  mf = input.required<{ elementId: string, tag: string }>();
-  inputs = input<Record<string, unknown>>();
+export class MfWrapper {
+  readonly mf = input.required<{ elementId: string, tag: string }>();
+  readonly inputs = input<Record<string, unknown>>();
 
-  private mfLoader = viewChild.required<MfLoaderDirective>('mfLoader');
-  private status = computed(() => this.mfLoader()?.status());
+  private readonly mfLoader = viewChild.required<MfLoader>('mfLoader');
+  private readonly status = computed(() => this.mfLoader()?.status());
 
-  isLoading = computed(() => this.status() === 'Loading');
-  failed = computed(() => this.status() === 'Failed');
+  protected readonly isLoading = computed(() => this.status() === 'Loading');
+  protected readonly failed = computed(() => this.status() === 'Failed');
 
-  reload(): void {
+  reload() {
     this.mfLoader().load();
   }
 }

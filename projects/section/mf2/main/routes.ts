@@ -1,22 +1,22 @@
 import { Route } from '@angular/router';
 
-import { MainComponent } from './main.component';
-import { AComponent } from './a/a.component';
-import { BComponent } from './b/b.component';
+import { Page } from './page';
+import { First } from 'section/mf2/main/other/first';
+import { Second } from 'section/mf2/main/other/second';
 
 export const mf2Routes = [{
   path: '',
-  component: MainComponent,
+  component: Page,
   title: 'Mf2',
   children: [
     {
       path: 'a',
-      component: AComponent,
+      component: First,
       title: 'Mf2/a',
     },
     {
       path: 'b',
-      component: BComponent,
+      component: Second,
       title: 'Mf2/b',
     },
   ],

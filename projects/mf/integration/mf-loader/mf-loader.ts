@@ -15,7 +15,7 @@ import { NgElement, WithProperties } from '@angular/elements';
 import { firstValueFrom, from } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 
-import { MfLoaderService } from './mf-loader.service';
+import { MfBundleLoader } from './mf-bundle-loader';
 
 type StatusType = 'Loading' | 'Loaded' | 'Failed';
 
@@ -23,33 +23,33 @@ type StatusType = 'Loading' | 'Loaded' | 'Failed';
   selector: '[mfLoader]',
   exportAs: 'mfLoader',
   providers: [
-    MfLoaderService,
+    MfBundleLoader,
   ],
 })
-export class MfLoaderDirective implements OnDestroy {
-  private vcr = inject(ViewContainerRef);
-  private renderer = inject(Renderer2);
-  private mfLoader = inject(MfLoaderService);
+export class MfLoader implements OnDestroy {
+  private readonly vcr = inject(ViewContainerRef);
+  private readonly renderer = inject(Renderer2);
+  private readonly mfLoader = inject(MfBundleLoader);
 
-  mf = input.required<{ elementId: string, tag: string }>({ alias: 'mfLoader' });
-  inputs = input<Record<string, unknown> | undefined>(undefined, { alias: 'mfInputs' });
+  readonly mf = input.required<{ elementId: string, tag: string }>({ alias: 'mfLoader' });
+  readonly inputs = input<Record<string, unknown> | undefined>(undefined, { alias: 'mfInputs' });
 
-  status = signal<StatusType | undefined>(undefined);
+  readonly status = signal<StatusType | undefined>(undefined);
 
   private ngElement: NgElement & WithProperties<Record<string, any>> | undefined = undefined;
 
-  private inputsWatcher = effect(() => {
+  private readonly inputsWatcher = effect(() => {
     this.inputs();
     untracked(() => this.updateInputs());
   });
 
-  private domAvailable = afterNextRender(() => this.load());
+  private readonly domAvailable = afterNextRender(() => this.load());
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.vcr.clear();
   }
 
-  load(): void {
+  load() {
     this.status.set('Loading');
     this.vcr.clear();
 
@@ -73,7 +73,7 @@ export class MfLoaderDirective implements OnDestroy {
       });
   }
 
-  private updateInputs(): void {
+  private updateInputs() {
     if (this.ngElement && this.inputs()) {
       const ngElement = this.ngElement as NgElement & WithProperties<Record<string, any>>;
       ngElement['mfInputs'] = { ...this.inputs() };
@@ -81,7 +81,7 @@ export class MfLoaderDirective implements OnDestroy {
   }
 
   // todo: check outputs availability
-  // private updateOutputs(): void {
+  // private updateOutputs() {
   //   if (this.ngElement && this.outputs()) {
   //     this.controller.abort();
   //     const ngElement = this.ngElement as NgElement & WithProperties<Record<string, any>>;

@@ -11,12 +11,12 @@ interface IHostRouter {
 }
 
 @Injectable()
-export class MfRouterService implements OnDestroy {
-  private mfRouter = inject(Router);
-  private mfZone = inject(NgZone);
+export class MfRouter implements OnDestroy {
+  private readonly mfRouter = inject(Router);
+  private readonly mfZone = inject(NgZone);
 
-  // getting HostRouterService from the global scope
-  private hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
+  // getting HostRouter from the global scope
+  private readonly hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
 
   private hostNavigationStartSubscription: Subscription | undefined = undefined;
   private mfNavigationStartSubscription: Subscription | undefined = undefined;
@@ -24,7 +24,7 @@ export class MfRouterService implements OnDestroy {
   /**
    * Start sync
    */
-  setup(): void {
+  setup() {
     // router init
     this.mfRouter.initialNavigation();
 
@@ -35,12 +35,12 @@ export class MfRouterService implements OnDestroy {
   /**
    * Stop sync
    */
-  cleanup(): void {
+  cleanup() {
     this.hostNavigationStartSubscription?.unsubscribe();
     this.mfNavigationStartSubscription?.unsubscribe();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.cleanup();
   }
 
@@ -50,7 +50,7 @@ export class MfRouterService implements OnDestroy {
    *
    * @private
    */
-  private listenForHostNavigationEvent(): void {
+  private listenForHostNavigationEvent() {
     this.hostNavigationStartSubscription?.unsubscribe();
 
     // changes triggered at host level: since host is zone based,
@@ -69,7 +69,7 @@ export class MfRouterService implements OnDestroy {
    *
    * @private
    */
-  private listenForMfNavigationEvent(): void {
+  private listenForMfNavigationEvent() {
     this.mfNavigationStartSubscription?.unsubscribe();
 
     this.mfNavigationStartSubscription = this.mfRouter

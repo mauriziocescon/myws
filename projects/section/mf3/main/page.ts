@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, OnDestroy, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
-import { MfLoaderDirective } from '@mf/integration/mf-loader';
+import { MfLoader } from '@mf/integration/mf-loader';
 
 @Component({
   selector: 'app-main',
   imports: [
     RouterLink,
     RouterOutlet,
-    MfLoaderDirective,
+    MfLoader,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -23,16 +23,16 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
       padding: 0.3rem;
     }`,
 })
-export class MainComponent implements OnDestroy {
-  link = signal('/mf2');
-  mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });
+export class Page implements OnDestroy {
+  protected readonly link = signal('/mf2');
+  protected readonly mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });
 
-  private value = signal(0);
-  private intervalId = setInterval(() => this.value.update(v => v + 1), 1000);
+  private readonly value = signal(0);
+  private readonly intervalId = setInterval(() => this.value.update(v => v + 1), 1000);
 
-  inputs = computed(() => ({ value: this.value() }));
+  protected readonly inputs = computed(() => ({ value: this.value() }));
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     clearInterval(this.intervalId);
   }
 }

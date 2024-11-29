@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-main',
   imports: [
     RouterLink,
   ],
@@ -24,9 +23,9 @@ import { RouterLink } from '@angular/router';
       padding: 0.3rem;
     }`,
 })
-export class MainComponent {
-  id = input();
-  link = signal('/mf2');
-  link2 = signal('/mf2/b');
-  link3 = signal('/mf1/tab/tabId');
+export class Page {
+  readonly id = input();
+  protected readonly link = signal('/mf2');
+  protected readonly link2 = signal('/mf2/b');
+  protected readonly link3 = signal('/mf1/tab/tabId');
 }

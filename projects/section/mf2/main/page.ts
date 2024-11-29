@@ -2,11 +2,9 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-main',
   imports: [
     RouterLink,
     RouterOutlet,
-
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -20,7 +18,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       padding: 0.3rem;
     }`,
 })
-export class MainComponent {
-  link = signal('/mf1');
-  link2 = signal('/mf2/a');
+export class Page {
+  protected readonly link = signal('/mf1');
+  protected readonly link2 = signal('/mf2/a');
 }

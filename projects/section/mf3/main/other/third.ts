@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
-import { MfLoaderDirective } from '@mf/integration/mf-loader';
+import { MfLoader } from '@mf/integration/mf-loader';
 
 @Component({
-  selector: 'app-a',
   imports: [
-    MfLoaderDirective,
+    MfLoader,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -23,6 +22,6 @@ import { MfLoaderDirective } from '@mf/integration/mf-loader';
       margin-right: 10%;
     }`,
 })
-export class AComponent {
-  mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });
+export class Third {
+  protected readonly mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });
 }

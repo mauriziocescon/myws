@@ -34,7 +34,7 @@
                 "input": "projects/host/public"
               }
             ],
-            "server": "projects/host/src/main.server.ts",
+            "server": "projects/host/src/main-server.ts",
             "prerender": true,
             "ssr": {
               "entry": "projects/host/server.ts"

@@ -1,6 +1,6 @@
 import { provideRouter, Route, RouterFeatures, withComponentInputBinding } from '@angular/router';
 
-import { PageNotFoundComponent } from './fallback';
+import { PageNotFound } from './fallback';
 
 const defineRoutes = (path: string, children: Route[]) => {
   return [
@@ -13,7 +13,7 @@ const defineRoutes = (path: string, children: Route[]) => {
     },
 
     // wildcard to avoid exceptions while routing from /mf1 to /mf_x
-    { path: '**', component: PageNotFoundComponent },
+    { path: '**', component: PageNotFound },
   ] as Route[];
 };
 

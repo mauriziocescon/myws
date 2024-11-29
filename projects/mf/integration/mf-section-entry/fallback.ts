@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <div>Path not matching any predefined route</div>`,
 })
-export class PageNotFoundComponent {
+export class PageNotFound {
 }

@@ -5,14 +5,14 @@ import { createCustomElement } from '@angular/elements';
 
 import { provideStandaloneMf, StandaloneEntry } from '@mf/integration/mf-standalone-entry';
 
-import { MainComponent } from 'standalone/mf4';
+import { Main } from 'standalone/mf4';
 
 (async () => {
   const app = await createApplication({
     providers: [
       provideZonelessChangeDetection(),
       provideHttpClient(withFetch()),
-      provideStandaloneMf({ component: MainComponent }),
+      provideStandaloneMf({ component: Main }),
     ],
   });
   const element = createCustomElement(StandaloneEntry, { injector: app.injector });

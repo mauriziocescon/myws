@@ -20,7 +20,7 @@ import { RouterLink } from '@angular/router';
       padding: 0.3rem;
     }`,
 })
-export class MainComponent {
+export class Main {
   readonly value = input<number>();
   protected readonly showValue = computed(() => this.value() != undefined);
 

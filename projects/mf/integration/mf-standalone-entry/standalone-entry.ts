@@ -18,7 +18,7 @@ export class StandaloneEntry {
   private readonly mfConfig = inject(MF_CONFIG);
   private readonly mfRouter = inject(MfRouter);
 
-  readonly mfInputs = input<Record<string, unknown> | undefined>(undefined);
+  readonly mfInputs = input<Record<string, unknown>>({});
 
   readonly component = signal(this.mfConfig['component']);
 

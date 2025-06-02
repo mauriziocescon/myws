@@ -21,8 +21,8 @@ import { RouterLink } from '@angular/router';
     }`,
 })
 export class MainComponent {
-  value = input<number>();
-  showValue = computed(() => this.value() != undefined);
+  readonly value = input<number>();
+  protected readonly showValue = computed(() => this.value() != undefined);
 
-  link = signal('/mf1');
+  protected readonly link = signal('/mf1');
 }

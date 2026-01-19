@@ -3,20 +3,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "preserve",
     "paths": {
       "section": [
         "./projects/section"
@@ -36,13 +22,74 @@
       "@mf/integration/*": [
         "./projects/mf/integration/*"
       ]
-    }
+    },
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "strictStandalone": true
-  }
+    "strictTemplates": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/host/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/host/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/section/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/section/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/standalone/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/standalone/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mf/integration/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/mf/integration/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mf/mf1-entry/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mf/mf1-entry/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mf/mf2-entry/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mf/mf2-entry/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mf/mf3-entry/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mf/mf3-entry/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mf/mf4-entry/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mf/mf4-entry/tsconfig.spec.json"
+    }
+  ]
 }

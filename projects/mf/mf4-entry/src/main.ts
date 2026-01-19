@@ -1,5 +1,5 @@
 import { createApplication } from '@angular/platform-browser';
-import { provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import { provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
@@ -11,7 +11,6 @@ import { Main } from 'standalone/mf4';
   const app = await createApplication({
     providers: [
       provideBrowserGlobalErrorListeners(),
-      provideZonelessChangeDetection(),
       provideHttpClient(withFetch()),
       provideStandaloneMf({ component: Main }),
     ],

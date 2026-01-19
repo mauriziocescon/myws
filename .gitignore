@@ -2,7 +2,6 @@
 
 # Compiled output
 /dist
-/projects/host/public/elements
 /tmp
 /out-tsc
 /bazel-out
@@ -27,6 +26,7 @@ yarn-error.log
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/mcp.json
 .history/*
 
 # Miscellaneous
@@ -37,6 +37,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+__screenshots__/
 
 # System files
 .DS_Store

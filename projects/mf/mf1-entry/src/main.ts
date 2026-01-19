@@ -1,5 +1,5 @@
 import { createApplication } from '@angular/platform-browser';
-import { provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { withComponentInputBinding } from '@angular/router';
 import { createCustomElement } from '@angular/elements';
@@ -12,7 +12,6 @@ import { mf1Routes } from 'section/mf1';
   const app = await createApplication({
     providers: [
       provideBrowserGlobalErrorListeners(),
-      provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
       provideHttpClient(withFetch()),
 
       // this is simply calling provideRouter behind the scene

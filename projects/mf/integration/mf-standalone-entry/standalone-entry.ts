@@ -12,7 +12,8 @@ import { MF_CONFIG } from './mf-config';
   providers: [MfRouter],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="mfInputs()"/>`,
+    <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="mfInputs()" />
+  `,
 })
 export class StandaloneEntry {
   private readonly mfConfig = inject(MF_CONFIG);

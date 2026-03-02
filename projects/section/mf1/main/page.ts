@@ -13,7 +13,8 @@ import { RouterLink } from '@angular/router';
     <a class="link" [routerLink]="link3()">Go to /mf1/tab/tabId</a>
     @if (id()) {
       <div class="params">TabId: {{ id() }}</div>
-    }`,
+    }
+  `,
   styles: `
     .params {
       padding: 0.3rem;
@@ -21,7 +22,8 @@ import { RouterLink } from '@angular/router';
 
     .link {
       padding: 0.3rem;
-    }`,
+    }
+  `,
 })
 export class Page {
   readonly id = input();

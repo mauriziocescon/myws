@@ -18,7 +18,8 @@ import { MfLoader } from './mf-loader';
     @if (failed()) {
       <div>Failed to load!</div>
       <button (click)="reload()">Reload</button>
-    }`,
+    }
+  `,
 })
 export class MfWrapper {
   readonly mf = input.required<{ elementId: string, tag: string }>();

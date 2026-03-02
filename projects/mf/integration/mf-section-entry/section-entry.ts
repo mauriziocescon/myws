@@ -10,7 +10,8 @@ import { MfRouter } from '@mf/integration/mf-router';
   providers: [MfRouter],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <router-outlet/>`,
+    <router-outlet />
+  `,
 })
 export class SectionEntry {
   private readonly mfRouter = inject(MfRouter);

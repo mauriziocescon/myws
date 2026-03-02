@@ -17,11 +17,13 @@ import { MfLoader } from '@mf/integration/mf-loader';
     <hr>
     <div [mfLoader]="mf()" [mfInputs]="inputs()"></div>
     <hr>
-    <router-outlet/>`,
+    <router-outlet />
+  `,
   styles: `
     .link {
       padding: 0.3rem;
-    }`,
+    }
+  `,
 })
 export class Page implements OnDestroy {
   protected readonly link = signal('/mf2');

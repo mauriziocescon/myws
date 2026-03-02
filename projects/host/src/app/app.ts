@@ -16,7 +16,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       }
     </ul>
     <hr>
-    <router-outlet/>`,
+    <router-outlet />
+  `,
   styles: `
     ul {
       list-style-type: none;
@@ -33,7 +34,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
     .link {
       padding: 0.3rem;
-    }`,
+    }
+  `,
 })
 export class App {
   protected readonly urls = signal(['/mf1', '/mf1/tab/tabId', '/mf2', '/mf2/a', '/mf3', '/mf3/a', '/mf3/b']);

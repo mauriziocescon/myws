@@ -11,7 +11,8 @@ import { MfLoader } from '@mf/integration/mf-loader';
     <div class="container">
       <div class="block" [mfLoader]="mf()"></div>
       <div class="block" [mfLoader]="mf()"></div>
-    </div>`,
+    </div>
+  `,
   styles: `
     .container {
       display: flex;
@@ -20,7 +21,8 @@ import { MfLoader } from '@mf/integration/mf-loader';
     .block {
       width: 50%;
       margin-right: 10%;
-    }`,
+    }
+  `,
 })
 export class Third {
   protected readonly mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });

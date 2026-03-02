@@ -12,11 +12,13 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     <a class="link" [routerLink]="link()">Go to mf1</a>
     <a class="link" [routerLink]="link2()">Go to mf2/a</a>
     <hr>
-    <router-outlet/>`,
+    <router-outlet />
+  `,
   styles: `
     .link {
       padding: 0.3rem;
-    }`,
+    }
+  `,
 })
 export class Page {
   protected readonly link = signal('/mf1');

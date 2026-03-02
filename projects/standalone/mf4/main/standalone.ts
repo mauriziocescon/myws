@@ -14,11 +14,13 @@ import { RouterLink } from '@angular/router';
       <div class="link">Input: {{ value() }}</div>
     } @else {
       <div class="link">No inputs!</div>
-    }`,
+    }
+  `,
   styles: `
     .link {
       padding: 0.3rem;
-    }`,
+    }
+  `,
 })
 export class Main {
   readonly value = input<number>();

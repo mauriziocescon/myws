@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,7 +6,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     RouterLink,
     RouterOutlet,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h4>Mf2 section</h4>
     <a class="link" [routerLink]="link()">Go to mf1</a>

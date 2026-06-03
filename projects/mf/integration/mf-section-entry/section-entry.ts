@@ -8,7 +8,6 @@ import { MfRouter } from '@mf/integration/mf-router';
     RouterOutlet,
   ],
   providers: [MfRouter],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <router-outlet />
   `,

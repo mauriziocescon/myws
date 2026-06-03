@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, OnDestroy, signal } from '@angular/core';
+import { Component, computed, OnDestroy, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 import { MfLoader } from '@mf/integration/mf-loader';
@@ -10,7 +10,6 @@ import { MfLoader } from '@mf/integration/mf-loader';
     RouterOutlet,
     MfLoader,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h4>Mf3 section</h4>
     <a class="link" [routerLink]="link()">Go to mf2</a>

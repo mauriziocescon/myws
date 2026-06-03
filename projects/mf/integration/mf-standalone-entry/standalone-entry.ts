@@ -10,7 +10,6 @@ import { MF_CONFIG } from './mf-config';
     NgComponentOutlet,
   ],
   providers: [MfRouter],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container [ngComponentOutlet]="component()" [ngComponentOutletInputs]="mfInputs()" />
   `,

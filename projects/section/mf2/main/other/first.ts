@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
   imports: [
     RouterLink,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h5>First</h5>
     <a class="link" [routerLink]="link()">Go to mf1</a>

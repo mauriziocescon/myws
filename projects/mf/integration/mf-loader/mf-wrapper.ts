@@ -7,7 +7,6 @@ import { MfLoader } from './mf-loader';
   imports: [
     MfLoader,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (mf()) {
       <div #mfLoader="mfLoader" [mfLoader]="mf()" [mfInputs]="inputs()"></div>

@@ -7,7 +7,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     RouterLink,
     RouterOutlet,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ul>
       <li><strong>Host</strong></li>

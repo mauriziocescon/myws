@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   imports: [
     RouterLink,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h5>Second</h5>
     <a class="link" [routerLink]="link()">Go to mf1</a>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 import { MfLoader } from '@mf/integration/mf-loader';
 
@@ -6,7 +6,6 @@ import { MfLoader } from '@mf/integration/mf-loader';
   imports: [
     MfLoader,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
       <div class="block" [mfLoader]="mf()"></div>

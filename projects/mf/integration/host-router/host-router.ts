@@ -1,13 +1,11 @@
-import { inject, Injectable, NgZone } from '@angular/core';
+import { inject, NgZone, Service } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class HostRouter {
   private readonly hostRouter = inject(Router);
   private readonly hostZone = inject(NgZone);

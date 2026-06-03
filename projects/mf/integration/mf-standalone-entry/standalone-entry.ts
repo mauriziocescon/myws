@@ -1,4 +1,4 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
+import { afterNextRender, Component, inject, input, signal } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 
 import { MfRouter } from '@mf/integration/mf-router';

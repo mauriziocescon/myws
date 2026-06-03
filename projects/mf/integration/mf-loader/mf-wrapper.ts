@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
+import { Component, computed, input, viewChild } from '@angular/core';
 
 import { MfLoader } from './mf-loader';
 

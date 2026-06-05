@@ -1,7 +1,6 @@
 import { createApplication } from '@angular/platform-browser';
 import { provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { withComponentInputBinding } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
 import { provideSectionMf, SectionEntry } from '@mf/integration/mf-section-entry';
@@ -12,12 +11,12 @@ import { mf1Routes } from 'section/mf1';
   const app = await createApplication({
     providers: [
       provideBrowserGlobalErrorListeners(),
-      provideHttpClient(withFetch()),
+      provideHttpClient(),
 
       // this is simply calling provideRouter behind the scene
       // and set the mf "base path" to mf1: mf1 must match
       // what has been defined at host level!
-      provideSectionMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
+      provideSectionMf({ path: 'mf1', children: mf1Routes }),
     ],
   });
   const element = createCustomElement(SectionEntry, { injector: app.injector });

@@ -1,7 +1,6 @@
 import { createApplication } from '@angular/platform-browser';
 import { provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { withComponentInputBinding } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
 import { provideSectionMf, SectionEntry } from '@mf/integration/mf-section-entry';
@@ -12,8 +11,8 @@ import { mf3Routes } from 'section/mf3';
   const app = await createApplication({
     providers: [
       provideBrowserGlobalErrorListeners(),
-      provideHttpClient(withFetch()),
-      provideSectionMf({ path: 'mf3', children: mf3Routes }, withComponentInputBinding()),
+      provideHttpClient(),
+      provideSectionMf({ path: 'mf3', children: mf3Routes }),
     ],
   });
   const element = createCustomElement(SectionEntry, { injector: app.injector });

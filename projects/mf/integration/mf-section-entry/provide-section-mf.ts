@@ -1,4 +1,11 @@
-import { provideRouter, Route, RouterFeatures, withComponentInputBinding } from '@angular/router';
+import {
+  provideRouter,
+  Route,
+  RouterFeatures,
+  withComponentInputBinding,
+  withExperimentalAutoCleanupInjectors,
+  withExperimentalPlatformNavigation,
+} from '@angular/router';
 
 import { PageNotFound } from './fallback';
 
@@ -18,5 +25,11 @@ const defineRoutes = (path: string, children: Route[]) => {
 };
 
 export const provideSectionMf = (config: { path: string, children: Route[] }, ...features: RouterFeatures[]) => {
-  return provideRouter(defineRoutes(config.path, config.children), withComponentInputBinding(), ...features);
+  return provideRouter(
+    defineRoutes(config.path, config.children),
+    withComponentInputBinding(),
+    withExperimentalPlatformNavigation(),
+    withExperimentalAutoCleanupInjectors(),
+    ...features,
+  );
 };

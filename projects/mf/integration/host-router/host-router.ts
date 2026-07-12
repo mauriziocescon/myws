@@ -1,6 +1,6 @@
 import { inject, Service } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, PRIMARY_OUTLET, Router, UrlSegmentGroup } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -41,8 +41,29 @@ export class HostRouter {
    * @param url
    */
   mfRouterEvent(url: string) {
-    if (this.hostRouter.url !== url) {
+    if (this.hostRouter.url !== this.stripOutlets(this.hostRouter, url)) {
       this.hostRouter.navigateByUrl(url);
     }
+  }
+
+  /**
+   * Strips all named outlet segments from a URL, preserving only the primary route.
+   * Used in opsys-map to extract the base navigation path, ignoring any
+   * auxiliary outlet navigations (e.g. side panels, dialogs).
+   */
+  private stripOutlets(router: Router, url: string): string {
+    const removeOutlets = (group: UrlSegmentGroup) => {
+      for (const key of Object.keys(group.children)) {
+        if (key !== PRIMARY_OUTLET) {
+          delete group.children[key];
+        } else {
+          removeOutlets(group.children[key]);
+        }
+      }
+    };
+
+    const tree = router.parseUrl(url);
+    removeOutlets(tree.root);
+    return router.serializeUrl(tree);
   }
 }

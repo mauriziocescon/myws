@@ -1,4 +1,4 @@
-import { inject, Injectable, NgZone, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
@@ -13,7 +13,6 @@ interface IHostRouter {
 @Injectable()
 export class MfRouter implements OnDestroy {
   private readonly mfRouter = inject(Router);
-  private readonly mfZone = inject(NgZone);
 
   // getting HostRouter from the global scope
   private readonly hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
@@ -53,13 +52,10 @@ export class MfRouter implements OnDestroy {
   private listenForHostNavigationEvent() {
     this.hostNavigationStartSubscription?.unsubscribe();
 
-    // changes triggered at host level: since host is zone based,
-    // we need zone.run
-    // Note: no need of zone.run in case everything is zoneless
     this.hostNavigationStartSubscription = this.hostRouter
       .hostUrl$
       .pipe(filter(url => this.mfRouter.url !== url))
-      .subscribe(url => this.mfZone.run(() => this.mfRouter.navigateByUrl(url)));
+      .subscribe(url => this.mfRouter.navigateByUrl(url));
   }
 
   /**

@@ -5,6 +5,8 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+  high_level_summary: true
+  auto_title_placeholder: "@coderabbitai"
 
 chat:
   auto_reply: true
@@ -12,10 +14,3 @@ chat:
 knowledge_base:
   learnings:
     scope: auto
-
-change_summary:
-  auto_title:
-    enabled: true
-  auto_description:
-    enabled: true
-    description_header: "## Summary"

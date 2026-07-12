@@ -6,7 +6,7 @@ reviews:
     enabled: true
     drafts: false
   high_level_summary: true
-  auto_title_placeholder: "@coderabbitai"
+  auto_title_placeholder: "@ai"
 
 chat:
   auto_reply: true

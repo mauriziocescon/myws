@@ -1,11 +1,5 @@
 import { makeEnvironmentProviders } from '@angular/core';
-import {
-  provideRouter,
-  Route,
-  withComponentInputBinding,
-  withExperimentalAutoCleanupInjectors,
-  withExperimentalPlatformNavigation,
-} from '@angular/router';
+import { provideRouter, Route, withComponentInputBinding, withExperimentalAutoCleanupInjectors } from '@angular/router';
 
 import { MF_CONFIG } from './mf-config';
 
@@ -22,7 +16,7 @@ export const provideStandaloneMf = (config: { component: any }) => [
   provideRouter(
     defineRoutes(config.component),
     withComponentInputBinding(),
-    withExperimentalPlatformNavigation(),
+    // withExperimentalPlatformNavigation(),
     withExperimentalAutoCleanupInjectors(),
   ),
   makeEnvironmentProviders([

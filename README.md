@@ -23,8 +23,10 @@ notifications and performs `navigateByUrl`. Once such operation ends, it notifie
 every `mf` on screen about the url change and each `mf` triggers
 an "internal" `navigateByUrl` with the new host url.
 
-Each `mf_x` bundles the necessary v19 angular code. Considering each `mf_x` in the end
+Each `mf_x` bundles the necessary v22 angular code. Considering each `mf_x` in the end
 is a WC, they could potentially be built with different ng versions.
+
+The entire setup is **zoneless** — there is no `NgZone` or `zone.js` involved.
 
 **PS**: there might be some ng-routing features not covered!
 
@@ -39,15 +41,15 @@ Routes at host level are defined like this:
 ```ts
 export const routes: Routes = [
   {
-    // matching any url starting with mf1/... 
+    // matching any url starting with mf1/...
     matcher: startsWith('mf1'),
 
-    // loader of the mf bundle: loads the bundle 
-    // and appends <mf1-v19></mf1-v19>. 
+    // loader of the mf bundle: loads the bundle
+    // and appends <mf1-v19></mf1-v19>.
     component: MfWrapper,
     data: {
       // mf is used by MfWrapper to load the
-      // bundle and create a WC <mf1-v1></mf1-v19>
+      // bundle and create a WC <mf1-v19></mf1-v19>
       mf: { elementId: 'mf1', tag: 'mf1-v19' },
 
       // inputs is an object of `ng-inputs` passed to
@@ -78,20 +80,16 @@ export const routes: Routes = [
 Host has a `HostRouter` managing the url / route events
 
 ```ts
-
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class HostRouter {
   private readonly hostRouter = inject(Router);
-  private readonly hostZone = inject(NgZone);
 
   /**
    * Url at host level used by mf to sync its router.
    * Note: cannot expose a signal cause cross-app signals don't work.
    */
   private readonly hostUrlSubject$ = new BehaviorSubject(this.hostRouter.url);
-  private hostUrl$ = this.hostUrlSubject$.asObservable();
+  readonly hostUrl$ = this.hostUrlSubject$.asObservable();
 
   /**
    * Anytime the host router has successfully
@@ -101,7 +99,7 @@ export class HostRouter {
    *
    * Host event: NavigationEnd
    */
-  private readonly hostRouterSubscription = this.hostRouter
+  private hostRouterSubscription = this.hostRouter
     .events
     .pipe(
       takeUntilDestroyed(),
@@ -118,11 +116,28 @@ export class HostRouter {
    * @param url
    */
   mfRouterEvent(url: string) {
-    if (this.hostRouter.url !== url) {
-      // method called by mf: needs zone.run for mf zone based
-      // Note: no need of zone.run in case everything is zoneless
-      this.hostZone.run(() => this.hostRouter.navigateByUrl(url));
+    if (this.hostRouter.url !== this.stripOutlets(this.hostRouter, url)) {
+      this.hostRouter.navigateByUrl(url);
     }
+  }
+
+  /**
+   * Strips all named outlet segments from a URL, preserving only the primary route.
+   */
+  private stripOutlets(router: Router, url: string): string {
+    const removeOutlets = (group: UrlSegmentGroup) => {
+      for (const key of Object.keys(group.children)) {
+        if (key !== PRIMARY_OUTLET) {
+          delete group.children[key];
+        } else {
+          removeOutlets(group.children[key]);
+        }
+      }
+    };
+
+    const tree = router.parseUrl(url);
+    removeOutlets(tree.root);
+    return router.serializeUrl(tree);
   }
 }
 ```
@@ -158,13 +173,13 @@ import { mf1Routes } from 'section/mf1';
 (async () => {
   const app = await createApplication({
     providers: [
-      provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
-      provideHttpClient(withFetch()),
+      provideBrowserGlobalErrorListeners(),
+      provideHttpClient(),
 
       // this is simply calling provideRouter behind the scene
       // and set the mf "base path" to mf1: mf1 must match
       // what has been defined at host level!
-      provideSectionMf({ path: 'mf1', children: mf1Routes }, withComponentInputBinding()),
+      provideSectionMf({ path: 'mf1', children: mf1Routes }),
     ],
   });
   const element = createCustomElement(SectionEntry, { injector: app.injector });
@@ -193,22 +208,26 @@ const defineRoutes = (path: string, children: Route[]) => {
 };
 
 export const provideSectionMf = (config: { path: string, children: Route[] }, ...features: RouterFeatures[]) => {
-  return provideRouter(defineRoutes(config.path, config.children), withComponentInputBinding(), ...features);
+  return provideRouter(
+    defineRoutes(config.path, config.children),
+    withComponentInputBinding(),
+    withExperimentalAutoCleanupInjectors(),
+    ...features,
+  );
 };
 ```
 
 and
 
 ```ts
-
 @Component({
   imports: [
     RouterOutlet,
   ],
   providers: [MfRouter],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <router-outlet/>`,
+    <router-outlet />
+  `,
 })
 export class SectionEntry {
   private readonly mfRouter = inject(MfRouter);
@@ -229,10 +248,9 @@ interface IHostRouter {
 @Injectable()
 export class MfRouter implements OnDestroy {
   private readonly mfRouter = inject(Router);
-  private readonly mfZone = inject(NgZone);
 
   // getting HostRouter from the global scope
-  private readonly hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouter;
+  private readonly hostRouter: IHostRouter = (globalThis as any).__myws__.HostRouterService;
 
   private hostNavigationStartSubscription: Subscription | undefined = undefined;
   private mfNavigationStartSubscription: Subscription | undefined = undefined;
@@ -269,13 +287,10 @@ export class MfRouter implements OnDestroy {
   private listenForHostNavigationEvent() {
     this.hostNavigationStartSubscription?.unsubscribe();
 
-    // changes triggered at host level: since host is zone based, 
-    // we need zone.run
-    // Note: no need of zone.run in case everything is zoneless
     this.hostNavigationStartSubscription = this.hostRouter
       .hostUrl$
       .pipe(filter(url => this.mfRouter.url !== url))
-      .subscribe(url => this.mfZone.run(() => this.mfRouter.navigateByUrl(url)));
+      .subscribe(url => this.mfRouter.navigateByUrl(url));
   }
 
   /**

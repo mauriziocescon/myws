@@ -99,7 +99,7 @@
     "section": {
       "projectType": "library",
       "root": "projects/section",
-      "sourceRoot": "projects/section/src",
+      "sourceRoot": "projects/section",
       "prefix": "lib",
       "architect": {
         "build": {
@@ -125,7 +125,7 @@
     "standalone": {
       "projectType": "library",
       "root": "projects/standalone",
-      "sourceRoot": "projects/standalone/src",
+      "sourceRoot": "projects/standalone",
       "prefix": "lib",
       "architect": {
         "build": {
@@ -151,7 +151,7 @@
     "@mf/integration": {
       "projectType": "library",
       "root": "projects/mf/integration",
-      "sourceRoot": "projects/mf/integration/src",
+      "sourceRoot": "projects/mf/integration",
       "prefix": "lib",
       "architect": {
         "build": {

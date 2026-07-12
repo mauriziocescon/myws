@@ -1,6 +1,6 @@
-import { inject, NgZone, Service } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, PRIMARY_OUTLET, Router, UrlSegmentGroup } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -8,7 +8,6 @@ import { filter } from 'rxjs/operators';
 @Service()
 export class HostRouter {
   private readonly hostRouter = inject(Router);
-  private readonly hostZone = inject(NgZone);
 
   /**
    * Url at host level used by mf to sync its router.
@@ -42,10 +41,29 @@ export class HostRouter {
    * @param url
    */
   mfRouterEvent(url: string) {
-    if (this.hostRouter.url !== url) {
-      // method called by mf: needs zone.run for mf zone based
-      // Note: no need of zone.run in case everything is zoneless
-      this.hostZone.run(() => this.hostRouter.navigateByUrl(url));
+    if (this.hostRouter.url !== this.stripOutlets(this.hostRouter, url)) {
+      this.hostRouter.navigateByUrl(url);
     }
+  }
+
+  /**
+   * Strips all named outlet segments from a URL, preserving only the primary route.
+   * Used in opsys-map to extract the base navigation path, ignoring any
+   * auxiliary outlet navigations (e.g. side panels, dialogs).
+   */
+  private stripOutlets(router: Router, url: string): string {
+    const removeOutlets = (group: UrlSegmentGroup) => {
+      for (const key of Object.keys(group.children)) {
+        if (key !== PRIMARY_OUTLET) {
+          delete group.children[key];
+        } else {
+          removeOutlets(group.children[key]);
+        }
+      }
+    };
+
+    const tree = router.parseUrl(url);
+    removeOutlets(tree.root);
+    return router.serializeUrl(tree);
   }
 }

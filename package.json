@@ -26,7 +26,7 @@
     "serve:host": "npm run build:all && ng serve host --open --configuration debug | npm run json-server-watch",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --no-watch"
+    "test": "ng test @mf/integration --no-watch"
   },
   "repository": {
     "type": "git",

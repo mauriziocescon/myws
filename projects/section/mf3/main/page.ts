@@ -120,7 +120,7 @@ import { MfLoader } from '@mf/integration/mf-loader';
   `,
 })
 export class Page implements OnDestroy {
-  protected readonly mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });
+  protected readonly mf = signal({ elementId: 'mf4', tag: 'mf4-v22' });
 
   private readonly value = signal(0);
   private readonly intervalId = setInterval(() => this.value.update(v => v + 1), 1000);

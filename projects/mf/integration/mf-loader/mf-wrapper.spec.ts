@@ -26,7 +26,7 @@ describe('MfWrapper', () => {
     component = fixture.componentInstance;
 
     // Set required input
-    fixture.componentRef.setInput('mf', { elementId: 'mf1', tag: 'mf1-v19' });
+    fixture.componentRef.setInput('mf', { elementId: 'mf1', tag: 'mf1-v22' });
   });
 
   it('should create the component', () => {

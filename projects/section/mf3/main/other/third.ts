@@ -53,5 +53,5 @@ import { MfLoader } from '@mf/integration/mf-loader';
   `,
 })
 export class Third {
-  protected readonly mf = signal({ elementId: 'mf4', tag: 'mf4-v19' });
+  protected readonly mf = signal({ elementId: 'mf4', tag: 'mf4-v22' });
 }

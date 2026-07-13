@@ -20,8 +20,8 @@ export const mf3Routes = [{
       component: MfWrapper,
       title: 'MF3 – Child B',
       data: {
-        mf: { elementId: 'mf4', tag: 'mf4-v19' },
-        inputs: { mf: { elementId: 'mf4', tag: 'mf4-v19' } },
+        mf: { elementId: 'mf4', tag: 'mf4-v22' },
+        inputs: { mf: { elementId: 'mf4', tag: 'mf4-v22' } },
       },
     },
   ],

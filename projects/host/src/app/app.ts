@@ -82,7 +82,8 @@ interface NavGroup {
       padding: 0.25rem 0;
     }
 
-    .dropdown:hover .dropdown-menu {
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
       display: block;
     }
 

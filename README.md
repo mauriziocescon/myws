@@ -29,23 +29,23 @@ This keeps every router in sync at the URL level, giving each MF full access to 
 
 ```
 projects/
-├── host/                    # Shell app
-├── section/                 # Library: mf1, mf2, mf3 business code & routes
-├── standalone/              # Library: mf4 business code
+├── host/                        # Shell app
+├── section/                     # Library: mf1, mf2, mf3 business code & routes
+├── standalone/                  # Library: mf4 business code
 └── mf/
-    ├── integration/         # Shared library (@mf/integration)
-    │   ├── host-router/     #   HostRouter, provideHostRouter, startsWith matcher
-    │   ├── mf-router/       #   MfRouter (injected in every MF)
-    │   ├── mf-loader/       #   MfWrapper, MfLoader, MfBundleLoader
+    ├── integration/             # Shared library (@mf/integration)
+    │   ├── host-router/         #   HostRouter, provideHostRouter, startsWith matcher
+    │   ├── mf-router/           #   MfRouter (injected in every MF)
+    │   ├── mf-loader/           #   MfWrapper, MfLoader, MfBundleLoader
     │   ├── mf-section-entry/    #   SectionEntry, provideSectionMf
     │   └── mf-standalone-entry/ #   StandaloneEntry, provideStandaloneMf
-    ├── mf1-entry/           # Entry app → builds <mf1-v22>
-    ├── mf2-entry/           # Entry app → builds <mf2-v22>
-    ├── mf3-entry/           # Entry app → builds <mf3-v22>
-    └── mf4-entry/           # Entry app → builds <mf4-v22>
-mock-server/                 # json-server (fake API on port 3000)
+    ├── mf1-entry/               # Entry app → builds <mf1-v22>
+    ├── mf2-entry/               # Entry app → builds <mf2-v22>
+    ├── mf3-entry/               # Entry app → builds <mf3-v22>
+    └── mf4-entry/               # Entry app → builds <mf4-v22>
+mock-server/                     # json-server (fake API on port 3000)
 scripts/
-    bundle-mf.ts             # Post-build: creates index.js and copies to host/public/elements/
+    bundle-mf.ts                 # Post-build: creates index.js and copies to host/public/elements/
 ```
 
 ## Key pieces

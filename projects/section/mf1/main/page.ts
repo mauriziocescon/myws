@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,14 +9,28 @@ import { RouterLink } from '@angular/router';
     <div class="mf-container">
       <div class="mf-header">
         <span class="mf-badge">MF1</span>
-        <h4>Mf1 section</h4>
+        <h4>MF1 – Page</h4>
       </div>
       <div class="mf-body">
-        <a class="link" [routerLink]="link()">Go to mf2</a>
-        <a class="link" [routerLink]="link2()">Go to mf2/b</a>
-        <a class="link" [routerLink]="link3()">Go to /mf1/tab/tabId</a>
+        <p class="info">This is MF1's main page. Links below trigger cross-MF navigation via the host router.</p>
+        <nav class="nav-links">
+          <a class="link" [routerLink]="'/mf1/detail/42'">
+            <span class="link-action">Navigate within MF1</span>
+            <span class="link-url">/mf1/detail/42</span>
+          </a>
+          <a class="link" [routerLink]="'/mf2'">
+            <span class="link-action">Navigate to MF2</span>
+            <span class="link-url">/mf2</span>
+          </a>
+          <a class="link" [routerLink]="'/mf2/b'">
+            <span class="link-action">Navigate to MF2, child route</span>
+            <span class="link-url">/mf2/b</span>
+          </a>
+        </nav>
         @if (id()) {
-          <div class="params">TabId: {{ id() }}</div>
+          <div class="params">
+            <strong>Route param received:</strong> id = <code>{{ id() }}</code>
+          </div>
         }
       </div>
     </div>
@@ -55,19 +69,58 @@ import { RouterLink } from '@angular/router';
       padding: 1rem;
     }
 
-    .params {
-      padding: 0.3rem;
+    .info {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 0 0 0.75rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
     }
 
     .link {
-      padding: 0.3rem;
+      display: flex;
+      flex-direction: column;
+      padding: 0.4rem 0.6rem;
       color: #1976d2;
+      border: 1px solid #1976d2;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .link:hover {
+      background: #e3f2fd;
+    }
+
+    .link-action {
+      font-weight: 500;
+    }
+
+    .link-url {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #666;
+    }
+
+    .params {
+      padding: 0.5rem;
+      background: #e3f2fd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    code {
+      background: #fff;
+      padding: 0.1rem 0.3rem;
+      border-radius: 2px;
     }
   `,
 })
 export class Page {
   readonly id = input();
-  protected readonly link = signal('/mf2');
-  protected readonly link2 = signal('/mf2/b');
-  protected readonly link3 = signal('/mf1/tab/tabId');
 }

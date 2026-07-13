@@ -7,17 +7,17 @@ import { Second } from 'section/mf2/main/other/second';
 export const mf2Routes = [{
   path: '',
   component: Page,
-  title: 'Mf2',
+  title: 'MF2',
   children: [
     {
       path: 'a',
       component: First,
-      title: 'Mf2/a',
+      title: 'MF2 – Child A',
     },
     {
       path: 'b',
       component: Second,
-      title: 'Mf2/b',
+      title: 'MF2 – Child B',
     },
   ],
 },

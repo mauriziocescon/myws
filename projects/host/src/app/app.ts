@@ -1,9 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
+interface NavLink {
+  label: string;
+  url: string;
+}
+
 interface NavGroup {
   label: string;
-  urls: string[];
+  links: NavLink[];
 }
 
 @Component({
@@ -19,8 +24,11 @@ interface NavGroup {
         <div class="dropdown">
           <button class="dropdown-toggle">{{ group.label }}</button>
           <div class="dropdown-menu">
-            @for (url of group.urls; track url) {
-              <a class="dropdown-item" [routerLink]="url">{{ url }}</a>
+            @for (link of group.links; track link.url) {
+              <a class="dropdown-item" [routerLink]="link.url">
+                <span class="item-label">{{ link.label }}</span>
+                <span class="item-url">{{ link.url }}</span>
+              </a>
             }
           </div>
         </div>
@@ -65,7 +73,7 @@ interface NavGroup {
       position: absolute;
       top: 100%;
       left: 0;
-      min-width: 160px;
+      min-width: 200px;
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -79,8 +87,9 @@ interface NavGroup {
     }
 
     .dropdown-item {
-      display: block;
-      padding: 0.4rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 0.8rem;
       text-decoration: none;
       color: #333;
       white-space: nowrap;
@@ -89,12 +98,42 @@ interface NavGroup {
     .dropdown-item:hover {
       background: #f0f0f0;
     }
+
+    .item-label {
+      font-weight: 500;
+    }
+
+    .item-url {
+      font-size: 0.75rem;
+      color: #888;
+      font-family: monospace;
+    }
   `,
 })
 export class App {
   protected readonly navGroups = signal<NavGroup[]>([
-    { label: 'MF1', urls: ['/mf1', '/mf1/tab/tabId'] },
-    { label: 'MF2', urls: ['/mf2', '/mf2/a'] },
-    { label: 'MF3', urls: ['/mf3', '/mf3/a', '/mf3/b'] },
+    {
+      label: 'MF1',
+      links: [
+        { label: 'Page', url: '/mf1' },
+        { label: 'Detail with :id', url: '/mf1/detail/42' },
+      ],
+    },
+    {
+      label: 'MF2',
+      links: [
+        { label: 'Page', url: '/mf2' },
+        { label: 'Child A', url: '/mf2/a' },
+        { label: 'Child B', url: '/mf2/b' },
+      ],
+    },
+    {
+      label: 'MF3',
+      links: [
+        { label: 'Page', url: '/mf3' },
+        { label: 'Child A', url: '/mf3/a' },
+        { label: 'Child B', url: '/mf3/b' },
+      ],
+    },
   ]);
 }

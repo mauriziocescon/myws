@@ -16,5 +16,5 @@ import { mf3Routes } from 'section/mf3';
     ],
   });
   const element = createCustomElement(SectionEntry, { injector: app.injector });
-  customElements.define('mf3-v19', element);
+  customElements.define('mf3-v22', element);
 })();

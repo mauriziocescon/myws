@@ -16,5 +16,5 @@ import { Main } from 'standalone/mf4';
     ],
   });
   const element = createCustomElement(StandaloneEntry, { injector: app.injector });
-  customElements.define('mf4-v19', element);
+  customElements.define('mf4-v22', element);
 })();

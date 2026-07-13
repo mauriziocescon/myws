@@ -21,6 +21,6 @@ import { mf1Routes } from 'section/mf1';
   });
   const element = createCustomElement(SectionEntry, { injector: app.injector });
 
-  // definition of mf1-v19
-  customElements.define('mf1-v19', element);
+  // definition of mf1-v22
+  customElements.define('mf1-v22', element);
 })();

@@ -47,9 +47,8 @@ export class HostRouter {
   }
 
   /**
-   * Strips all named outlet segments from a URL, preserving only the primary route.
-   * Used in opsys-map to extract the base navigation path, ignoring any
-   * auxiliary outlet navigations (e.g. side panels, dialogs).
+   * Strips all named outlet segments from a URL,
+   * preserving only the primary route.
    */
   private stripOutlets(router: Router, url: string): string {
     const removeOutlets = (group: UrlSegmentGroup) => {

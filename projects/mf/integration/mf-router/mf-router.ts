@@ -1,4 +1,4 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
+import { inject, OnDestroy, Service } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ interface IHostRouter {
   mfRouterEvent(url: string): void;
 }
 
-@Injectable()
+@Service({ autoProvided: false })
 export class MfRouter implements OnDestroy {
   private readonly mfRouter = inject(Router);
 

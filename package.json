@@ -1,7 +1,7 @@
 {
   "name": "myws",
   "version": "1.0.0",
-  "description": "A demo application showcasing a micro frontend architecture",
+  "description": "Angular micro-frontend demo with zoneless web components",
   "author": "Maurizio Cescon <maurizio.cescon@gmail.com>",
   "homepage": "https://be.linkedin.com/in/mauriziocescon",
   "private": false,

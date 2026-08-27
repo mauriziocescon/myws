@@ -1,6 +1,5 @@
 import { createApplication } from '@angular/platform-browser';
 import { provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
 import { createCustomElement } from '@angular/elements';
 
 import { provideStandaloneMf, StandaloneEntry } from '@mf/integration/mf-standalone-entry';
@@ -11,7 +10,6 @@ import { Main } from 'standalone/mf4';
   const app = await createApplication({
     providers: [
       provideBrowserGlobalErrorListeners(),
-      provideHttpClient(),
       provideStandaloneMf({ component: Main }),
     ],
   });

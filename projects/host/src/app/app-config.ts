@@ -1,5 +1,10 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withExperimentalAutoCleanupInjectors } from '@angular/router';
+import {
+  provideRouter,
+  withAutoCleanupInjectors,
+  withComponentInputBinding,
+  withRouterResources,
+} from '@angular/router';
 
 import { provideHostRouter } from '@mf/integration/host-router';
 
@@ -10,9 +15,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
+      withAutoCleanupInjectors(),
       withComponentInputBinding(),
-      // withExperimentalPlatformNavigation(),
-      withExperimentalAutoCleanupInjectors(),
+      withRouterResources(),
     ),
     provideHostRouter(),
   ],

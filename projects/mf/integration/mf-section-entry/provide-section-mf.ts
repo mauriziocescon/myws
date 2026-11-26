@@ -2,8 +2,9 @@ import {
   provideRouter,
   Route,
   RouterFeatures,
+  withAutoCleanupInjectors,
   withComponentInputBinding,
-  withExperimentalAutoCleanupInjectors,
+  withRouterResources,
 } from '@angular/router';
 
 import { PageNotFound } from './fallback';
@@ -26,9 +27,9 @@ const defineRoutes = (path: string, children: Route[]) => {
 export const provideSectionMf = (config: { path: string, children: Route[] }, ...features: RouterFeatures[]) => {
   return provideRouter(
     defineRoutes(config.path, config.children),
+    withAutoCleanupInjectors(),
     withComponentInputBinding(),
-    // withExperimentalPlatformNavigation(),
-    withExperimentalAutoCleanupInjectors(),
+    withRouterResources(),
     ...features,
   );
 };
